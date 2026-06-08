@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #fafaf5;
+  --cream: #fffebb;
+  --ink: #27301c;
+  --highlight: #f2f2e9;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-paper: var(--paper);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-highlight: var(--highlight);
+  --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+  --font-sans: ui-sans-serif, system-ui, "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-display), "Snell Roundhand", cursive;
+}
+
+.font-serif {
+  font-family: var(--font-serif), "Times New Roman", serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+@keyframes loading-image-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loading-name-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loading-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes loading-screen-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.loading-screen__image--enter {
+  animation: loading-image-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.loading-screen__name-line {
+  opacity: 0;
+  transform: translateY(1.25rem);
+}
+
+.loading-screen__name--visible .loading-screen__name-line {
+  animation: loading-name-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.loading-screen__name--visible .loading-screen__name-line--second {
+  animation-delay: 0.18s;
+}
+
+.loading-screen__progress-bar {
+  transform: scaleX(0);
+}
+
+.loading-screen__progress--active .loading-screen__progress-bar {
+  animation: loading-progress 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.loading-screen--exit {
+  animation: loading-screen-out 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-screen__image--enter,
+  .loading-screen__name--visible .loading-screen__name-line,
+  .loading-screen__progress--active .loading-screen__progress-bar,
+  .loading-screen--exit {
+    animation: none;
+  }
+
+  .loading-screen__image--enter,
+  .loading-screen__name--visible .loading-screen__name-line {
+    opacity: 1;
+    transform: none;
+  }
+
+  .loading-screen__progress--active .loading-screen__progress-bar {
+    transform: scaleX(1);
+  }
 }
