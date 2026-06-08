@@ -122,7 +122,7 @@ export function PretextAboutText() {
   const projectionRef = useRef<TextProjection | null>(null);
   const [isReady, setIsReady] = useState(false);
 
-  const projectLayout = (projection: TextProjection) => {
+  const projectLayout = (projection: TextProjection, containerWidth: number) => {
     const textLayer = textLayerRef.current;
     if (!textLayer) return;
 
@@ -131,7 +131,7 @@ export function PretextAboutText() {
       lines: projection.lines,
       font: projection.font,
       lineHeight: projection.lineHeight,
-      justify: true,
+      justify: containerWidth >= 640,
     });
   };
 
@@ -155,7 +155,7 @@ export function PretextAboutText() {
       previous.firstParagraphHeight !== nextProjection.firstParagraphHeight;
 
     if (linesChanged || typographyChanged || heightChanged) {
-      projectLayout(nextProjection);
+      projectLayout(nextProjection, containerWidth);
     }
 
     setMonogramLayout(monogramRef.current, nextProjection.monogramRect);
@@ -185,16 +185,21 @@ export function PretextAboutText() {
 
     relayout();
 
+    let resizeTimer: number;
     const observer = new ResizeObserver(() => {
-      const containerWidth = container.clientWidth;
-      if (containerWidth <= 0 || !hullRef.current) return;
-      commitLayout(containerWidth);
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        const containerWidth = container.clientWidth;
+        if (containerWidth <= 0 || !hullRef.current) return;
+        commitLayout(containerWidth);
+      }, 100);
     });
     observer.observe(container);
 
     return () => {
       cancelled = true;
       observer.disconnect();
+      window.clearTimeout(resizeTimer);
       for (const element of linePoolRef.current) {
         element.remove();
       }

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { preloadHomeAssets } from "@/lib/preload-home";
 
 const HERO_IMAGE = "/images/hero-garden.png";
-const MIN_DISPLAY_MS = 2400;
+const MIN_DISPLAY_MS = 1200;
 const EXIT_MS = 900;
 
 type LoadingScreenProps = {

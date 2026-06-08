@@ -4,7 +4,7 @@ import { contents } from "./contents-data";
 
 export function ContentsSection() {
   return (
-    <section className="mx-auto flex w-full max-w-[70.25rem] flex-col items-center gap-16 px-8 pb-44 pt-8 md:px-12 md:gap-20 md:pb-52 md:pt-12">
+    <section className="mx-auto flex w-full max-w-[70.25rem] flex-col items-center gap-16 px-8 pb-20 pt-8 md:px-12 md:gap-20 md:pb-52 md:pt-12">
       <div className="relative h-[7.5rem] w-full max-w-[35.125rem] opacity-75">
         <Image
           src="/images/divider.png"
