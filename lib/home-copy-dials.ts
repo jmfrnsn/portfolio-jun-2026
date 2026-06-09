@@ -17,16 +17,16 @@ export type HomeCopyDials = {
 
 export const DEFAULT_HOME_COPY_DIALS: HomeCopyDials = {
   aboutText: "Jade is a product designer based in San Francisco, building at Perplexity. She has worked at Duolingo and Salesforce, and studied cognitive science, which shaped her interest in attention and perception. She aims to create artifacts that expand reality—things that help people notice and interact with the world anew. She is inspired by books, films, objects, and the collections people keep without quite knowing why.",
-  entry1Title: "EXPERIMENTING WITH TOOLS + IDEAS",
-  entry1Pages: "1 - 10",
+  entry1Title: "DESIGNING PRODUCTS, WEBSITES, AND OBJECTS",
+  entry1Pages: "LAB",
   entry2Title: "CULTIVATING A GARDEN OF THOUGHT",
-  entry2Pages: "11 - 15",
+  entry2Pages: "WRITING",
   entry3Title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-  entry3Pages: "16 - 20",
-  entry4Title: "COLLECTING ARTIFACTS",
-  entry4Pages: "21 - 24",
+  entry3Pages: "READING",
+  entry4Title: "COLLECTING KNOWLEDGE",
+  entry4Pages: "ARCHIVES",
   entry5Title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-  entry5Pages: "25 - 30",
+  entry5Pages: "STUDIO",
 };
 
 export const HOME_COPY_DIAL_CONFIG = {
@@ -36,16 +36,16 @@ export const HOME_COPY_DIAL_CONFIG = {
     placeholder: "Starts with Jade — J is the drop cap",
   },
   contentsCopy: {
-    entry1Title: "EXPERIMENTING WITH TOOLS + IDEAS",
-    entry1Pages: "1 - 10",
+    entry1Title: "DESIGNING PRODUCTS, WEBSITES, AND OBJECTS",
+    entry1Pages: "LAB",
     entry2Title: "CULTIVATING A GARDEN OF THOUGHT",
-    entry2Pages: "11 - 15",
+    entry2Pages: "WRITING",
     entry3Title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-    entry3Pages: "16 - 20",
-    entry4Title: "COLLECTING ARTIFACTS",
-    entry4Pages: "21 - 24",
+    entry3Pages: "READING",
+    entry4Title: "COLLECTING KNOWLEDGE",
+    entry4Pages: "ARCHIVES",
     entry5Title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-    entry5Pages: "25 - 30",
+    entry5Pages: "STUDIO",
   },
 } satisfies DialConfig;
 

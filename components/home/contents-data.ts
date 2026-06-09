@@ -7,28 +7,28 @@ export type ContentEntry = {
 export const contents: ContentEntry[] = [
   {
     number: "01",
-    title: "EXPERIMENTING WITH TOOLS + IDEAS",
-    pages: "1 - 10",
+    title: "DESIGNING PRODUCTS, WEBSITES, AND OBJECTS",
+    pages: "LAB",
   },
   {
     number: "02",
     title: "CULTIVATING A GARDEN OF THOUGHT",
-    pages: "11 - 15",
+    pages: "WRITING",
   },
   {
     number: "03",
     title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-    pages: "16 - 20",
+    pages: "READING",
   },
   {
     number: "04",
-    title: "COLLECTING ARTIFACTS",
-    pages: "21 - 24",
+    title: "COLLECTING KNOWLEDGE",
+    pages: "ARCHIVES",
   },
   {
     number: "05",
     title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-    pages: "25 - 30",
+    pages: "STUDIO",
   },
 ];
 
