@@ -12,6 +12,7 @@ import {
   type PositionedLine,
 } from "@/lib/pretext-monogram-layout";
 import { getWrapHull, type Point, type Rect } from "@/lib/pretext-wrap-geometry";
+import { getInkBleedParams } from "@/lib/ink-bleed";
 import {
   getAboutTypography,
   getSerifFontSpec,
@@ -36,6 +37,7 @@ type PretextAboutTextProps = {
   monogramTextGap: number;
   monogramLinesBesideMobile: number;
   monogramLinesBesideDesktop: number;
+  inkBleedIntensity: number;
 };
 
 type TextProjection = {
@@ -161,9 +163,12 @@ export function PretextAboutText({
   monogramTextGap,
   monogramLinesBesideMobile,
   monogramLinesBesideDesktop,
+  inkBleedIntensity,
 }: PretextAboutTextProps) {
+  const inkBleed = getInkBleedParams(inkBleedIntensity);
   const containerRef = useRef<HTMLDivElement>(null);
   const textLayerRef = useRef<HTMLDivElement>(null);
+  const linesLayerRef = useRef<HTMLDivElement>(null);
   const monogramRef = useRef<HTMLDivElement>(null);
   const linePoolRef = useRef<HTMLSpanElement[]>([]);
   const hullRef = useRef<Point[] | null>(null);
@@ -189,10 +194,11 @@ export function PretextAboutText({
 
   const projectLayout = (projection: TextProjection) => {
     const textLayer = textLayerRef.current;
-    if (!textLayer) return;
+    const linesLayer = linesLayerRef.current;
+    if (!textLayer || !linesLayer) return;
 
     textLayer.style.minHeight = `${projection.firstParagraphHeight}px`;
-    projectPositionedLines(textLayer, linePoolRef.current, {
+    projectPositionedLines(linesLayer, linePoolRef.current, {
       lines: projection.lines,
       font: projection.font,
       lineHeight: projection.lineHeight,
@@ -307,6 +313,94 @@ export function PretextAboutText({
       className="relative w-full min-h-[11rem] md:min-h-[14rem]"
       style={{ fontSize: aboutFontSize }}
     >
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute h-0 w-0 overflow-hidden"
+        focusable="false"
+      >
+        <defs>
+          <filter
+            id="about-newspaper-ink"
+            x="-12%"
+            y="-12%"
+            width="124%"
+            height="124%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feMorphology
+              operator="dilate"
+              radius={inkBleed.dilateRadius}
+              in="SourceAlpha"
+              result="dilated"
+            />
+            <feGaussianBlur
+              in="dilated"
+              stdDeviation={inkBleed.maskBlur}
+              result="bleedMask"
+            />
+            <feFlood
+              floodColor="#27301c"
+              floodOpacity={inkBleed.washOpacity}
+              result="inkWash"
+            />
+            <feComposite
+              in="inkWash"
+              in2="bleedMask"
+              operator="in"
+              result="baseBleed"
+            />
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.92 1.05"
+              numOctaves="4"
+              seed="7"
+              stitchTiles="stitch"
+              result="noise"
+            />
+            <feColorMatrix
+              in="noise"
+              type="matrix"
+              values={`0 0 0 0 0.153
+                      0 0 0 0 0.188
+                      0 0 0 0 0.110
+                      0 0 0 ${inkBleed.speckleAlphaScale} ${inkBleed.speckleThreshold}`}
+              result="speckle"
+            />
+            <feComposite
+              in="speckle"
+              in2="bleedMask"
+              operator="in"
+              result="grainyBleed"
+            />
+            <feGaussianBlur
+              in="grainyBleed"
+              stdDeviation={inkBleed.speckleBlur}
+              result="softBleed"
+            />
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.045 0.038"
+              numOctaves="2"
+              seed="3"
+              result="edgeNoise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="edgeNoise"
+              scale={inkBleed.displacement}
+              xChannelSelector="R"
+              yChannelSelector="G"
+              result="roughenedText"
+            />
+            <feMerge>
+              <feMergeNode in="baseBleed" />
+              <feMergeNode in="softBleed" />
+              <feMergeNode in="roughenedText" />
+            </feMerge>
+          </filter>
+        </defs>
+      </svg>
+
       <div
         ref={textLayerRef}
         className={`relative ${isReady ? "opacity-100" : "opacity-0"}`}
@@ -324,6 +418,14 @@ export function PretextAboutText({
             className="h-full w-full object-contain object-top"
           />
         </div>
+        <div
+          ref={linesLayerRef}
+          className={
+            inkBleed.enabled
+              ? "about-ink-bleed relative z-[1]"
+              : "relative z-[1]"
+          }
+        />
       </div>
     </div>
   );

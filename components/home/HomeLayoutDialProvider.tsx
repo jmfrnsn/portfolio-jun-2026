@@ -29,6 +29,7 @@ async function bakeToCode(dials: HomeLayoutDials): Promise<void> {
       contents: dials.contents,
       dropCap: dials.dropCap,
       typography: dials.typography,
+      inkBleed: dials.inkBleed,
       copy: dials.copy,
     }),
   });

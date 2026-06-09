@@ -41,6 +41,7 @@ export function AboutSection() {
           monogramTextGap={dials.dropCap.textGap}
           monogramLinesBesideMobile={dials.dropCap.linesBesideMobile}
           monogramLinesBesideDesktop={dials.dropCap.linesBesideDesktop}
+          inkBleedIntensity={dials.inkBleed.intensity}
         />
         <ContentsList />
       </div>

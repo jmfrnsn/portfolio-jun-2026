@@ -16,7 +16,7 @@ function slider(defaultValue: number, min: number, max: number, step?: number): 
 }
 
 export function buildHomeLayoutDialsSource(payload: BakeHomeLayoutPayload): string {
-  const { section, contents, dropCap, typography } = payload;
+  const { section, contents, dropCap, typography, inkBleed } = payload;
 
   return `import type { DialConfig } from "dialkit";
 
@@ -59,6 +59,9 @@ export const HOME_LAYOUT_DIAL_CONFIG = {
     aboutFontSize: ${slider(typography.aboutFontSize, 12, 48)},
     contentsFontSize: ${slider(typography.contentsFontSize, 10, 32)},
   },
+  inkBleed: {
+    intensity: ${slider(inkBleed.intensity, 0, 1, 0.01)},
+  },
 } satisfies DialConfig;
 
 export type HomeLayoutDials = {
@@ -86,6 +89,9 @@ export type HomeLayoutDials = {
   typography: {
     aboutFontSize: number;
     contentsFontSize: number;
+  };
+  inkBleed: {
+    intensity: number;
   };
   copy: HomeCopyDials;
 };
@@ -115,6 +121,9 @@ export const DEFAULT_HOME_LAYOUT_DIALS: HomeLayoutDials = {
   typography: {
     aboutFontSize: ${typography.aboutFontSize},
     contentsFontSize: ${typography.contentsFontSize},
+  },
+  inkBleed: {
+    intensity: ${inkBleed.intensity},
   },
   copy: DEFAULT_HOME_COPY_DIALS,
 };

@@ -38,6 +38,18 @@ body {
   font-family: var(--font-mono), "PP Supply Mono", ui-monospace, monospace;
 }
 
+/* Newspaper-style grainy ink bleed on about body lines */
+.about-ink-bleed {
+  filter: url(#about-newspaper-ink);
+  isolation: isolate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-ink-bleed {
+    filter: none;
+  }
+}
+
 @keyframes loading-image-in {
   from {
     opacity: 0;

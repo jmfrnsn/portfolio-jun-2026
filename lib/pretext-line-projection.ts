@@ -32,7 +32,7 @@ export function projectPositionedLines(
 ): void {
   syncPool(pool, projection.lines.length, parent, () => {
     const element = document.createElement("span");
-    element.className = "absolute text-ink";
+    element.className = "about-ink-line absolute text-ink";
     return element;
   });
 

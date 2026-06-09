@@ -39,6 +39,9 @@ export const HOME_LAYOUT_DIAL_CONFIG = {
     aboutFontSize: [20, 12, 48],
     contentsFontSize: [16, 10, 32],
   },
+  inkBleed: {
+    intensity: [0.47, 0, 1, 0.01],
+  },
 } satisfies DialConfig;
 
 export type HomeLayoutDials = {
@@ -66,6 +69,9 @@ export type HomeLayoutDials = {
   typography: {
     aboutFontSize: number;
     contentsFontSize: number;
+  };
+  inkBleed: {
+    intensity: number;
   };
   copy: HomeCopyDials;
 };
@@ -95,6 +101,9 @@ export const DEFAULT_HOME_LAYOUT_DIALS: HomeLayoutDials = {
   typography: {
     aboutFontSize: 20,
     contentsFontSize: 16,
+  },
+  inkBleed: {
+    intensity: 0.47,
   },
   copy: DEFAULT_HOME_COPY_DIALS,
 };
