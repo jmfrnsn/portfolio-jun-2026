@@ -14,18 +14,18 @@ export {
 
 export const HOME_LAYOUT_DIAL_CONFIG = {
   section: {
-    paddingXMobile: [32, 0, 96],
-    paddingTop: [32, 0, 96],
-    paddingBottom: [32, 0, 96],
-    paddingXDesktop: [48, 0, 128],
-    paddingTopDesktop: [48, 0, 128],
-    paddingBottomDesktop: [48, 0, 128],
+    paddingXMobile: [32, 0, 256, 4],
+    paddingTop: [32, 0, 256, 4],
+    paddingBottom: [32, 0, 256, 4],
+    paddingXDesktop: [400, 0, 400, 4],
+    paddingTopDesktop: [48, 0, 400, 4],
+    paddingBottomDesktop: [48, 0, 400, 4],
   },
   contents: {
-    rowGap: [4, 0, 48],
-    rowPaddingX: [12, 0, 48],
-    rowPaddingY: [10, 0, 32],
-    rowPaddingXDesktop: [16, 0, 48],
+    rowGap: [8, 0, 128, 4],
+    rowPaddingX: [12, 0, 160, 4],
+    rowPaddingY: [4, 0, 96, 4],
+    rowPaddingXDesktop: [4, 0, 160, 4],
   },
   dropCap: {
     _collapsed: true,
@@ -36,7 +36,7 @@ export const HOME_LAYOUT_DIAL_CONFIG = {
     linesBesideDesktop: [6, 1, 10],
   },
   typography: {
-    aboutFontSize: [24, 12, 48],
+    aboutFontSize: [20, 12, 48],
     contentsFontSize: [16, 10, 32],
   },
 } satisfies DialConfig;
@@ -75,15 +75,15 @@ export const DEFAULT_HOME_LAYOUT_DIALS: HomeLayoutDials = {
     paddingXMobile: 32,
     paddingTop: 32,
     paddingBottom: 32,
-    paddingXDesktop: 48,
+    paddingXDesktop: 400,
     paddingTopDesktop: 48,
     paddingBottomDesktop: 48,
   },
   contents: {
-    rowGap: 4,
+    rowGap: 8,
     rowPaddingX: 12,
-    rowPaddingY: 10,
-    rowPaddingXDesktop: 16,
+    rowPaddingY: 4,
+    rowPaddingXDesktop: 4,
   },
   dropCap: {
     scale: 0.7,
@@ -93,7 +93,7 @@ export const DEFAULT_HOME_LAYOUT_DIALS: HomeLayoutDials = {
     linesBesideDesktop: 6,
   },
   typography: {
-    aboutFontSize: 24,
+    aboutFontSize: 20,
     contentsFontSize: 16,
   },
   copy: DEFAULT_HOME_COPY_DIALS,
