@@ -1,8 +1,5 @@
-import {
-  Cormorant_Garamond,
-  IBM_Plex_Mono,
-  Pinyon_Script,
-} from "next/font/google";
+import localFont from "next/font/local";
+import { Pinyon_Script } from "next/font/google";
 
 export const display = Pinyon_Script({
   variable: "--font-display",
@@ -10,14 +7,17 @@ export const display = Pinyon_Script({
   weight: "400",
 });
 
-export const serif = Cormorant_Garamond({
+export const serif = localFont({
+  src: "../public/fonts/TeXGyreSchola-Regular.woff",
   variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  display: "swap",
+  fallback: ["Times New Roman", "serif"],
 });
 
-export const mono = IBM_Plex_Mono({
+export const mono = localFont({
+  src: "../public/fonts/pp-supply-mono.woff2",
   variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["200", "300"],
+  display: "swap",
+  weight: "200",
+  fallback: ["ui-monospace", "monospace"],
 });

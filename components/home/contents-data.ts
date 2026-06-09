@@ -2,7 +2,6 @@ export type ContentEntry = {
   number: string;
   title: string;
   pages: string;
-  highlighted?: boolean;
 };
 
 export const contents: ContentEntry[] = [
@@ -25,7 +24,6 @@ export const contents: ContentEntry[] = [
     number: "04",
     title: "COLLECTING ARTIFACTS",
     pages: "21 - 24",
-    highlighted: true,
   },
   {
     number: "05",
@@ -34,5 +32,8 @@ export const contents: ContentEntry[] = [
   },
 ];
 
-export const aboutText =
-  "Jade is a designer based in San Francisco. She aims to create artifacts that expand reality. Reality is often larger than we perceive. I want to create things that help people notice, observe, and interact with the world in new ways. I am endlessly inspired by books, movies, objects, and other artifacts.";
+export const DEFAULT_ABOUT_TEXT =
+  "Jade is a product designer based in San Francisco, building at Perplexity. She has worked at Duolingo and Salesforce, and studied cognitive science, which shaped her interest in attention and perception. She aims to create artifacts that expand reality—things that help people notice and interact with the world anew. She is inspired by books, films, objects, and the collections people keep without quite knowing why.";
+
+/** @deprecated Use DEFAULT_ABOUT_TEXT */
+export const aboutText = DEFAULT_ABOUT_TEXT;

@@ -4,6 +4,7 @@ export type LineProjection = {
   lines: PositionedLine[];
   font: string;
   lineHeight: number;
+  letterSpacing: number;
   justify: boolean;
 };
 
@@ -42,8 +43,13 @@ export function projectPositionedLines(
     element.style.left = `${line.x}px`;
     element.style.top = `${line.y}px`;
     element.style.width = `${line.slotWidth}px`;
+    element.style.display = "block";
+    element.style.height = `${projection.lineHeight}px`;
+    element.style.overflow = "hidden";
+    element.style.whiteSpace = "nowrap";
     element.style.font = projection.font;
     element.style.lineHeight = `${projection.lineHeight}px`;
+    element.style.letterSpacing = `${projection.letterSpacing}px`;
     element.style.textAlign = projection.justify ? "justify" : "left";
   }
 }

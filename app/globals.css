@@ -29,11 +29,13 @@ body {
 }
 
 .font-serif {
-  font-family: var(--font-serif), "Times New Roman", serif;
+  font-family: var(--font-serif), "TeXGyreSchola-Regular", "Times New Roman",
+    serif;
+  letter-spacing: -0.04375rem;
 }
 
 .font-mono {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), "PP Supply Mono", ui-monospace, monospace;
 }
 
 @keyframes loading-image-in {

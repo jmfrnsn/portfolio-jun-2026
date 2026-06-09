@@ -30,6 +30,9 @@ type MonogramObstacle = {
 
 const MIN_SLOT_WIDTH = 24;
 
+/** Gap between the drop cap and wrapped text on the right and below. */
+export const MONOGRAM_TEXT_GAP = 10;
+
 export function positionedLinesEqual(
   left: PositionedLine[],
   right: PositionedLine[],
@@ -57,11 +60,12 @@ export function layoutTextAroundMonogram(
   lineHeight: number,
   monogramRect: Rect,
   monogramHull: Point[],
+  textGap = MONOGRAM_TEXT_GAP,
 ): { lines: PositionedLine[]; height: number } {
   const obstacle: MonogramObstacle = {
     hull: transformWrapPoints(monogramHull, monogramRect),
-    horizontalPadding: 10,
-    verticalPadding: 2,
+    horizontalPadding: textGap,
+    verticalPadding: 0,
   };
 
   let cursor: LayoutCursor = { segmentIndex: 0, graphemeIndex: 0 };
@@ -129,15 +133,22 @@ export function layoutTextAroundMonogram(
   return { lines, height };
 }
 
+export function clearPreparedTextCache(
+  cache: Map<string, PreparedTextWithSegments>,
+): void {
+  cache.clear();
+}
+
 export function getPreparedText(
   text: string,
   font: string,
   cache: Map<string, PreparedTextWithSegments>,
+  letterSpacing = 0,
 ): PreparedTextWithSegments {
-  const key = `${font}::${text}`;
+  const key = `${font}::${letterSpacing}::${text}`;
   const cached = cache.get(key);
   if (cached !== undefined) return cached;
-  const prepared = prepareWithSegments(text, font);
+  const prepared = prepareWithSegments(text, font, { letterSpacing });
   cache.set(key, prepared);
   return prepared;
 }

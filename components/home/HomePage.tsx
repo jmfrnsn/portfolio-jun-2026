@@ -3,8 +3,8 @@
 import { useCallback, useState } from "react";
 
 import { AboutSection } from "./AboutSection";
-import { ContentsSection } from "./ContentsSection";
 import { FooterSection } from "./FooterSection";
+import { HomeLayoutDialProvider } from "./HomeLayoutDialProvider";
 import { LoadingScreen } from "./LoadingScreen";
 
 export function HomePage() {
@@ -24,14 +24,15 @@ export function HomePage() {
       {showLoader ? (
         <LoadingScreen onReveal={handleReveal} onDismiss={handleDismiss} />
       ) : null}
-      <div
-        className={isRevealed ? "opacity-100" : "opacity-0"}
-        aria-hidden={!isRevealed}
-      >
-        <AboutSection />
-        <ContentsSection />
-        <FooterSection />
-      </div>
+      <HomeLayoutDialProvider>
+        <div
+          className={isRevealed ? "opacity-100" : "opacity-0"}
+          aria-hidden={!isRevealed}
+        >
+          <AboutSection />
+          <FooterSection />
+        </div>
+      </HomeLayoutDialProvider>
     </div>
   );
 }

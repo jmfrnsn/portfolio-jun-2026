@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function FooterSection() {
   return (
-    <footer className="relative overflow-hidden pb-36 md:pb-44">
+    <footer className="relative overflow-hidden pb-28 md:pb-36">
       <p
         className="pointer-events-none absolute left-1/2 top-8 -translate-x-1/2 whitespace-nowrap font-display text-[clamp(6rem,28vw,27rem)] text-black/10"
         aria-hidden="true"
@@ -10,7 +10,7 @@ export function FooterSection() {
         JadeFranson
       </p>
 
-      <div className="relative mx-auto flex w-full max-w-[59.375rem] flex-col items-center px-8 pt-56 md:px-12 md:pt-72">
+      <div className="relative mx-auto flex w-full max-w-[59.375rem] flex-col items-center px-6 pt-40 md:px-8 md:pt-52">
         <div className="relative aspect-[950/632] w-full max-w-[59.375rem]">
           <Image
             src="/images/footer-illustration.png"

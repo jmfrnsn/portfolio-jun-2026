@@ -1,3 +1,8 @@
+import {
+  ABOUT_FONT_SIZE_PX,
+  BODY_FONT_SIZE_PX,
+  waitForSerifFonts,
+} from "@/lib/typography";
 import { getWrapHull } from "@/lib/pretext-wrap-geometry";
 
 const HERO_IMAGE = "/images/hero-garden.png";
@@ -14,7 +19,7 @@ function loadImage(src: string): Promise<void> {
 
 export function preloadHomeAssets(): Promise<void> {
   return Promise.all([
-    document.fonts.ready,
+    waitForSerifFonts([ABOUT_FONT_SIZE_PX, BODY_FONT_SIZE_PX]),
     loadImage(HERO_IMAGE),
     loadImage(DROP_CAP_SRC),
     getWrapHull(DROP_CAP_SRC, { smoothRadius: 4, mode: "envelope" }),

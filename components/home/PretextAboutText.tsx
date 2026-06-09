@@ -5,49 +5,44 @@ import { useLayoutEffect, useRef, useState } from "react";
 
 import { projectPositionedLines } from "@/lib/pretext-line-projection";
 import {
+  clearPreparedTextCache,
   getPreparedText,
   layoutTextAroundMonogram,
   positionedLinesEqual,
   type PositionedLine,
 } from "@/lib/pretext-monogram-layout";
 import { getWrapHull, type Point, type Rect } from "@/lib/pretext-wrap-geometry";
-
-import { aboutText } from "./contents-data";
+import {
+  getAboutTypography,
+  getSerifFontSpec,
+  waitForSerifFonts,
+} from "@/lib/typography";
 
 const DROP_CAP_SRC = "/images/drop-cap-j.svg";
-const BODY_TEXT = aboutText.slice(1);
-const MONOGRAM_OFFSET: Point = { x: 0, y: 0 };
 
-let cachedSerifFontFamily: string | null = null;
+type MonogramLayoutConfig = {
+  scale: number;
+  offsetY: number;
+  textGap: number;
+  linesBesideMobile: number;
+  linesBesideDesktop: number;
+};
 
-function getSerifFontFamily(): string {
-  if (cachedSerifFontFamily !== null) return cachedSerifFontFamily;
-  if (typeof document === "undefined") {
-    return '"Cormorant Garamond", "Times New Roman", serif';
-  }
-
-  const probe = document.createElement("span");
-  probe.className = "font-serif";
-  probe.style.visibility = "hidden";
-  probe.style.position = "absolute";
-  probe.textContent = "M";
-  document.body.appendChild(probe);
-  cachedSerifFontFamily = getComputedStyle(probe).fontFamily;
-  probe.remove();
-  return cachedSerifFontFamily;
-}
-
-function getTypography(containerWidth: number) {
-  const fontSize = containerWidth >= 768 ? 24 : 18;
-  const lineHeight = Math.round(fontSize * 1.5);
-  const font = `${fontSize}px ${getSerifFontFamily()}`;
-  return { fontSize, lineHeight, font };
-}
+type PretextAboutTextProps = {
+  aboutText: string;
+  aboutFontSize: number;
+  monogramScale: number;
+  monogramOffsetY: number;
+  monogramTextGap: number;
+  monogramLinesBesideMobile: number;
+  monogramLinesBesideDesktop: number;
+};
 
 type TextProjection = {
   lines: PositionedLine[];
   font: string;
   lineHeight: number;
+  letterSpacing: number;
   firstParagraphHeight: number;
   monogramRect: Rect;
 };
@@ -63,31 +58,71 @@ function getMonogramHull(): Promise<Point[]> {
   return monogramHullPromise;
 }
 
-function getMonogramSize(containerWidth: number): Pick<Rect, "width" | "height"> {
-  const width = containerWidth >= 768 ? 186 : 88;
-  const height = containerWidth >= 768 ? 188 : 88;
-  return { width, height };
+/**
+ * Snap cap size to whole line bands so text below starts on a clean line,
+ * not mid-band (fractional scale values otherwise land between lines).
+ */
+function snapMonogramSideToLineGrid(
+  scaledSide: number,
+  lineHeight: number,
+  offsetY: number,
+  textGap: number,
+): number {
+  const lineCount = Math.max(
+    1,
+    Math.round((scaledSide + textGap) / lineHeight),
+  );
+  let side = lineCount * lineHeight - textGap;
+  const alignedBottom = Math.round((offsetY + side) / lineHeight) * lineHeight;
+  side = alignedBottom - offsetY;
+  return Math.max(lineHeight - textGap, side);
+}
+
+function getMonogramSize(
+  containerWidth: number,
+  lineHeight: number,
+  layout: MonogramLayoutConfig,
+): Pick<Rect, "width" | "height"> {
+  const linesBeside =
+    containerWidth >= 768
+      ? layout.linesBesideDesktop
+      : layout.linesBesideMobile;
+  const scaledSide =
+    (linesBeside * lineHeight - layout.textGap) * layout.scale;
+  const side = snapMonogramSideToLineGrid(
+    scaledSide,
+    lineHeight,
+    layout.offsetY,
+    layout.textGap,
+  );
+  return { width: side, height: side };
 }
 
 function computeProjection(
   containerWidth: number,
   hull: Point[],
+  serifFamily: string,
+  layout: MonogramLayoutConfig,
+  aboutFontSize: number,
+  bodyText: string,
 ): TextProjection {
-  const { lineHeight, font } = getTypography(containerWidth);
-  const { width, height } = getMonogramSize(containerWidth);
+  const { fontSize, lineHeight, letterSpacing } = getAboutTypography(aboutFontSize);
+  const font = getSerifFontSpec(fontSize, serifFamily);
+  const { width, height } = getMonogramSize(containerWidth, lineHeight, layout);
   const monogramRect: Rect = {
-    x: MONOGRAM_OFFSET.x,
-    y: MONOGRAM_OFFSET.y,
+    x: 0,
+    y: layout.offsetY,
     width,
     height,
   };
-  const prepared = getPreparedText(BODY_TEXT, font, preparedCache);
+  const prepared = getPreparedText(bodyText, font, preparedCache, letterSpacing);
   const first = layoutTextAroundMonogram(
     prepared,
     { x: 0, y: 0, width: containerWidth, height: 100_000 },
     lineHeight,
     monogramRect,
     hull,
+    layout.textGap,
   );
 
   return {
@@ -99,6 +134,7 @@ function computeProjection(
     ),
     font,
     lineHeight,
+    letterSpacing,
   };
 }
 
@@ -113,14 +149,43 @@ function setMonogramLayout(
   element.style.height = `${rect.height}px`;
 }
 
-export function PretextAboutText() {
+function getBodyText(aboutText: string): string {
+  return aboutText.startsWith("J") ? aboutText.slice(1) : aboutText;
+}
+
+export function PretextAboutText({
+  aboutText,
+  aboutFontSize,
+  monogramScale,
+  monogramOffsetY,
+  monogramTextGap,
+  monogramLinesBesideMobile,
+  monogramLinesBesideDesktop,
+}: PretextAboutTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textLayerRef = useRef<HTMLDivElement>(null);
   const monogramRef = useRef<HTMLDivElement>(null);
   const linePoolRef = useRef<HTMLSpanElement[]>([]);
   const hullRef = useRef<Point[] | null>(null);
+  const serifFamilyRef = useRef<string | null>(null);
   const projectionRef = useRef<TextProjection | null>(null);
+  const lastAboutTextRef = useRef(aboutText);
+  const layoutRef = useRef<MonogramLayoutConfig>({
+    scale: monogramScale,
+    offsetY: monogramOffsetY,
+    textGap: monogramTextGap,
+    linesBesideMobile: monogramLinesBesideMobile,
+    linesBesideDesktop: monogramLinesBesideDesktop,
+  });
   const [isReady, setIsReady] = useState(false);
+
+  layoutRef.current = {
+    scale: monogramScale,
+    offsetY: monogramOffsetY,
+    textGap: monogramTextGap,
+    linesBesideMobile: monogramLinesBesideMobile,
+    linesBesideDesktop: monogramLinesBesideDesktop,
+  };
 
   const projectLayout = (projection: TextProjection) => {
     const textLayer = textLayerRef.current;
@@ -131,6 +196,7 @@ export function PretextAboutText() {
       lines: projection.lines,
       font: projection.font,
       lineHeight: projection.lineHeight,
+      letterSpacing: projection.letterSpacing,
       justify: true,
     });
   };
@@ -140,7 +206,17 @@ export function PretextAboutText() {
     const textLayer = textLayerRef.current;
     if (!hull || !textLayer) return;
 
-    const nextProjection = computeProjection(containerWidth, hull);
+    const serifFamily = serifFamilyRef.current;
+    if (!serifFamily) return;
+
+    const nextProjection = computeProjection(
+      containerWidth,
+      hull,
+      serifFamily,
+      layoutRef.current,
+      aboutFontSize,
+      getBodyText(aboutText),
+    );
     const previous = projectionRef.current;
 
     const linesChanged =
@@ -149,7 +225,8 @@ export function PretextAboutText() {
     const typographyChanged =
       previous === null ||
       previous.font !== nextProjection.font ||
-      previous.lineHeight !== nextProjection.lineHeight;
+      previous.lineHeight !== nextProjection.lineHeight ||
+      previous.letterSpacing !== nextProjection.letterSpacing;
     const heightChanged =
       previous === null ||
       previous.firstParagraphHeight !== nextProjection.firstParagraphHeight;
@@ -171,7 +248,21 @@ export function PretextAboutText() {
     let cancelled = false;
 
     async function relayout() {
-      await document.fonts.ready;
+      const serifFamily = await waitForSerifFonts([aboutFontSize]);
+      if (cancelled || !container) return;
+
+      if (serifFamilyRef.current !== serifFamily) {
+        clearPreparedTextCache(preparedCache);
+        serifFamilyRef.current = serifFamily;
+        projectionRef.current = null;
+      }
+
+      if (lastAboutTextRef.current !== aboutText) {
+        clearPreparedTextCache(preparedCache);
+        projectionRef.current = null;
+        lastAboutTextRef.current = aboutText;
+      }
+
       const hull = await getMonogramHull();
       if (cancelled || !container) return;
 
@@ -200,12 +291,21 @@ export function PretextAboutText() {
       }
       linePoolRef.current = [];
     };
-  }, []);
+  }, [
+    aboutText,
+    aboutFontSize,
+    monogramScale,
+    monogramOffsetY,
+    monogramTextGap,
+    monogramLinesBesideMobile,
+    monogramLinesBesideDesktop,
+  ]);
 
   return (
     <div
       ref={containerRef}
       className="relative w-full min-h-[11rem] md:min-h-[14rem]"
+      style={{ fontSize: aboutFontSize }}
     >
       <div
         ref={textLayerRef}
