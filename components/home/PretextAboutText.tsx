@@ -38,6 +38,7 @@ type PretextAboutTextProps = {
   monogramLinesBesideMobile: number;
   monogramLinesBesideDesktop: number;
   inkBleedIntensity: number;
+  textAlign?: "left" | "justify";
 };
 
 type TextProjection = {
@@ -164,6 +165,7 @@ export function PretextAboutText({
   monogramLinesBesideMobile,
   monogramLinesBesideDesktop,
   inkBleedIntensity,
+  textAlign = "left",
 }: PretextAboutTextProps) {
   const inkBleed = getInkBleedParams(inkBleedIntensity);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -203,7 +205,7 @@ export function PretextAboutText({
       font: projection.font,
       lineHeight: projection.lineHeight,
       letterSpacing: projection.letterSpacing,
-      justify: true,
+      justify: textAlign === "justify",
     });
   };
 
@@ -305,6 +307,7 @@ export function PretextAboutText({
     monogramTextGap,
     monogramLinesBesideMobile,
     monogramLinesBesideDesktop,
+    textAlign,
   ]);
 
   return (

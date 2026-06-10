@@ -29,7 +29,7 @@ export const HOME_LAYOUT_DIAL_CONFIG = {
   },
   dropCap: {
     _collapsed: true,
-    scale: [0.7, 0.3, 1.2, 0.01],
+    scale: [1.18, 0.3, 1.2, 0.01],
     offsetY: [6, 0, 32],
     textGap: [10, 0, 32],
     linesBesideMobile: [3, 1, 8],
@@ -92,7 +92,7 @@ export const DEFAULT_HOME_LAYOUT_DIALS: HomeLayoutDials = {
     rowPaddingXDesktop: 8,
   },
   dropCap: {
-    scale: 0.7,
+    scale: 1.18,
     offsetY: 6,
     textGap: 10,
     linesBesideMobile: 3,
