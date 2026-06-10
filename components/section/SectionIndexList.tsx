@@ -1,5 +1,6 @@
 "use client";
 
+import { ContentsTableRow } from "@/components/shared/ContentsTableRow";
 import {
   SlidingHighlightList,
   SlidingHighlightRow,
@@ -19,16 +20,11 @@ export function SectionIndexList({ section }: SectionIndexListProps) {
           href={sectionItemHref(section.slug, item.slug)}
           className="p-2"
         >
-          <span className="min-w-0 flex-1 font-mono text-sm font-extralight uppercase tracking-[-0.04375rem] text-ink">
-            {item.title}
-          </span>
-          <span
-            className="hidden min-w-8 flex-1 border-b border-dotted border-ink/35 sm:block"
-            aria-hidden="true"
+          <ContentsTableRow
+            title={item.title}
+            suffix={item.year ?? "—"}
+            suffixClassName="font-mono text-sm font-extralight tracking-[-0.04375rem] text-ink/70"
           />
-          <span className="font-mono text-sm font-extralight tracking-[-0.04375rem] text-ink/70 sm:ml-auto">
-            {item.year ?? "—"}
-          </span>
         </SlidingHighlightRow>
       ))}
     </SlidingHighlightList>

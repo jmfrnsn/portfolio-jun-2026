@@ -5,7 +5,7 @@ import { ContentsList } from "../ContentsList";
 import { useAboutSectionMetrics } from "../useAboutSectionMetrics";
 
 export function AboutLayoutCentered() {
-  const { paddingX, paddingTop, paddingBottom, viewportInset } =
+  const { paddingX, paddingTop, paddingBottom, viewportInset, contentMaxWidth } =
     useAboutSectionMetrics();
 
   return (
@@ -18,10 +18,13 @@ export function AboutLayoutCentered() {
       }}
     >
       <div
-        className="mx-auto flex w-full max-w-[40rem] flex-col"
-        style={{ minHeight: `calc(100svh - ${viewportInset}px)` }}
+        className="mx-auto flex w-full flex-col"
+        style={{
+          maxWidth: contentMaxWidth,
+          minHeight: `calc(100svh - ${viewportInset}px)`,
+        }}
       >
-        <div className="flex w-full flex-1 flex-col justify-center">
+        <div className="flex w-full flex-1 flex-col justify-start">
           <AboutTextBlock
             className="w-full"
             textAlign="justify"

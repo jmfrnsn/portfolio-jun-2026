@@ -1,5 +1,6 @@
 "use client";
 
+import { ContentsTableRow } from "@/components/shared/ContentsTableRow";
 import {
   SlidingHighlightList,
   SlidingHighlightRow,
@@ -40,21 +41,11 @@ export function ContentsList({ className = "" }: ContentsListProps) {
             paddingBottom: dials.contents.rowPaddingY,
           }}
         >
-          <span className="flex min-w-0 shrink-0 items-baseline gap-2 sm:gap-3">
-            <span className="font-sans tracking-[-0.04375rem] text-ink">
-              {entry.number}
-            </span>
-            <span className="font-mono font-extralight uppercase tracking-[-0.04375rem] text-ink">
-              {entry.title}
-            </span>
-          </span>
-          <span
-            className="hidden min-w-8 flex-1 border-b border-dotted border-ink/35 sm:block"
-            aria-hidden="true"
+          <ContentsTableRow
+            number={entry.number}
+            title={entry.title}
+            suffix={entry.pages}
           />
-          <span className="font-mono font-extralight tracking-[-0.04375rem] text-ink sm:ml-auto">
-            {entry.pages}
-          </span>
         </SlidingHighlightRow>
       ))}
     </SlidingHighlightList>

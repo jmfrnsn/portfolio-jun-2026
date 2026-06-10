@@ -147,7 +147,7 @@ export function SlidingHighlightRow({
       <Link
         ref={linkRef}
         href={href}
-        className={`relative z-[1] flex w-full flex-wrap items-baseline gap-x-2 gap-y-1 sm:flex-nowrap sm:items-center ${className}`.trim()}
+        className={`relative z-[1] flex w-full flex-nowrap items-baseline gap-2 sm:gap-3 ${className}`.trim()}
         style={style}
         onMouseEnter={activate}
         onFocus={activate}

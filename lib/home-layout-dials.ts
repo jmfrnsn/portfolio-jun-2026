@@ -12,6 +12,9 @@ export {
   HOME_COPY_DIAL_CONFIG,
 } from "./home-copy-dials";
 
+/** Centered column width — padding scales down so this width is preserved. */
+export const HOME_CONTENT_MAX_WIDTH_REM = 44;
+
 export const HOME_LAYOUT_DIAL_CONFIG = {
   section: {
     paddingXMobile: [32, 0, 256, 4],
