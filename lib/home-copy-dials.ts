@@ -1,5 +1,6 @@
-import type { ContentEntry } from "@/components/home/contents-data";
+import { contents, type ContentEntry } from "@/components/home/contents-data";
 import type { DialConfig } from "dialkit";
+import { pagesLabelToSlug } from "@/lib/site-sections";
 
 export type HomeCopyDials = {
   aboutText: string;
@@ -52,13 +53,18 @@ export const HOME_COPY_DIAL_CONFIG = {
 export function getContentsFromCopyDials(
   copy: HomeCopyDials,
 ): ContentEntry[] {
-  return [
+  const rows = [
     { number: "01", title: copy.entry1Title, pages: copy.entry1Pages },
     { number: "02", title: copy.entry2Title, pages: copy.entry2Pages },
     { number: "03", title: copy.entry3Title, pages: copy.entry3Pages },
     { number: "04", title: copy.entry4Title, pages: copy.entry4Pages },
     { number: "05", title: copy.entry5Title, pages: copy.entry5Pages },
   ];
+
+  return rows.map((row, index) => ({
+    ...row,
+    slug: pagesLabelToSlug(row.pages) ?? contents[index]!.slug,
+  }));
 }
 
 export function flattenCopyDialsFromPanel(panel: {

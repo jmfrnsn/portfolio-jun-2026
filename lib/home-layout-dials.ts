@@ -23,7 +23,7 @@ export const HOME_LAYOUT_DIAL_CONFIG = {
   },
   contents: {
     rowGap: [8, 0, 128, 4],
-    rowPaddingX: [8, 0, 160, 4],
+    rowPaddingX: [12, 0, 160, 4],
     rowPaddingY: [4, 0, 96, 4],
     rowPaddingXDesktop: [8, 0, 160, 4],
   },
@@ -40,7 +40,7 @@ export const HOME_LAYOUT_DIAL_CONFIG = {
     contentsFontSize: [16, 10, 32],
   },
   inkBleed: {
-    intensity: [0.47, 0, 1, 0.01],
+    intensity: [0, 0, 1, 0.01],
   },
 } satisfies DialConfig;
 
@@ -87,7 +87,7 @@ export const DEFAULT_HOME_LAYOUT_DIALS: HomeLayoutDials = {
   },
   contents: {
     rowGap: 8,
-    rowPaddingX: 8,
+    rowPaddingX: 12,
     rowPaddingY: 4,
     rowPaddingXDesktop: 8,
   },
@@ -103,7 +103,7 @@ export const DEFAULT_HOME_LAYOUT_DIALS: HomeLayoutDials = {
     contentsFontSize: 16,
   },
   inkBleed: {
-    intensity: 0.47,
+    intensity: 0,
   },
   copy: DEFAULT_HOME_COPY_DIALS,
 };

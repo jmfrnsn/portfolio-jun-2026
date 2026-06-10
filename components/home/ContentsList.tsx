@@ -1,8 +1,12 @@
 "use client";
 
-import { useMinWidthMd } from "@/lib/use-min-width-md";
-
+import {
+  SlidingHighlightList,
+  SlidingHighlightRow,
+} from "@/components/shared/SlidingHighlightRows";
 import { getContentsFromCopyDials } from "@/lib/home-copy-dials";
+import { isSectionSlug, sectionHref } from "@/lib/site-sections";
+import { useMinWidthMd } from "@/lib/use-min-width-md";
 
 import { useHomeLayoutDials } from "./HomeLayoutDialProvider";
 
@@ -21,14 +25,14 @@ export function ContentsList({ className = "" }: ContentsListProps) {
   const contents = getContentsFromCopyDials(dials.copy);
 
   return (
-    <ol
+    <SlidingHighlightList
       className={`flex w-full flex-col ${className}`.trim()}
       style={{ gap: dials.contents.rowGap, fontSize: contentsFontSize }}
     >
       {contents.map((entry) => (
-        <li
+        <SlidingHighlightRow
           key={entry.number}
-          className="flex w-full flex-wrap items-baseline gap-x-2 gap-y-1 transition-colors hover:bg-highlight focus-visible:bg-highlight sm:flex-nowrap sm:items-center"
+          href={isSectionSlug(entry.slug) ? sectionHref(entry.slug) : "/"}
           style={{
             paddingLeft: rowPaddingX,
             paddingRight: rowPaddingX,
@@ -51,8 +55,8 @@ export function ContentsList({ className = "" }: ContentsListProps) {
           <span className="font-mono font-extralight tracking-[-0.04375rem] text-ink sm:ml-auto">
             {entry.pages}
           </span>
-        </li>
+        </SlidingHighlightRow>
       ))}
-    </ol>
+    </SlidingHighlightList>
   );
 }

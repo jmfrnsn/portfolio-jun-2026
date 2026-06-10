@@ -31,8 +31,7 @@ export function AboutLayoutCentered() {
           />
         </div>
 
-        <div className="mt-12 flex w-full flex-col items-center text-center md:mt-16">
-          <h2 className="mb-6 font-serif text-2xl text-ink md:mb-8">CONTENTS</h2>
+        <div className="mt-12 flex w-full flex-col items-center md:mt-16">
           <ContentsList className="text-left" />
         </div>
       </div>

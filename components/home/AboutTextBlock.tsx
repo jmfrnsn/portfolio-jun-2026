@@ -21,7 +21,7 @@ export function AboutTextBlock({
   const { dials } = useAboutSectionMetrics();
 
   return (
-    <div className={className}>
+    <div className={className} style={{ paddingLeft: 8, paddingRight: 8 }}>
       <PretextAboutText
         aboutText={dials.copy.aboutText}
         aboutFontSize={dials.typography.aboutFontSize}

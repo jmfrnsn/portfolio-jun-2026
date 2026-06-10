@@ -46,7 +46,7 @@ export function AboutTextColumns({ className = "" }: AboutTextColumnsProps) {
 
   return (
     <div
-      className={`grid w-full grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-x-12 lg:gap-x-16 ${className}`.trim()}
+      className={`grid w-full grid-cols-1 items-start gap-8 px-2 md:grid-cols-2 md:gap-x-12 lg:gap-x-16 ${className}`.trim()}
     >
       <PretextAboutText
         aboutText={left.join(" ")}

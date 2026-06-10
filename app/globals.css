@@ -38,6 +38,19 @@ body {
   font-family: var(--font-mono), "PP Supply Mono", ui-monospace, monospace;
 }
 
+.sliding-row-highlight {
+  transition:
+    transform 320ms ease,
+    height 320ms ease,
+    opacity 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sliding-row-highlight {
+    transition: none;
+  }
+}
+
 /* Newspaper-style grainy ink bleed on about body lines */
 .about-ink-bleed {
   filter: url(#about-newspaper-ink);
