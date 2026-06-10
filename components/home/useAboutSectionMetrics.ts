@@ -2,15 +2,14 @@
 
 import {
   HOME_CONTENT_MAX_WIDTH_REM,
-  type HomeLayoutDials,
-} from "@/lib/home-layout-dials";
+  HOME_LAYOUT,
+  type HomeLayout,
+} from "@/lib/home-layout";
 import { useMinWidthMd } from "@/lib/use-min-width-md";
-
-import { useHomeLayoutDials } from "./HomeLayoutDialProvider";
 
 function getPaddingX(
   isMd: boolean,
-  section: HomeLayoutDials["section"],
+  section: HomeLayout["section"],
 ): number | string {
   if (!isMd) return section.paddingXMobile;
 
@@ -18,20 +17,16 @@ function getPaddingX(
 }
 
 export function useAboutSectionMetrics() {
-  const dials = useHomeLayoutDials();
   const isMd = useMinWidthMd();
+  const { section } = HOME_LAYOUT;
 
-  const paddingX = getPaddingX(isMd, dials.section);
-  const paddingTop = isMd
-    ? dials.section.paddingTopDesktop
-    : dials.section.paddingTop;
-  const paddingBottom = isMd
-    ? dials.section.paddingBottomDesktop
-    : dials.section.paddingBottom;
+  const paddingX = getPaddingX(isMd, section);
+  const paddingTop = isMd ? section.paddingTopDesktop : section.paddingTop;
+  const paddingBottom = isMd ? section.paddingBottomDesktop : section.paddingBottom;
   const viewportInset = paddingTop + paddingBottom;
 
   return {
-    dials,
+    dials: HOME_LAYOUT,
     isMd,
     paddingX,
     paddingTop,

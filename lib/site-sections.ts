@@ -64,20 +64,7 @@ const SECTION_ITEMS: Record<SectionSlug, SectionItem[]> = {
       year: "2024",
     },
   ],
-  reading: [
-    {
-      slug: "fiction-shelf",
-      title: "Fiction Shelf",
-      description: "Novels and stories worth returning to.",
-      year: "2025",
-    },
-    {
-      slug: "philosophy-log",
-      title: "Philosophy Log",
-      description: "Readings in perception, mind, and meaning.",
-      year: "2024",
-    },
-  ],
+  reading: [],
   archives: [
     {
       slug: "knowledge-index",
@@ -92,20 +79,7 @@ const SECTION_ITEMS: Record<SectionSlug, SectionItem[]> = {
       year: "2024",
     },
   ],
-  studio: [
-    {
-      slug: "process-sketches",
-      title: "Process Sketches",
-      description: "Working drawings and in-progress studies.",
-      year: "2025",
-    },
-    {
-      slug: "material-tests",
-      title: "Material Tests",
-      description: "Experiments in texture, print, and form.",
-      year: "2024",
-    },
-  ],
+  about: [],
 };
 
 const SECTION_DESCRIPTIONS: Record<SectionSlug, string> = {
@@ -113,7 +87,7 @@ const SECTION_DESCRIPTIONS: Record<SectionSlug, string> = {
   writing: "Essays, notes, and cultivated thought.",
   reading: "Fiction, philosophy, sci-fi, and more.",
   archives: "Collected knowledge and references.",
-  studio: "Process, experiments, and studio work.",
+  about: "Biography and background.",
 };
 
 export function buildSiteSections(

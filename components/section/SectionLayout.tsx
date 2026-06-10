@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { FooterSection } from "@/components/home/FooterSection";
+import { SectionContentShell } from "@/components/section/SectionContentShell";
 import type { SiteSection } from "@/lib/site-sections";
 
 type SectionLayoutProps = {
@@ -11,7 +12,7 @@ type SectionLayoutProps = {
 export function SectionLayout({ section, children }: SectionLayoutProps) {
   return (
     <div className="bg-paper text-ink">
-      <div className="mx-auto w-full max-w-[40rem] px-8 pb-24 pt-12 md:px-12 md:pb-32 md:pt-16">
+      <SectionContentShell>
         <header className="mb-12 md:mb-16">
           <Link
             href="/"
@@ -37,7 +38,7 @@ export function SectionLayout({ section, children }: SectionLayoutProps) {
         </header>
 
         <main>{children}</main>
-      </div>
+      </SectionContentShell>
       <FooterSection />
     </div>
   );

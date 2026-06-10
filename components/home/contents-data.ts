@@ -1,7 +1,7 @@
 export const contents = [
   {
     number: "01",
-    title: "DESIGNING PRODUCTS, WEBSITES, AND OBJECTS",
+    title: "EXPERIMENTING WITH NEW IDEAS + TOOLS",
     pages: "LAB",
     slug: "lab",
   },
@@ -19,15 +19,15 @@ export const contents = [
   },
   {
     number: "04",
-    title: "COLLECTING KNOWLEDGE",
+    title: "NOTICING THE WORLD ANEW",
     pages: "ARCHIVES",
     slug: "archives",
   },
   {
     number: "05",
-    title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-    pages: "STUDIO",
-    slug: "studio",
+    title: "TAKING A WALK",
+    pages: "ABOUT",
+    slug: "about",
   },
 ] as const;
 
@@ -35,7 +35,7 @@ export type ContentEntry = {
   number: string;
   title: string;
   pages: string;
-  slug: string;
+  slug: (typeof contents)[number]["slug"];
 };
 
 export const DEFAULT_ABOUT_TEXT =

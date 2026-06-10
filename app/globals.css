@@ -5,6 +5,7 @@
   --cream: #fffebb;
   --ink: #27301c;
   --highlight: #f2f2e9;
+  --highlight-cursor: #e6e6dc;
 }
 
 @theme inline {
@@ -12,6 +13,7 @@
   --color-cream: var(--cream);
   --color-ink: var(--ink);
   --color-highlight: var(--highlight);
+  --color-highlight-cursor: var(--highlight-cursor);
   --font-display: var(--font-display);
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
@@ -36,6 +38,15 @@ body {
 
 .font-mono {
   font-family: var(--font-mono), "PP Supply Mono", ui-monospace, monospace;
+}
+
+.contents-row-leader {
+  min-width: 2rem;
+  height: 3px;
+  flex: 1 1 0%;
+  align-self: center;
+  background-position: center;
+  background-repeat: repeat-x;
 }
 
 .sliding-row-highlight {

@@ -25,6 +25,12 @@ type SlidingHighlightContextValue = {
 const SlidingHighlightContext =
   createContext<SlidingHighlightContextValue | null>(null);
 
+const ScrambleRowContext = createContext(false);
+
+export function useScrambleRowActive(): boolean {
+  return useContext(ScrambleRowContext);
+}
+
 function useSlidingHighlightContext(): SlidingHighlightContextValue {
   const context = useContext(SlidingHighlightContext);
   if (!context) {
@@ -139,21 +145,31 @@ export function SlidingHighlightRow({
 }: SlidingHighlightRowProps) {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const { setActiveRow } = useSlidingHighlightContext();
+  const [scrambleActive, setScrambleActive] = useState(false);
 
-  const activate = () => setActiveRow(linkRef.current);
+  const activate = () => {
+    setActiveRow(linkRef.current);
+    setScrambleActive(true);
+  };
+
+  const deactivate = () => setScrambleActive(false);
 
   return (
     <li>
-      <Link
-        ref={linkRef}
-        href={href}
-        className={`relative z-[1] flex w-full flex-nowrap items-baseline gap-2 sm:gap-3 ${className}`.trim()}
-        style={style}
-        onMouseEnter={activate}
-        onFocus={activate}
-      >
-        {children}
-      </Link>
+      <ScrambleRowContext.Provider value={scrambleActive}>
+        <Link
+          ref={linkRef}
+          href={href}
+          className={`relative z-[1] flex w-full origin-center flex-nowrap items-center gap-2 transition-transform duration-150 ease-out active:scale-[0.99] motion-reduce:transition-none motion-reduce:active:scale-100 sm:gap-3 ${className}`.trim()}
+          style={style}
+          onMouseEnter={activate}
+          onMouseLeave={deactivate}
+          onFocus={activate}
+          onBlur={deactivate}
+        >
+          {children}
+        </Link>
+      </ScrambleRowContext.Provider>
     </li>
   );
 }

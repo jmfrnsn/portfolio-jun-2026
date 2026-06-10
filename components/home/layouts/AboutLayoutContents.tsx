@@ -1,11 +1,10 @@
 "use client";
 
-import { AboutTextBlock } from "../AboutTextBlock";
 import { ContentsList } from "../ContentsList";
 import { useAboutSectionMetrics } from "../useAboutSectionMetrics";
 
-export function AboutLayoutStacked() {
-  const { paddingX, paddingTop, paddingBottom, viewportInset } =
+export function AboutLayoutContents() {
+  const { paddingX, paddingTop, paddingBottom, viewportInset, contentMaxWidth } =
     useAboutSectionMetrics();
 
   return (
@@ -18,11 +17,13 @@ export function AboutLayoutStacked() {
       }}
     >
       <div
-        className="flex flex-col justify-between"
-        style={{ minHeight: `calc(100svh - ${viewportInset}px)` }}
+        className="mx-auto flex w-full flex-col justify-center"
+        style={{
+          maxWidth: contentMaxWidth,
+          minHeight: `calc(100svh - ${viewportInset}px)`,
+        }}
       >
-        <AboutTextBlock />
-        <ContentsList />
+        <ContentsList className="text-left" />
       </div>
     </section>
   );
