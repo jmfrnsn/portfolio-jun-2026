@@ -134,7 +134,7 @@ function ReadingRow({ entry }: { entry: ReadingDisplayEntry }) {
       tabIndex={0}
       className="group border-b border-paper/25 outline-none transition-colors last:border-b-0 hover:bg-paper/[0.03] focus-visible:bg-paper/[0.03] focus-visible:ring-1 focus-visible:ring-paper/60"
     >
-      <div className="grid grid-cols-[2.5rem_minmax(4.5rem,0.45fr)_minmax(0,1fr)_1.25rem] items-center gap-3 py-2 font-mono text-xs font-extralight uppercase tracking-[-0.04375rem] text-paper/80 md:grid-cols-[3rem_minmax(5rem,0.35fr)_minmax(0,1fr)_6rem_1.25rem]">
+      <div className="grid grid-cols-[2.5rem_minmax(4.5rem,0.35fr)_minmax(0,1fr)_1.25rem] items-center gap-3 py-2 font-mono text-xs font-extralight uppercase tracking-[-0.04375rem] text-paper/80 md:grid-cols-[3rem_minmax(8rem,0.25fr)_minmax(0,1fr)_10rem_1.25rem] xl:grid-cols-[4rem_minmax(10rem,0.22fr)_minmax(0,1fr)_12rem_1.25rem]">
         <span className="text-paper/55">{String(entry.index + 1).padStart(2, "0")}</span>
         <span className="text-paper/70">{entryCode(entry)}</span>
         <h2 className="truncate text-paper">{entry.name}</h2>
@@ -184,11 +184,11 @@ export function ReadingList() {
   const [year, setYear] = useState<ReadingYear>("2026");
 
   return (
-    <div className="-mx-2 md:-mx-4">
-      <div className="rounded-sm bg-[#d1cec4] p-3 md:p-6">
-        <div className="rounded-[0.1rem] bg-black p-4 text-paper shadow-[0_1.5rem_4rem_rgba(0,0,0,0.18)] md:p-5">
+    <div className="relative left-1/2 w-[calc(100vw-1.5rem)] -translate-x-1/2 md:w-[calc(100vw-4rem)]">
+      <div className="rounded-sm bg-[#d1cec4] p-3 md:p-7 xl:p-9">
+        <div className="rounded-[0.1rem] bg-black p-4 text-paper shadow-[0_1.5rem_4rem_rgba(0,0,0,0.18)] md:p-6 xl:p-8">
           <YearTabs year={year} onChange={setYear} />
-          <div className="mb-2 grid grid-cols-[2.5rem_minmax(4.5rem,0.45fr)_minmax(0,1fr)_1.25rem] gap-3 font-mono text-[0.58rem] font-extralight uppercase tracking-[0.08em] text-paper/40 md:grid-cols-[3rem_minmax(5rem,0.35fr)_minmax(0,1fr)_6rem_1.25rem]">
+          <div className="mb-2 grid grid-cols-[2.5rem_minmax(4.5rem,0.35fr)_minmax(0,1fr)_1.25rem] gap-3 font-mono text-[0.58rem] font-extralight uppercase tracking-[0.08em] text-paper/40 md:grid-cols-[3rem_minmax(8rem,0.25fr)_minmax(0,1fr)_10rem_1.25rem] xl:grid-cols-[4rem_minmax(10rem,0.22fr)_minmax(0,1fr)_12rem_1.25rem]">
             <span>№</span>
             <span>Code</span>
             <span>Title</span>
