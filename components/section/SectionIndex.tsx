@@ -17,7 +17,7 @@ export function SectionIndex({ sectionSlug }: SectionIndexProps) {
   if (!section) return null;
 
   return (
-    <SectionLayout section={section}>
+    <SectionLayout section={section} hideIntro={sectionSlug === "reading"}>
       {sectionSlug === "reading" ? (
         <ReadingList />
       ) : (
