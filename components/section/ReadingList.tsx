@@ -141,8 +141,8 @@ function ReadingCover({ entry }: { entry: ReadingDisplayEntry }) {
 
 function ReadingPreview({ entry }: { entry: ReadingDisplayEntry }) {
   return (
-    <aside className="top-8 md:sticky" aria-live="polite">
-      <div className="grid gap-5 border border-ink/10 bg-paper/80 p-3 shadow-[0_1.25rem_4rem_rgba(39,48,28,0.06)] backdrop-blur md:grid-cols-[minmax(12rem,0.55fr)_minmax(0,1fr)] md:p-4 xl:p-5">
+    <aside className="w-full max-w-3xl" aria-live="polite">
+      <div className="grid gap-5 border border-ink/10 bg-paper/80 p-3 shadow-[0_1.25rem_4rem_rgba(39,48,28,0.06)] backdrop-blur md:grid-cols-[minmax(12rem,0.45fr)_minmax(0,1fr)] md:p-4 xl:p-5">
         <ReadingCover entry={entry} />
         <div className="flex flex-col justify-end">
           <p className="font-mono text-[0.625rem] font-extralight uppercase tracking-[0.08em] text-ink/45">
@@ -225,21 +225,21 @@ export function ReadingList() {
       <div className="p-0 md:p-2 xl:p-4">
         <div className="border-y border-ink/10 py-4 md:py-6 xl:py-8">
           <YearTabs year={year} onChange={setYear} />
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.56fr)_minmax(26rem,0.44fr)] xl:gap-10">
-            <div className="border-y border-ink/10">
-              {entries.map((entry) => {
-                const key = entryKey(entry);
-                return (
-                  <ReadingRow
-                    key={key}
-                    entry={entry}
-                    isActive={entryKey(activeEntry) === key}
-                    onActivate={() => setActiveKey(key)}
-                  />
-                );
-              })}
-            </div>
+          <div className="mb-6 flex justify-end md:mb-8">
             <ReadingPreview entry={activeEntry} />
+          </div>
+          <div className="border-y border-ink/10">
+            {entries.map((entry) => {
+              const key = entryKey(entry);
+              return (
+                <ReadingRow
+                  key={key}
+                  entry={entry}
+                  isActive={entryKey(activeEntry) === key}
+                  onActivate={() => setActiveKey(key)}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
