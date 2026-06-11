@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --font-display: "Snell Roundhand", "Pinyon Script", cursive;
   --paper: #fafaf5;
   --cream: #fffebb;
   --ink: #27301c;
@@ -24,6 +25,10 @@
 body {
   background: var(--paper);
   color: var(--ink);
+}
+
+.font-display-fallback {
+  --font-display: "Snell Roundhand", "Pinyon Script", cursive;
 }
 
 .font-display {

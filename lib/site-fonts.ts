@@ -1,11 +1,8 @@
 import localFont from "next/font/local";
-import { Pinyon_Script } from "next/font/google";
 
-export const display = Pinyon_Script({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: "400",
-});
+export const display = {
+  variable: "font-display-fallback",
+};
 
 export const serif = localFont({
   src: "../public/fonts/TeXGyreSchola-Regular.woff",
