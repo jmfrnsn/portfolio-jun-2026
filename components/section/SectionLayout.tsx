@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { FooterSection } from "@/components/home/FooterSection";
 import { SectionContentShell } from "@/components/section/SectionContentShell";
 import type { SiteSection } from "@/lib/site-sections";
@@ -14,14 +12,7 @@ export function SectionLayout({ section, children }: SectionLayoutProps) {
     <div className="bg-paper text-ink">
       <SectionContentShell>
         <header className="mb-12 md:mb-16">
-          <Link
-            href="/"
-            className="font-mono text-sm font-extralight uppercase tracking-[0.08em] text-ink/60 transition-colors hover:text-ink"
-          >
-            ← Contents
-          </Link>
-
-          <div className="mt-8 flex flex-col gap-3">
+          <div className="flex flex-col gap-3">
             <p className="font-sans text-sm tracking-[-0.04375rem] text-ink/60">
               {section.number}
             </p>

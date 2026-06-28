@@ -1,4 +1,5 @@
-import { ReadingList } from "@/components/section/ReadingList";
+import { LabIndex } from "@/components/section/LabIndex";
+import { ReadingPage } from "@/components/section/ReadingPage";
 import { SectionAbout } from "@/components/section/SectionAbout";
 import { SectionIndexList } from "@/components/section/SectionIndexList";
 import { SectionLayout } from "@/components/section/SectionLayout";
@@ -13,16 +14,20 @@ export function SectionIndex({ sectionSlug }: SectionIndexProps) {
     return <SectionAbout />;
   }
 
+  if (sectionSlug === "reading") {
+    return <ReadingPage />;
+  }
+
   const section = getSection(sectionSlug);
   if (!section) return null;
 
+  if (sectionSlug === "lab") {
+    return <LabIndex section={section} />;
+  }
+
   return (
     <SectionLayout section={section}>
-      {sectionSlug === "reading" ? (
-        <ReadingList />
-      ) : (
-        <SectionIndexList section={section} />
-      )}
+      <SectionIndexList section={section} />
     </SectionLayout>
   );
 }

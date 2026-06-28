@@ -9,6 +9,7 @@ export type SectionItem = {
   title: string;
   description: string;
   year?: string;
+  medium?: string;
 };
 
 export type SiteSection = {
@@ -32,22 +33,46 @@ export function isSectionSlug(value: string): value is SectionSlug {
 const SECTION_ITEMS: Record<SectionSlug, SectionItem[]> = {
   lab: [
     {
-      slug: "perplexity-comet",
-      title: "Perplexity Comet",
-      description: "Product design for the Comet browser experience.",
+      slug: "coworking-club",
+      title: "Coworking Club",
+      description: "A landing page study for a lightweight coworking concept.",
       year: "2025",
+      medium: "Website",
     },
     {
-      slug: "duolingo-music",
-      title: "Duolingo Music",
-      description: "Interaction and visual design for music learning.",
-      year: "2023",
+      slug: "brand-archive",
+      title: "Brand Archive",
+      description: "A visual archive for collecting and comparing brand systems.",
+      year: "2025",
+      medium: "Website",
     },
     {
-      slug: "object-study-01",
-      title: "Object Study 01",
-      description: "A small physical-digital object experiment.",
-      year: "2024",
+      slug: "photo-gallery",
+      title: "Photo Gallery",
+      description: "A compact gallery interaction for browsing visual references.",
+      year: "2025",
+      medium: "Website",
+    },
+    {
+      slug: "system-1-os-chess",
+      title: "System 1 OS Chess",
+      description: "A chess interface sketch in a retro operating-system language.",
+      year: "2025",
+      medium: "Website",
+    },
+    {
+      slug: "plant-care",
+      title: "Plant Care",
+      description: "A small mobile concept for identifying and tending to plants.",
+      year: "2025",
+      medium: "iOS App",
+    },
+    {
+      slug: "monet-waterlilies",
+      title: "Monet Waterlilies",
+      description: "A hand-made study combining embroidery and bookbinding.",
+      year: "2025",
+      medium: "Embroidery + Bookbinding",
     },
   ],
   writing: [
@@ -65,20 +90,6 @@ const SECTION_ITEMS: Record<SectionSlug, SectionItem[]> = {
     },
   ],
   reading: [],
-  archives: [
-    {
-      slug: "knowledge-index",
-      title: "Knowledge Index",
-      description: "Collected references, links, and fragments.",
-      year: "2025",
-    },
-    {
-      slug: "collections",
-      title: "Collections",
-      description: "Objects and sets kept without quite knowing why.",
-      year: "2024",
-    },
-  ],
   about: [],
 };
 
@@ -86,7 +97,6 @@ const SECTION_DESCRIPTIONS: Record<SectionSlug, string> = {
   lab: "Products, websites, and objects.",
   writing: "Essays, notes, and cultivated thought.",
   reading: "Fiction, philosophy, sci-fi, and more.",
-  archives: "Collected knowledge and references.",
   about: "Biography and background.",
 };
 

@@ -17,7 +17,7 @@ export function SectionContentShell({ children }: SectionContentShellProps) {
       }}
     >
       <div
-        className="mx-auto w-full pb-24 pt-12 md:pb-32 md:pt-16"
+        className="mx-auto w-full pb-24 pt-44 md:pb-32 md:pt-52"
         style={{ maxWidth: contentMaxWidth }}
       >
         {children}

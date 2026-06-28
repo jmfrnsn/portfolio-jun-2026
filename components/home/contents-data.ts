@@ -19,12 +19,6 @@ export const contents = [
   },
   {
     number: "04",
-    title: "NOTICING THE WORLD ANEW",
-    pages: "ARCHIVES",
-    slug: "archives",
-  },
-  {
-    number: "05",
     title: "TAKING A WALK",
     pages: "ABOUT",
     slug: "about",
