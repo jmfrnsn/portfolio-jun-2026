@@ -6,6 +6,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getBookCoverUrl } from "@/lib/book-cover";
 import {
+  DEFAULT_LIBRARY_HERO_CARD_CONFIGS,
+  type HeroCardConfig,
+} from "@/lib/library-hero-config";
+import {
   getLibraryCardAsset,
   type LibraryCardAsset,
 } from "@/lib/reading-library-card";
@@ -18,31 +22,52 @@ import {
 } from "@/lib/reading-list";
 
 const LIBRARY_RED = "#d7361f";
-
-type HeroCardConfig = {
-  startLeft: number;
-  startTop: number;
-  startRotate: number;
-  endLeft: number;
-  endTop: number;
-  endRotate: number;
-};
+const HERO_CARD_CONFIG_STORAGE_KEY = "portfolio-library-hero-card-configs";
 
 type DraftHeroPosition = {
   left: number;
   top: number;
 };
 
-const HERO_CARD_CONFIGS: HeroCardConfig[] = [
-  { startLeft: 44, startTop: 22, startRotate: 0, endLeft: 8, endTop: 4, endRotate: -7 },
-  { startLeft: 44, startTop: 22, startRotate: 0, endLeft: 28, endTop: 34, endRotate: -11 },
-  { startLeft: 44, startTop: 22, startRotate: 0, endLeft: 51, endTop: 6, endRotate: 13 },
-  { startLeft: 44, startTop: 22, startRotate: 0, endLeft: 67, endTop: -4, endRotate: -15 },
-  { startLeft: 44, startTop: 22, startRotate: 0, endLeft: 81, endTop: 24, endRotate: 4 },
-  { startLeft: 44, startTop: 22, startRotate: 0, endLeft: -4, endTop: 38, endRotate: -22 },
-] as const;
-
 const HERO_CARD_WIDTH = "12.5rem";
+
+function cloneDefaultHeroCardConfigs(): HeroCardConfig[] {
+  return DEFAULT_LIBRARY_HERO_CARD_CONFIGS.map((config) => ({ ...config }));
+}
+
+function isHeroCardConfig(value: unknown): value is HeroCardConfig {
+  if (!value || typeof value !== "object") return false;
+
+  const config = value as Record<keyof HeroCardConfig, unknown>;
+  return (
+    typeof config.startLeft === "number" &&
+    typeof config.startTop === "number" &&
+    typeof config.startRotate === "number" &&
+    typeof config.endLeft === "number" &&
+    typeof config.endTop === "number" &&
+    typeof config.endRotate === "number"
+  );
+}
+
+function readStoredHeroCardConfigs(): HeroCardConfig[] | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const stored = window.localStorage.getItem(HERO_CARD_CONFIG_STORAGE_KEY);
+    if (!stored) return null;
+
+    const parsed = JSON.parse(stored) as unknown;
+    if (!Array.isArray(parsed)) return null;
+
+    const configs = parsed.slice(0, DEFAULT_LIBRARY_HERO_CARD_CONFIGS.length);
+    if (configs.length !== DEFAULT_LIBRARY_HERO_CARD_CONFIGS.length) return null;
+    if (!configs.every(isHeroCardConfig)) return null;
+
+    return configs.map((config) => ({ ...config }));
+  } catch {
+    return null;
+  }
+}
 
 const COVER_OVERLAY_POSITIONS = [
   { left: "50%", top: "42%", width: "34%", rotate: "-1.1deg" },
@@ -326,11 +351,32 @@ function LibraryHeroEditor({
   onConfigChange: (index: number, config: HeroCardConfig) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [bakeStatus, setBakeStatus] = useState<"idle" | "saving" | "saved" | "error">(
+    "idle",
+  );
   const config = configs[selectedIndex]!;
   const entry = entries[selectedIndex]!;
 
   const update = (key: keyof HeroCardConfig, value: number) => {
     onConfigChange(selectedIndex, { ...config, [key]: value });
+  };
+
+  const bakeConfig = async () => {
+    setBakeStatus("saving");
+    try {
+      const response = await window.fetch("/api/library-hero-config", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ configs }),
+      });
+
+      if (!response.ok) throw new Error("Failed to bake config");
+
+      setBakeStatus("saved");
+      window.setTimeout(() => setBakeStatus("idle"), 1800);
+    } catch {
+      setBakeStatus("error");
+    }
   };
 
   return (
@@ -451,13 +497,29 @@ function LibraryHeroEditor({
               >
                 Reset
               </button>
-              <button
-                type="button"
-                onClick={onReplay}
-                className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink"
-              >
-                Replay
-              </button>
+              <div className="flex gap-1.5">
+                <button
+                  type="button"
+                  onClick={bakeConfig}
+                  disabled={bakeStatus === "saving"}
+                  className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink"
+                >
+                  {bakeStatus === "saving"
+                    ? "Baking"
+                    : bakeStatus === "saved"
+                      ? "Baked"
+                      : bakeStatus === "error"
+                        ? "Error"
+                        : "Bake Config"}
+                </button>
+                <button
+                  type="button"
+                  onClick={onReplay}
+                  className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink"
+                >
+                  Replay
+                </button>
+              </div>
             </div>
           </div>
         ) : null}
@@ -477,9 +539,10 @@ function LibraryHeroEditor({
 
 function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
   const heroRef = useRef<HTMLElement>(null);
-  const heroEntries = entries.slice(0, HERO_CARD_CONFIGS.length);
+  const hasLoadedStoredConfigsRef = useRef(false);
+  const heroEntries = entries.slice(0, DEFAULT_LIBRARY_HERO_CARD_CONFIGS.length);
   const [configs, setConfigs] = useState<HeroCardConfig[]>(() =>
-    HERO_CARD_CONFIGS.map((config) => ({ ...config })),
+    cloneDefaultHeroCardConfigs(),
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [previewStart, setPreviewStart] = useState(false);
@@ -488,6 +551,25 @@ function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
   >({});
   const [replayKey, setReplayKey] = useState(0);
 
+  useEffect(() => {
+    const storedConfigs = readStoredHeroCardConfigs();
+    if (storedConfigs) setConfigs(storedConfigs);
+    hasLoadedStoredConfigsRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!hasLoadedStoredConfigsRef.current) return;
+
+    try {
+      window.localStorage.setItem(
+        HERO_CARD_CONFIG_STORAGE_KEY,
+        JSON.stringify(configs),
+      );
+    } catch {
+      // Ignore storage failures; the editor remains usable for this session.
+    }
+  }, [configs]);
+
   const updateConfig = (index: number, config: HeroCardConfig) => {
     setConfigs((current) =>
       current.map((item, itemIndex) => (itemIndex === index ? config : item)),
@@ -495,7 +577,7 @@ function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
   };
 
   const resetConfigs = () => {
-    setConfigs(HERO_CARD_CONFIGS.map((config) => ({ ...config })));
+    setConfigs(cloneDefaultHeroCardConfigs());
     setDraftPositions({});
     setPreviewStart(false);
     setReplayKey((value) => value + 1);
