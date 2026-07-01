@@ -5,6 +5,7 @@ import { useState, useEffect, type MouseEvent } from "react";
 import { BookCoverPreview } from "@/components/section/BookCoverPreview";
 import { ReadingListCards } from "@/components/section/ReadingListCards";
 import { ReadingListGrid } from "@/components/section/ReadingListGrid";
+import { ReadingListLibrary } from "@/components/section/ReadingListLibrary";
 import { ReadingListMiddle } from "@/components/section/ReadingListMiddle";
 import { useReadingLayout } from "@/components/section/ReadingLayoutContext";
 import {
@@ -214,6 +215,10 @@ export function ReadingList() {
   useEffect(() => {
     if (!showCovers) setPreview(null);
   }, [showCovers]);
+
+  if (layout === "library") {
+    return <ReadingListLibrary />;
+  }
 
   if (layout === "grid") {
     return (

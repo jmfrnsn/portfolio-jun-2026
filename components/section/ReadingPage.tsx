@@ -8,7 +8,7 @@ export function ReadingPage() {
   return (
     <div className="min-h-svh bg-paper text-ink">
       <ReadingLayoutProvider>
-        <div className="w-full px-6 pb-24 pt-44 sm:px-10 md:pb-32 md:pt-52 lg:px-14">
+        <div className="w-full px-6 pb-24 pt-24 sm:px-10 md:pb-32 md:pt-32 lg:px-14">
           <ReadingList />
         </div>
         <ReadingLayoutSelector />

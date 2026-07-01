@@ -14,7 +14,7 @@ export const contents = [
   {
     number: "03",
     title: "CONSUMING FICTION, PHILOSOPHY, SCI-FI",
-    pages: "READING",
+    pages: "LIBRARY",
     slug: "reading",
   },
   {

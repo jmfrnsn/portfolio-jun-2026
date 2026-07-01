@@ -40,6 +40,17 @@ body {
   font-family: var(--font-mono), "PP Supply Mono", ui-monospace, monospace;
 }
 
+.font-playground {
+  font-family: "PP Playground", "PP Playground Thin", var(--font-display),
+    "Snell Roundhand", cursive;
+}
+
+.font-playground-thin {
+  font-family: "PP Playground Thin", "PP Playground", var(--font-display),
+    "Snell Roundhand", cursive;
+  font-weight: 100;
+}
+
 .contents-row-leader {
   min-width: 2rem;
   height: 3px;

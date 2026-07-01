@@ -27,6 +27,20 @@ const SlidingHighlightContext =
 
 const ScrambleRowContext = createContext(false);
 
+export function ScrambleTextProvider({
+  active,
+  children,
+}: {
+  active: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <ScrambleRowContext.Provider value={active}>
+      {children}
+    </ScrambleRowContext.Provider>
+  );
+}
+
 export function useScrambleRowActive(): boolean {
   return useContext(ScrambleRowContext);
 }
@@ -156,7 +170,7 @@ export function SlidingHighlightRow({
 
   return (
     <li>
-      <ScrambleRowContext.Provider value={scrambleActive}>
+      <ScrambleTextProvider active={scrambleActive}>
         <Link
           ref={linkRef}
           href={href}
@@ -169,7 +183,7 @@ export function SlidingHighlightRow({
         >
           {children}
         </Link>
-      </ScrambleRowContext.Provider>
+      </ScrambleTextProvider>
     </li>
   );
 }
