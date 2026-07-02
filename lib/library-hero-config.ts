@@ -1,59 +1,38 @@
-export type HeroCardConfig = {
-  startLeft: number;
-  startTop: number;
-  startRotate: number;
-  endLeft: number;
-  endTop: number;
-  endRotate: number;
+export type LibraryHeroCardPlacement = {
+  left: number;
+  top: number;
+  rotate: number;
 };
 
-export const DEFAULT_LIBRARY_HERO_CARD_CONFIGS: HeroCardConfig[] = [
+export const DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS: LibraryHeroCardPlacement[] = [
   {
-    startLeft: 48.02,
-    startTop: 23.76,
-    startRotate: 0,
-    endLeft: 6.9,
-    endTop: -19.26,
-    endRotate: -7,
+    left: 28.69,
+    top: -12.22,
+    rotate: -29,
   },
   {
-    startLeft: 38.82,
-    startTop: 37.57,
-    startRotate: 0,
-    endLeft: 15.26,
-    endTop: 55.33,
-    endRotate: -11,
+    left: 12.43,
+    top: 38.64,
+    rotate: 0,
   },
   {
-    startLeft: 68.44,
-    startTop: 22.43,
-    startRotate: 0,
-    endLeft: 71.87,
-    endTop: 55.5,
-    endRotate: 13,
+    left: 53.82,
+    top: 51.12,
+    rotate: 23,
   },
   {
-    startLeft: 32.24,
-    startTop: 34.46,
-    startRotate: 0,
-    endLeft: 70.39,
-    endTop: -15.17,
-    endRotate: -15,
+    left: 78.38,
+    top: -8.74,
+    rotate: 42,
   },
   {
-    startLeft: 52.57,
-    startTop: 4.77,
-    startRotate: 0,
-    endLeft: 81,
-    endTop: 24,
-    endRotate: 4,
+    left: 87.44,
+    top: 17.39,
+    rotate: 12,
   },
   {
-    startLeft: 40.4,
-    startTop: 10.71,
-    startRotate: 0,
-    endLeft: -4,
-    endTop: 38,
-    endRotate: -22,
+    left: -0.28,
+    top: 17.91,
+    rotate: -22,
   },
 ];

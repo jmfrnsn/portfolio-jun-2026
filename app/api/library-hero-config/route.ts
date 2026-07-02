@@ -1,48 +1,44 @@
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import type { HeroCardConfig } from "@/lib/library-hero-config";
+import type { LibraryHeroCardPlacement } from "@/lib/library-hero-config";
 
 export const runtime = "nodejs";
 
-function isHeroCardConfig(value: unknown): value is HeroCardConfig {
+function isLibraryHeroCardPlacement(
+  value: unknown,
+): value is LibraryHeroCardPlacement {
   if (!value || typeof value !== "object") return false;
 
-  const config = value as Record<keyof HeroCardConfig, unknown>;
+  const placement = value as Record<keyof LibraryHeroCardPlacement, unknown>;
   return (
-    typeof config.startLeft === "number" &&
-    typeof config.startTop === "number" &&
-    typeof config.startRotate === "number" &&
-    typeof config.endLeft === "number" &&
-    typeof config.endTop === "number" &&
-    typeof config.endRotate === "number"
+    typeof placement.left === "number" &&
+    Number.isFinite(placement.left) &&
+    typeof placement.top === "number" &&
+    Number.isFinite(placement.top) &&
+    typeof placement.rotate === "number" &&
+    Number.isFinite(placement.rotate)
   );
 }
 
-function formatConfig(configs: HeroCardConfig[]): string {
-  const body = configs
+function formatPlacements(placements: LibraryHeroCardPlacement[]): string {
+  const body = placements
     .map(
-      (config) => `  {
-    startLeft: ${config.startLeft},
-    startTop: ${config.startTop},
-    startRotate: ${config.startRotate},
-    endLeft: ${config.endLeft},
-    endTop: ${config.endTop},
-    endRotate: ${config.endRotate},
+      (placement) => `  {
+    left: ${placement.left},
+    top: ${placement.top},
+    rotate: ${placement.rotate},
   },`,
     )
     .join("\n");
 
-  return `export type HeroCardConfig = {
-  startLeft: number;
-  startTop: number;
-  startRotate: number;
-  endLeft: number;
-  endTop: number;
-  endRotate: number;
+  return `export type LibraryHeroCardPlacement = {
+  left: number;
+  top: number;
+  rotate: number;
 };
 
-export const DEFAULT_LIBRARY_HERO_CARD_CONFIGS: HeroCardConfig[] = [
+export const DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS: LibraryHeroCardPlacement[] = [
 ${body}
 ];
 `;
@@ -50,17 +46,23 @@ ${body}
 
 export async function POST(request: Request) {
   const payload = (await request.json()) as unknown;
-  const configs =
+  const placements =
     payload && typeof payload === "object"
-      ? (payload as { configs?: unknown }).configs
+      ? (payload as { placements?: unknown }).placements
       : undefined;
 
-  if (!Array.isArray(configs) || !configs.every(isHeroCardConfig)) {
-    return Response.json({ error: "Invalid hero config payload." }, { status: 400 });
+  if (
+    !Array.isArray(placements) ||
+    !placements.every(isLibraryHeroCardPlacement)
+  ) {
+    return Response.json(
+      { error: "Invalid library hero placement payload." },
+      { status: 400 },
+    );
   }
 
   const filePath = path.join(process.cwd(), "lib", "library-hero-config.ts");
-  await writeFile(filePath, formatConfig(configs), "utf8");
+  await writeFile(filePath, formatPlacements(placements), "utf8");
 
   return Response.json({ ok: true });
 }

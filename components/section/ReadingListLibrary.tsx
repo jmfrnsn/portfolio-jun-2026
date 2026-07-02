@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useMotionValue, useReducedMotion } from "motion/react";
+import { motion, useMotionValue } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getBookCoverUrl } from "@/lib/book-cover";
 import {
-  DEFAULT_LIBRARY_HERO_CARD_CONFIGS,
-  type HeroCardConfig,
+  DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS,
+  type LibraryHeroCardPlacement,
 } from "@/lib/library-hero-config";
 import {
   getLibraryCardAsset,
@@ -22,51 +22,10 @@ import {
 } from "@/lib/reading-list";
 
 const LIBRARY_RED = "#d7361f";
-const HERO_CARD_CONFIG_STORAGE_KEY = "portfolio-library-hero-card-configs";
-
-type DraftHeroPosition = {
-  left: number;
-  top: number;
-};
-
 const HERO_CARD_WIDTH = "12.5rem";
 
-function cloneDefaultHeroCardConfigs(): HeroCardConfig[] {
-  return DEFAULT_LIBRARY_HERO_CARD_CONFIGS.map((config) => ({ ...config }));
-}
-
-function isHeroCardConfig(value: unknown): value is HeroCardConfig {
-  if (!value || typeof value !== "object") return false;
-
-  const config = value as Record<keyof HeroCardConfig, unknown>;
-  return (
-    typeof config.startLeft === "number" &&
-    typeof config.startTop === "number" &&
-    typeof config.startRotate === "number" &&
-    typeof config.endLeft === "number" &&
-    typeof config.endTop === "number" &&
-    typeof config.endRotate === "number"
-  );
-}
-
-function readStoredHeroCardConfigs(): HeroCardConfig[] | null {
-  if (typeof window === "undefined") return null;
-
-  try {
-    const stored = window.localStorage.getItem(HERO_CARD_CONFIG_STORAGE_KEY);
-    if (!stored) return null;
-
-    const parsed = JSON.parse(stored) as unknown;
-    if (!Array.isArray(parsed)) return null;
-
-    const configs = parsed.slice(0, DEFAULT_LIBRARY_HERO_CARD_CONFIGS.length);
-    if (configs.length !== DEFAULT_LIBRARY_HERO_CARD_CONFIGS.length) return null;
-    if (!configs.every(isHeroCardConfig)) return null;
-
-    return configs.map((config) => ({ ...config }));
-  } catch {
-    return null;
-  }
+function cloneDefaultLibraryHeroCardPlacements(): LibraryHeroCardPlacement[] {
+  return DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS.map((placement) => ({ ...placement }));
 }
 
 const COVER_OVERLAY_POSITIONS = [
@@ -186,32 +145,25 @@ function LibraryCardImage({
 function DraggableLibraryCard({
   entry,
   index,
-  config,
-  previewStart,
-  replayKey,
+  placement,
   onSelect,
-  onDragPosition,
+  onDragPlacement,
 }: {
   entry: LibraryEntry;
   index: number;
-  config: HeroCardConfig;
-  previewStart: boolean;
-  replayKey: number;
+  placement: LibraryHeroCardPlacement;
   onSelect: (index: number) => void;
-  onDragPosition: (index: number, x: number, y: number) => void;
+  onDragPlacement: (index: number, offsetX: number, offsetY: number) => void;
 }) {
-  const reduceMotion = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const asset = getLibraryCardAsset(entry.name, index);
-  const activeRotation = previewStart ? config.startRotate : config.endRotate;
-  const baseRotation = activeRotation;
-  const dragRotation = `${baseRotation + (index % 2 === 0 ? 4 : -4)}deg`;
+  const dragRotation = `${placement.rotate + (index % 2 === 0 ? 4 : -4)}deg`;
 
   useEffect(() => {
     x.set(0);
     y.set(0);
-  }, [previewStart, replayKey, x, y]);
+  }, [placement.left, placement.top, x, y]);
 
   return (
     <motion.div
@@ -222,30 +174,15 @@ function DraggableLibraryCard({
       className="absolute cursor-grab touch-none active:cursor-grabbing"
       title="Drag library card"
       onPointerDown={() => onSelect(index)}
-      onDrag={() => onDragPosition(index, x.get(), y.get())}
-      onDragEnd={() => onDragPosition(index, x.get(), y.get())}
+      onDragEnd={() => onDragPlacement(index, x.get(), y.get())}
       style={{
         x,
         y,
         width: HERO_CARD_WIDTH,
-      }}
-      initial={
-        reduceMotion
-          ? false
-          : {
-              opacity: 0.82,
-              left: `${config.startLeft}%`,
-              top: `${config.startTop}%`,
-              rotate: `${config.startRotate}deg`,
-              scale: 0.96,
-            }
-      }
-      animate={{
+        left: `${placement.left}%`,
+        top: `${placement.top}%`,
+        rotate: `${placement.rotate}deg`,
         opacity: 0.78,
-        left: `${previewStart ? config.startLeft : config.endLeft}%`,
-        top: `${previewStart ? config.startTop : config.endTop}%`,
-        rotate: `${activeRotation}deg`,
-        scale: 1,
       }}
       whileHover={{
         opacity: 1,
@@ -271,17 +208,6 @@ function DraggableLibraryCard({
           mass: 0.45,
         },
       }}
-      transition={
-        reduceMotion
-          ? { duration: 0 }
-          : {
-              type: "spring",
-              stiffness: 95,
-              damping: 18,
-              mass: 0.75,
-              delay: 0.35,
-            }
-      }
       aria-label={`${entry.name} by ${entry.author}`}
     >
       <LibraryCardImage asset={asset} title={entry.name} index={index} />
@@ -289,7 +215,7 @@ function DraggableLibraryCard({
   );
 }
 
-function HeroEditorControl({
+function PlacementEditorControl({
   label,
   value,
   min,
@@ -323,54 +249,43 @@ function HeroEditorControl({
   );
 }
 
-function LibraryHeroEditor({
+function LibraryHeroPlacementEditor({
   entries,
-  configs,
+  placements,
   selectedIndex,
-  previewStart,
-  draftPosition,
   onSelect,
-  onPreviewStartChange,
-  onPlaceStart,
-  onPlaceEnd,
-  onReplay,
+  onPlacementChange,
   onReset,
-  onConfigChange,
 }: {
   entries: LibraryEntry[];
-  configs: HeroCardConfig[];
+  placements: LibraryHeroCardPlacement[];
   selectedIndex: number;
-  previewStart: boolean;
-  draftPosition?: DraftHeroPosition;
   onSelect: (index: number) => void;
-  onPreviewStartChange: (value: boolean) => void;
-  onPlaceStart: () => void;
-  onPlaceEnd: () => void;
-  onReplay: () => void;
+  onPlacementChange: (index: number, placement: LibraryHeroCardPlacement) => void;
   onReset: () => void;
-  onConfigChange: (index: number, config: HeroCardConfig) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [bakeStatus, setBakeStatus] = useState<"idle" | "saving" | "saved" | "error">(
-    "idle",
-  );
-  const config = configs[selectedIndex]!;
+  const [bakeStatus, setBakeStatus] = useState<
+    "idle" | "saving" | "saved" | "error"
+  >("idle");
+  const placement = placements[selectedIndex]!;
   const entry = entries[selectedIndex]!;
 
-  const update = (key: keyof HeroCardConfig, value: number) => {
-    onConfigChange(selectedIndex, { ...config, [key]: value });
+  const update = (key: keyof LibraryHeroCardPlacement, value: number) => {
+    onPlacementChange(selectedIndex, { ...placement, [key]: value });
   };
 
-  const bakeConfig = async () => {
+  const bakePlacements = async () => {
     setBakeStatus("saving");
+
     try {
       const response = await window.fetch("/api/library-hero-config", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ configs }),
+        body: JSON.stringify({ placements }),
       });
 
-      if (!response.ok) throw new Error("Failed to bake config");
+      if (!response.ok) throw new Error("Failed to bake placements");
 
       setBakeStatus("saved");
       window.setTimeout(() => setBakeStatus("idle"), 1800);
@@ -387,7 +302,7 @@ function LibraryHeroEditor({
             <div className="mb-3 flex items-start justify-between gap-3">
               <div>
                 <p className="font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/60">
-                  Hero Edit
+                  Card Layout
                 </p>
                 <p className="mt-1 truncate font-serif text-sm tracking-[-0.04375rem] text-ink">
                   {entry.name}
@@ -407,86 +322,41 @@ function LibraryHeroEditor({
               onChange={(event) => onSelect(Number(event.target.value))}
               className="mb-3 w-full rounded-sm border border-ink/10 bg-paper px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink"
             >
-              {entries.slice(0, configs.length).map((item, index) => (
+              {entries.map((item, index) => (
                 <option key={item.name} value={index}>
                   {String(index + 1).padStart(2, "0")} {item.name}
                 </option>
               ))}
             </select>
 
-            <div className="mb-3 grid grid-cols-2 gap-1.5">
-              <button
-                type="button"
-                onClick={() => onPreviewStartChange(true)}
-                className={`cursor-pointer rounded-sm border px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] transition-colors ${
-                  previewStart
-                    ? "border-ink bg-ink text-paper"
-                    : "border-ink/10 text-ink/55 hover:bg-highlight"
-                }`}
-              >
-                Start
-              </button>
-              <button
-                type="button"
-                onClick={() => onPreviewStartChange(false)}
-                className={`cursor-pointer rounded-sm border px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] transition-colors ${
-                  !previewStart
-                    ? "border-ink bg-ink text-paper"
-                    : "border-ink/10 text-ink/55 hover:bg-highlight"
-                }`}
-              >
-                End
-              </button>
-            </div>
+            <p className="mb-3 rounded-sm border border-ink/10 bg-highlight/40 p-2 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink/45">
+              Drag cards on the page, or tune the selected card below.
+            </p>
 
-            <div className="mb-3 rounded-sm border border-ink/10 bg-highlight/40 p-2">
-              <p className="mb-2 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink/45">
-                Drag selected card, then place keyframe
-              </p>
-              <div className="grid grid-cols-2 gap-1.5">
-                <button
-                  type="button"
-                  onClick={onPlaceStart}
-                  disabled={!draftPosition}
-                  className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink/55 transition-colors hover:bg-paper disabled:cursor-not-allowed disabled:opacity-35"
-                >
-                  Set Start Here
-                </button>
-                <button
-                  type="button"
-                  onClick={onPlaceEnd}
-                  disabled={!draftPosition}
-                  className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink/55 transition-colors hover:bg-paper disabled:cursor-not-allowed disabled:opacity-35"
-                >
-                  Set End Here
-                </button>
-              </div>
-              {draftPosition ? (
-                <p className="mt-2 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink/35">
-                  Current: {draftPosition.left.toFixed(1)} /{" "}
-                  {draftPosition.top.toFixed(1)}
-                </p>
-              ) : null}
-            </div>
-
-            <div className="grid gap-3">
-              <div className="grid gap-2 border-t border-ink/10 pt-3">
-                <p className="font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/35">
-                  Start
-                </p>
-                <HeroEditorControl label="Left %" value={config.startLeft} min={-20} max={100} onChange={(value) => update("startLeft", value)} />
-                <HeroEditorControl label="Top %" value={config.startTop} min={-20} max={80} onChange={(value) => update("startTop", value)} />
-                <HeroEditorControl label="Rotate" value={config.startRotate} min={-45} max={45} onChange={(value) => update("startRotate", value)} />
-              </div>
-
-              <div className="grid gap-2 border-t border-ink/10 pt-3">
-                <p className="font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/35">
-                  End
-                </p>
-                <HeroEditorControl label="Left %" value={config.endLeft} min={-20} max={100} onChange={(value) => update("endLeft", value)} />
-                <HeroEditorControl label="Top %" value={config.endTop} min={-20} max={80} onChange={(value) => update("endTop", value)} />
-                <HeroEditorControl label="Rotate" value={config.endRotate} min={-45} max={45} onChange={(value) => update("endRotate", value)} />
-              </div>
+            <div className="grid gap-2 border-t border-ink/10 pt-3">
+              <PlacementEditorControl
+                label="Left %"
+                value={placement.left}
+                min={-30}
+                max={110}
+                step={0.25}
+                onChange={(value) => update("left", value)}
+              />
+              <PlacementEditorControl
+                label="Top %"
+                value={placement.top}
+                min={-30}
+                max={90}
+                step={0.25}
+                onChange={(value) => update("top", value)}
+              />
+              <PlacementEditorControl
+                label="Rotate"
+                value={placement.rotate}
+                min={-45}
+                max={45}
+                onChange={(value) => update("rotate", value)}
+              />
             </div>
 
             <div className="mt-4 flex justify-between gap-2">
@@ -497,29 +367,20 @@ function LibraryHeroEditor({
               >
                 Reset
               </button>
-              <div className="flex gap-1.5">
-                <button
-                  type="button"
-                  onClick={bakeConfig}
-                  disabled={bakeStatus === "saving"}
-                  className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink"
-                >
-                  {bakeStatus === "saving"
-                    ? "Baking"
-                    : bakeStatus === "saved"
-                      ? "Baked"
-                      : bakeStatus === "error"
-                        ? "Error"
-                        : "Bake Config"}
-                </button>
-                <button
-                  type="button"
-                  onClick={onReplay}
-                  className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink"
-                >
-                  Replay
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={bakePlacements}
+                disabled={bakeStatus === "saving"}
+                className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {bakeStatus === "saving"
+                  ? "Baking"
+                  : bakeStatus === "saved"
+                    ? "Baked"
+                    : bakeStatus === "error"
+                      ? "Error"
+                      : "Bake Layout"}
+              </button>
             </div>
           </div>
         ) : null}
@@ -530,7 +391,7 @@ function LibraryHeroEditor({
           aria-expanded={open}
           className="cursor-pointer rounded-md border border-ink/10 bg-paper/80 px-2.5 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/45 backdrop-blur-sm transition-colors hover:border-ink/20 hover:bg-paper hover:text-ink/70"
         >
-          Hero Edit
+          Card Layout
         </button>
       </div>
     </div>
@@ -539,97 +400,41 @@ function LibraryHeroEditor({
 
 function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
   const heroRef = useRef<HTMLElement>(null);
-  const hasLoadedStoredConfigsRef = useRef(false);
-  const heroEntries = entries.slice(0, DEFAULT_LIBRARY_HERO_CARD_CONFIGS.length);
-  const [configs, setConfigs] = useState<HeroCardConfig[]>(() =>
-    cloneDefaultHeroCardConfigs(),
+  const heroEntries = entries.slice(0, DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS.length);
+  const [placements, setPlacements] = useState<LibraryHeroCardPlacement[]>(() =>
+    cloneDefaultLibraryHeroCardPlacements(),
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [previewStart, setPreviewStart] = useState(false);
-  const [draftPositions, setDraftPositions] = useState<
-    Partial<Record<number, DraftHeroPosition>>
-  >({});
-  const [replayKey, setReplayKey] = useState(0);
 
-  useEffect(() => {
-    const storedConfigs = readStoredHeroCardConfigs();
-    if (storedConfigs) setConfigs(storedConfigs);
-    hasLoadedStoredConfigsRef.current = true;
-  }, []);
-
-  useEffect(() => {
-    if (!hasLoadedStoredConfigsRef.current) return;
-
-    try {
-      window.localStorage.setItem(
-        HERO_CARD_CONFIG_STORAGE_KEY,
-        JSON.stringify(configs),
-      );
-    } catch {
-      // Ignore storage failures; the editor remains usable for this session.
-    }
-  }, [configs]);
-
-  const updateConfig = (index: number, config: HeroCardConfig) => {
-    setConfigs((current) =>
-      current.map((item, itemIndex) => (itemIndex === index ? config : item)),
+  const updatePlacement = (
+    index: number,
+    placement: LibraryHeroCardPlacement,
+  ) => {
+    setPlacements((current) =>
+      current.map((item, itemIndex) => (itemIndex === index ? placement : item)),
     );
   };
 
-  const resetConfigs = () => {
-    setConfigs(cloneDefaultHeroCardConfigs());
-    setDraftPositions({});
-    setPreviewStart(false);
-    setReplayKey((value) => value + 1);
-  };
-
-  const replay = () => {
-    setDraftPositions({});
-    setPreviewStart(false);
-    setReplayKey((value) => value + 1);
-  };
-
-  const updateDraggedPosition = (index: number, offsetX: number, offsetY: number) => {
+  const updateDraggedPlacement = (
+    index: number,
+    offsetX: number,
+    offsetY: number,
+  ) => {
     const rect = heroRef.current?.getBoundingClientRect();
-    if (!rect) return;
+    const placement = placements[index];
+    if (!rect || !placement) return;
 
-    const config = configs[index];
-    if (!config) return;
-
-    const baseLeft = previewStart ? config.startLeft : config.endLeft;
-    const baseTop = previewStart ? config.startTop : config.endTop;
-    const left = baseLeft + (offsetX / rect.width) * 100;
-    const top = baseTop + (offsetY / rect.height) * 100;
-
+    updatePlacement(index, {
+      ...placement,
+      left: Number((placement.left + (offsetX / rect.width) * 100).toFixed(2)),
+      top: Number((placement.top + (offsetY / rect.height) * 100).toFixed(2)),
+    });
     setSelectedIndex(index);
-    setDraftPositions((current) => ({
-      ...current,
-      [index]: {
-        left: Number(left.toFixed(2)),
-        top: Number(top.toFixed(2)),
-      },
-    }));
   };
 
-  const placeKeyframe = (target: "start" | "end") => {
-    const draft = draftPositions[selectedIndex];
-    if (!draft) return;
-
-    setConfigs((current) =>
-      current.map((config, index) => {
-        if (index !== selectedIndex) return config;
-        return target === "start"
-          ? { ...config, startLeft: draft.left, startTop: draft.top }
-          : { ...config, endLeft: draft.left, endTop: draft.top };
-      }),
-    );
-    setDraftPositions((current) => {
-      const next = { ...current };
-      delete next[selectedIndex];
-      return next;
-    });
-    setPreviewStart(target === "start");
-    setReplayKey((value) => value + 1);
+  const resetPlacements = () => {
+    setPlacements(cloneDefaultLibraryHeroCardPlacements());
+    setSelectedIndex(0);
   };
 
   return (
@@ -646,30 +451,22 @@ function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
       <div className="absolute inset-x-0 top-0 h-full">
         {heroEntries.map((entry, index) => (
           <DraggableLibraryCard
-            key={`${entry.name}-${replayKey}`}
+            key={entry.name}
             entry={entry}
             index={index}
-            config={configs[index]!}
-            previewStart={previewStart}
-            replayKey={replayKey}
+            placement={placements[index]!}
             onSelect={setSelectedIndex}
-            onDragPosition={updateDraggedPosition}
+            onDragPlacement={updateDraggedPlacement}
           />
         ))}
       </div>
-      <LibraryHeroEditor
+      <LibraryHeroPlacementEditor
         entries={heroEntries}
-        configs={configs}
+        placements={placements}
         selectedIndex={selectedIndex}
-        previewStart={previewStart}
-        draftPosition={draftPositions[selectedIndex]}
         onSelect={setSelectedIndex}
-        onPreviewStartChange={setPreviewStart}
-        onPlaceStart={() => placeKeyframe("start")}
-        onPlaceEnd={() => placeKeyframe("end")}
-        onReplay={replay}
-        onReset={resetConfigs}
-        onConfigChange={updateConfig}
+        onPlacementChange={updatePlacement}
+        onReset={resetPlacements}
       />
     </section>
   );
@@ -789,7 +586,7 @@ function LibraryList({ entries }: { entries: LibraryEntry[] }) {
 }
 
 export function ReadingListLibrary() {
-  const entries = useMemo(getLibraryEntries, []);
+  const entries = useMemo(() => getLibraryEntries(), []);
 
   return (
     <div>
