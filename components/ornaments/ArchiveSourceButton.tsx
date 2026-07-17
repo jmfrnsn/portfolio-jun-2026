@@ -3,8 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const ADMIN_SECRET_KEY = "ornament-admin-secret";
-
 type ArchiveSourceButtonProps = {
   sourceId: string;
   archived: boolean;
@@ -17,29 +15,14 @@ type ApiErrorBody = {
   };
 };
 
-function readStoredSecret() {
-  if (typeof window === "undefined") return "";
-  return window.sessionStorage.getItem(ADMIN_SECRET_KEY) ?? "";
-}
-
-function storeSecret(secret: string) {
-  window.sessionStorage.setItem(ADMIN_SECRET_KEY, secret);
-}
-
-async function postArchiveAction(
-  sourceId: string,
-  archived: boolean,
-  secret: string,
-) {
+async function postArchiveAction(sourceId: string, archived: boolean) {
   const endpoint = archived
     ? `/api/ornaments/sources/${sourceId}/unarchive`
     : `/api/ornaments/sources/${sourceId}/archive`;
 
   const response = await fetch(endpoint, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${secret}`,
-    },
+    credentials: "same-origin",
   });
 
   const body = (await response.json().catch(() => ({}))) as ApiErrorBody & {
@@ -83,21 +66,11 @@ export function ArchiveSourceButton({
       return;
     }
 
-    let secret = readStoredSecret();
-    if (!secret) {
-      secret = window.prompt("Enter the ornament admin secret")?.trim() ?? "";
-      if (!secret) {
-        setError("Admin secret required");
-        return;
-      }
-      storeSecret(secret);
-    }
-
     setError(null);
     setIsPending(true);
 
     try {
-      await postArchiveAction(sourceId, isArchived, secret);
+      await postArchiveAction(sourceId, isArchived);
       setStatus(isArchived ? "active" : "archived");
       router.refresh();
     } catch (actionError) {
@@ -107,8 +80,7 @@ export function ArchiveSourceButton({
           : undefined;
 
       if (code === "UNAUTHORIZED") {
-        window.sessionStorage.removeItem(ADMIN_SECRET_KEY);
-        setError("Secret rejected");
+        setError("Sign in at /ornaments/admin");
         return;
       }
 

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
 import type { ExportedOrnamentSource } from "@/lib/ornaments/sources-export";
@@ -11,6 +12,36 @@ type SourceListProps = {
 };
 
 export function SourceList({ sources }: SourceListProps) {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadSession() {
+      try {
+        const response = await fetch("/api/ornaments/admin/session", {
+          credentials: "same-origin",
+          cache: "no-store",
+        });
+        if (!response.ok) return;
+        const body = (await response.json()) as { authenticated?: boolean };
+        if (!cancelled) {
+          setIsAdmin(Boolean(body.authenticated));
+        }
+      } catch {
+        if (!cancelled) {
+          setIsAdmin(false);
+        }
+      }
+    }
+
+    void loadSession();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   if (sources.length === 0) {
     return (
       <p className="font-serif text-base text-ink/60">
@@ -57,14 +88,16 @@ export function SourceList({ sources }: SourceListProps) {
             </div>
           </Link>
 
-          <div className="pointer-events-none absolute right-3 top-3 z-10 opacity-100 transition-opacity duration-200 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-within:opacity-100">
-            <div className="pointer-events-auto">
-              <ArchiveSourceButton
-                sourceId={source.id}
-                archived={source.notionStatus === "Archived"}
-              />
+          {isAdmin ? (
+            <div className="pointer-events-none absolute right-3 top-3 z-10 opacity-100 transition-opacity duration-200 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-within:opacity-100">
+              <div className="pointer-events-auto">
+                <ArchiveSourceButton
+                  sourceId={source.id}
+                  archived={source.notionStatus === "Archived"}
+                />
+              </div>
             </div>
-          </div>
+          ) : null}
         </li>
       ))}
     </ul>
