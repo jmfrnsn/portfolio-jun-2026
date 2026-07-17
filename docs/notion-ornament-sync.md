@@ -107,7 +107,12 @@ On the host (Vercel or similar), set:
 NOTION_WEBHOOK_SECRET=paste_after_verification
 GITHUB_DISPATCH_TOKEN=github_pat_with_repo_scope
 GITHUB_REPOSITORY=jmfrnsn/portfolio-jun-2026
+NOTION_TOKEN=secret_...
+NOTION_ORNAMENTS_DATA_SOURCE_ID=ed3e4557-a0cd-419f-b017-e524d14abff1
+ORNAMENT_ADMIN_SECRET=choose_a_long_random_string
 ```
+
+`ORNAMENT_ADMIN_SECRET` protects website archive/restore actions on the sources grid (hover/focus on a source tile). The API routes are `POST /api/ornaments/sources/:id/archive` and `/unarchive`. The UI prompts for the secret once per browser session.
 
 `GITHUB_DISPATCH_TOKEN` needs permission to create a `repository_dispatch` on this repo (classic PAT `repo` scope, or fine-grained PAT with Actions write).
 

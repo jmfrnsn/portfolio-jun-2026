@@ -239,3 +239,20 @@ export async function archiveNotionSourcePage(notionPageId: string) {
     },
   });
 }
+
+export async function unarchiveNotionSourcePage(notionPageId: string) {
+  const { auth } = getNotionConfig();
+  const notion = new Client({ auth });
+
+  await ensureNotionStatusProperty();
+
+  await notion.pages.update({
+    page_id: notionPageId,
+    archived: false,
+    properties: {
+      [propertyNames.status]: {
+        select: { name: "Active" },
+      },
+    },
+  });
+}

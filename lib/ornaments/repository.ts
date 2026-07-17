@@ -178,6 +178,22 @@ export async function archiveSource(id: string) {
   return updated;
 }
 
+export async function unarchiveSource(id: string) {
+  const timestamp = now();
+  const updated = getDb()
+    .update(sources)
+    .set({ archivedAt: null, updatedAt: timestamp })
+    .where(eq(sources.id, id))
+    .returning()
+    .get();
+
+  if (!updated) {
+    throw new NotFoundError("Source");
+  }
+
+  return updated;
+}
+
 export async function createMotif(input: MotifCreateInput) {
   await getSource(input.sourceId);
 
