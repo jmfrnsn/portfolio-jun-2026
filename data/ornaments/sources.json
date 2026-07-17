@@ -1,13 +1,31 @@
 {
   "schemaVersion": 1,
   "counts": {
-    "total": 5,
-    "active": 3,
+    "total": 6,
+    "active": 4,
     "archived": 2
   },
   "sources": [
     {
-      "id": "4ddc5fce-5a6e-4d62-9965-5a07db29372c",
+      "id": "8c383b2a-1211-49d2-85de-a30cc4ddaba5",
+      "notionPageId": "3a0157fd-4777-810b-a955-fff3fac81bd3",
+      "title": "Ornamental design",
+      "creator": "Paul Flindt",
+      "year": "n.d.",
+      "type": "Art Institute of Chicago",
+      "era": "Undated & Other",
+      "region": "Germany",
+      "url": "https://www.artic.edu/artworks/108932",
+      "imageUrl": "https://www.artic.edu/iiif/2/c979223c-580a-70dc-e8cc-f3168f40c079/full/600,/0/default.jpg",
+      "status": "to_read",
+      "notionStatus": "Active",
+      "archivedAt": null,
+      "notes": "",
+      "createdAt": "2026-07-17T15:42:36.057Z",
+      "updatedAt": "2026-07-17T15:42:36.057Z"
+    },
+    {
+      "id": "c4250d36-47f3-4f3b-85c2-4472e914f6cb",
       "notionPageId": "3a0157fd-4777-811b-8b78-f7e4f5642426",
       "title": "Design for an Alcove with a Coat of Arms Flanked by Putti",
       "creator": "Giovanni Battista Foggini",
@@ -21,11 +39,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T14:04:57.788Z",
-      "updatedAt": "2026-07-17T14:04:57.788Z"
+      "createdAt": "2026-07-17T15:42:36.061Z",
+      "updatedAt": "2026-07-17T15:42:36.061Z"
     },
     {
-      "id": "5512133f-09a2-4d38-82ff-cf0bad3294b2",
+      "id": "7b73777c-7acf-4c6e-bd46-7bdb01195f67",
       "notionPageId": "3a0157fd-4777-8183-b98b-d926d126b643",
       "title": "Design for a Frieze with Putto and Acanthus Scroll",
       "creator": "Anonymous, French",
@@ -39,11 +57,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T14:04:57.791Z",
-      "updatedAt": "2026-07-17T14:04:57.791Z"
+      "createdAt": "2026-07-17T15:42:36.062Z",
+      "updatedAt": "2026-07-17T15:42:36.062Z"
     },
     {
-      "id": "b2a01e2a-9ce6-4091-9686-444b80f88205",
+      "id": "036333fc-4693-4c5c-96ea-5943b831df5a",
       "notionPageId": "3a0157fd-4777-8185-aaed-de6f5cc39ea8",
       "title": "Ornament Design (German, 17th century)",
       "creator": "Anonymous, German",
@@ -55,13 +73,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP804528.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T14:04:57.792Z",
+      "archivedAt": "2026-07-17T15:42:36.063Z",
       "notes": "",
-      "createdAt": "2026-07-17T14:04:57.793Z",
-      "updatedAt": "2026-07-17T14:04:57.793Z"
+      "createdAt": "2026-07-17T15:42:36.064Z",
+      "updatedAt": "2026-07-17T15:42:36.064Z"
     },
     {
-      "id": "93436295-a0e4-4e9c-8460-ee8f321321f1",
+      "id": "5333ab57-b50f-41b4-ae70-18329733b6ea",
       "notionPageId": "3a0157fd-4777-81b4-ae7c-f1c3ebe41597",
       "title": "Design for a Chandelier with Acanthus, Grape, and Palmette Motifs",
       "creator": "Anonymous, French",
@@ -75,11 +93,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T14:04:57.794Z",
-      "updatedAt": "2026-07-17T14:04:57.794Z"
+      "createdAt": "2026-07-17T15:42:36.066Z",
+      "updatedAt": "2026-07-17T15:42:36.066Z"
     },
     {
-      "id": "87859d43-ce45-4ea3-9d79-f2778d0651ed",
+      "id": "5755cf53-a075-43fe-bdd7-1082d85a0714",
       "notionPageId": "3a0157fd-4777-81e8-b377-d77e3f7b33de",
       "title": "Ornament Design with Vases (Designs for Various Ornaments, pl. 38)",
       "creator": "Michelangelo Pergolesi",
@@ -91,10 +109,10 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP104571.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T14:04:57.795Z",
+      "archivedAt": "2026-07-17T15:42:36.067Z",
       "notes": "",
-      "createdAt": "2026-07-17T14:04:57.795Z",
-      "updatedAt": "2026-07-17T14:04:57.795Z"
+      "createdAt": "2026-07-17T15:42:36.068Z",
+      "updatedAt": "2026-07-17T15:42:36.068Z"
     }
   ]
 }
