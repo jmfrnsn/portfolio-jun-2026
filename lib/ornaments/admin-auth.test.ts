@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { assertOrnamentAdmin } from "./admin-auth";
+import {
+  ORNAMENT_ADMIN_COOKIE,
+  assertOrnamentAdmin,
+  createAdminSessionToken,
+  verifyAdminSessionToken,
+} from "./admin-auth";
 import { ApiError } from "./errors";
 
 test("assertOrnamentAdmin requires configured secret", () => {
@@ -23,7 +28,7 @@ test("assertOrnamentAdmin requires configured secret", () => {
   }
 });
 
-test("assertOrnamentAdmin accepts bearer and header secrets", () => {
+test("assertOrnamentAdmin accepts bearer, header, and session cookie", () => {
   const previous = process.env.ORNAMENT_ADMIN_SECRET;
   process.env.ORNAMENT_ADMIN_SECRET = "test-secret";
 
@@ -43,6 +48,17 @@ test("assertOrnamentAdmin accepts bearer and header secrets", () => {
     ),
   );
 
+  const token = createAdminSessionToken("test-secret");
+  assert.equal(verifyAdminSessionToken(token, "test-secret"), true);
+
+  assert.doesNotThrow(() =>
+    assertOrnamentAdmin(
+      new Request("http://localhost/test", {
+        headers: { cookie: `${ORNAMENT_ADMIN_COOKIE}=${token}` },
+      }),
+    ),
+  );
+
   assert.throws(
     () =>
       assertOrnamentAdmin(
@@ -54,6 +70,24 @@ test("assertOrnamentAdmin accepts bearer and header secrets", () => {
       error instanceof ApiError &&
       error.code === "UNAUTHORIZED" &&
       error.status === 401,
+  );
+
+  if (previous === undefined) {
+    delete process.env.ORNAMENT_ADMIN_SECRET;
+  } else {
+    process.env.ORNAMENT_ADMIN_SECRET = previous;
+  }
+});
+
+test("verifyAdminSessionToken rejects expired or tampered tokens", () => {
+  const previous = process.env.ORNAMENT_ADMIN_SECRET;
+  process.env.ORNAMENT_ADMIN_SECRET = "test-secret";
+
+  const expired = createAdminSessionToken("test-secret", -10);
+  assert.equal(verifyAdminSessionToken(expired, "test-secret"), false);
+  assert.equal(
+    verifyAdminSessionToken("9999999999.not-a-real-signature", "test-secret"),
+    false,
   );
 
   if (previous === undefined) {

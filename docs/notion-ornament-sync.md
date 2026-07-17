@@ -112,7 +112,7 @@ NOTION_ORNAMENTS_DATA_SOURCE_ID=ed3e4557-a0cd-419f-b017-e524d14abff1
 ORNAMENT_ADMIN_SECRET=choose_a_long_random_string
 ```
 
-`ORNAMENT_ADMIN_SECRET` protects website archive/restore actions on the sources grid (hover/focus on a source tile). The API routes are `POST /api/ornaments/sources/:id/archive` and `/unarchive`. The UI prompts for the secret once per browser session.
+`ORNAMENT_ADMIN_SECRET` powers a private admin session at `/ornaments/admin` (not linked from the public nav, `noindex`). After sign-in, an httpOnly cookie unlocks Archive/Restore on the sources grid; everyone else never sees those controls. API routes: `POST /api/ornaments/admin/login`, `POST /api/ornaments/admin/logout`, `GET /api/ornaments/admin/session`, plus `POST /api/ornaments/sources/:id/archive` and `/unarchive`.
 
 `GITHUB_DISPATCH_TOKEN` needs permission to create a `repository_dispatch` on this repo (classic PAT `repo` scope, or fine-grained PAT with Actions write).
 
