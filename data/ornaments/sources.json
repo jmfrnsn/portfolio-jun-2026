@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "counts": {
     "total": 6,
-    "active": 4,
-    "archived": 2
+    "active": 3,
+    "archived": 3
   },
   "sources": [
     {
-      "id": "3b8831f9-e63a-465f-8c67-60be9e2067a0",
+      "id": "01d463ef-ec25-424b-aaf3-24dcea5dd51e",
       "notionPageId": "3a0157fd-4777-810b-a955-fff3fac81bd3",
       "title": "Ornamental design",
       "creator": "Paul Flindt",
@@ -18,14 +18,14 @@
       "url": "https://www.artic.edu/artworks/108932",
       "imageUrl": "https://www.artic.edu/iiif/2/c979223c-580a-70dc-e8cc-f3168f40c079/full/600,/0/default.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-17T23:30:26.869Z",
       "notes": "",
-      "createdAt": "2026-07-17T22:27:37.991Z",
-      "updatedAt": "2026-07-17T22:27:37.991Z"
+      "createdAt": "2026-07-17T23:30:26.898Z",
+      "updatedAt": "2026-07-17T23:30:26.898Z"
     },
     {
-      "id": "3b365d47-b7d5-4ebc-b520-32ca66558803",
+      "id": "7bbb6c03-834e-4870-b7c3-875984ede53e",
       "notionPageId": "3a0157fd-4777-811b-8b78-f7e4f5642426",
       "title": "Design for an Alcove with a Coat of Arms Flanked by Putti",
       "creator": "Giovanni Battista Foggini",
@@ -39,11 +39,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T22:27:37.994Z",
-      "updatedAt": "2026-07-17T22:27:37.994Z"
+      "createdAt": "2026-07-17T23:30:26.901Z",
+      "updatedAt": "2026-07-17T23:30:26.901Z"
     },
     {
-      "id": "864ffd77-8ad5-4c6a-9368-06bed9101dbe",
+      "id": "c0c6dfba-1dc3-4593-837e-67f91d496ded",
       "notionPageId": "3a0157fd-4777-8183-b98b-d926d126b643",
       "title": "Design for a Frieze with Putto and Acanthus Scroll",
       "creator": "Anonymous, French",
@@ -57,11 +57,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T22:27:37.996Z",
-      "updatedAt": "2026-07-17T22:27:37.996Z"
+      "createdAt": "2026-07-17T23:30:26.902Z",
+      "updatedAt": "2026-07-17T23:30:26.902Z"
     },
     {
-      "id": "3c7a60ef-d53b-4dfb-8562-2918e8736d19",
+      "id": "b54eb43a-6e17-4e68-819f-065067aef131",
       "notionPageId": "3a0157fd-4777-8185-aaed-de6f5cc39ea8",
       "title": "Ornament Design (German, 17th century)",
       "creator": "Anonymous, German",
@@ -73,13 +73,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP804528.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T22:27:37.996Z",
+      "archivedAt": "2026-07-17T23:30:26.903Z",
       "notes": "",
-      "createdAt": "2026-07-17T22:27:37.997Z",
-      "updatedAt": "2026-07-17T22:27:37.997Z"
+      "createdAt": "2026-07-17T23:30:26.904Z",
+      "updatedAt": "2026-07-17T23:30:26.904Z"
     },
     {
-      "id": "70450a3a-0285-4998-b8f7-2ffc19fc1d56",
+      "id": "11bf71f2-3433-48a0-b335-267c450a2e2a",
       "notionPageId": "3a0157fd-4777-81b4-ae7c-f1c3ebe41597",
       "title": "Design for a Chandelier with Acanthus, Grape, and Palmette Motifs",
       "creator": "Anonymous, French",
@@ -93,11 +93,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T22:27:37.999Z",
-      "updatedAt": "2026-07-17T22:27:37.999Z"
+      "createdAt": "2026-07-17T23:30:26.905Z",
+      "updatedAt": "2026-07-17T23:30:26.905Z"
     },
     {
-      "id": "95f3449b-5da2-45a7-8b3c-9fa53808cd91",
+      "id": "440f5a93-5ddc-4d8c-bc5a-69a32c29bbfe",
       "notionPageId": "3a0157fd-4777-81e8-b377-d77e3f7b33de",
       "title": "Ornament Design with Vases (Designs for Various Ornaments, pl. 38)",
       "creator": "Michelangelo Pergolesi",
@@ -109,10 +109,10 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP104571.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T22:27:37.999Z",
+      "archivedAt": "2026-07-17T23:30:26.906Z",
       "notes": "",
-      "createdAt": "2026-07-17T22:27:38.000Z",
-      "updatedAt": "2026-07-17T22:27:38.000Z"
+      "createdAt": "2026-07-17T23:30:26.906Z",
+      "updatedAt": "2026-07-17T23:30:26.906Z"
     }
   ]
 }
