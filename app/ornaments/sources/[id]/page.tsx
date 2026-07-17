@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
 import { OrnamentLayout } from "@/components/ornaments/OrnamentLayout";
 import {
   getExportedSource,
@@ -126,11 +125,6 @@ export default async function OrnamentSourceDetailPage({
               View object →
             </a>
           ) : null}
-
-          <ArchiveSourceButton
-            sourceId={source.id}
-            archived={source.notionStatus === "Archived"}
-          />
 
           <p className="border-t border-ink/10 pt-6 font-serif text-base leading-relaxed text-ink/60">
             Linked motifs will appear here after this source is digested.

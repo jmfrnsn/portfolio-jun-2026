@@ -69,7 +69,6 @@ export function ArchiveSourceButton({
   const [status, setStatus] = useState<"active" | "archived">(
     archived ? "archived" : "active",
   );
-  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const isArchived = status === "archived";
@@ -88,24 +87,18 @@ export function ArchiveSourceButton({
     if (!secret) {
       secret = window.prompt("Enter the ornament admin secret")?.trim() ?? "";
       if (!secret) {
-        setError("Admin secret is required to archive sources.");
+        setError("Admin secret required");
         return;
       }
       storeSecret(secret);
     }
 
     setError(null);
-    setMessage(null);
     setIsPending(true);
 
     try {
-      const result = await postArchiveAction(sourceId, isArchived, secret);
+      await postArchiveAction(sourceId, isArchived, secret);
       setStatus(isArchived ? "active" : "archived");
-      setMessage(
-        result.dispatched
-          ? `${actionLabel}d in Notion. Catalog sync has been queued.`
-          : `${actionLabel}d in Notion. Catalog will refresh on the next sync.`,
-      );
       router.refresh();
     } catch (actionError) {
       const code =
@@ -115,14 +108,14 @@ export function ArchiveSourceButton({
 
       if (code === "UNAUTHORIZED") {
         window.sessionStorage.removeItem(ADMIN_SECRET_KEY);
-        setError("Admin secret was rejected. Try again.");
+        setError("Secret rejected");
         return;
       }
 
       setError(
         actionError instanceof Error
           ? actionError.message
-          : `Unable to ${actionLabel.toLowerCase()} source.`,
+          : `Unable to ${actionLabel.toLowerCase()}`,
       );
     } finally {
       setIsPending(false);
@@ -130,25 +123,23 @@ export function ArchiveSourceButton({
   }
 
   return (
-    <div className="flex flex-col gap-2 border-t border-ink/10 pt-6">
-      <p className="font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink/40">
-        Catalog status · {isArchived ? "Archived" : "Active"}
-      </p>
+    <div className="flex flex-col items-end gap-1">
       <button
         type="button"
-        onClick={() => {
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
           void runAction();
         }}
         disabled={isPending}
-        className="w-fit font-mono text-sm font-extralight uppercase tracking-[0.08em] text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink disabled:cursor-wait disabled:opacity-50"
+        className="bg-paper/95 px-2.5 py-1.5 font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink transition-opacity disabled:cursor-wait disabled:opacity-50"
       >
         {isPending ? `${actionLabel}…` : actionLabel}
       </button>
-      {message ? (
-        <p className="font-serif text-sm leading-relaxed text-ink/65">{message}</p>
-      ) : null}
       {error ? (
-        <p className="font-serif text-sm leading-relaxed text-ink/80">{error}</p>
+        <p className="max-w-[10rem] bg-paper/95 px-2 py-1 text-right font-serif text-xs leading-snug text-ink/80">
+          {error}
+        </p>
       ) : null}
     </div>
   );
