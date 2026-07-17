@@ -6,6 +6,7 @@ import { useState } from "react";
 type ArchiveSourceButtonProps = {
   sourceId: string;
   archived: boolean;
+  onCompleted?: (nextArchived: boolean) => void;
 };
 
 type ApiErrorBody = {
@@ -46,12 +47,14 @@ async function postArchiveAction(sourceId: string, archived: boolean) {
 export function ArchiveSourceButton({
   sourceId,
   archived,
+  onCompleted,
 }: ArchiveSourceButtonProps) {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
   const [status, setStatus] = useState<"active" | "archived">(
     archived ? "archived" : "active",
   );
+  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const isArchived = status === "archived";
@@ -67,11 +70,19 @@ export function ArchiveSourceButton({
     }
 
     setError(null);
+    setMessage(null);
     setIsPending(true);
 
     try {
-      await postArchiveAction(sourceId, isArchived);
-      setStatus(isArchived ? "active" : "archived");
+      const result = await postArchiveAction(sourceId, isArchived);
+      const nextArchived = !isArchived;
+      setStatus(nextArchived ? "archived" : "active");
+      setMessage(
+        result.dispatched
+          ? `${actionLabel}d. Sync queued — catalog refreshes shortly.`
+          : `${actionLabel}d in Notion. Catalog refreshes on the next sync.`,
+      );
+      onCompleted?.(nextArchived);
       router.refresh();
     } catch (actionError) {
       const code =
@@ -81,6 +92,15 @@ export function ArchiveSourceButton({
 
       if (code === "UNAUTHORIZED") {
         setError("Sign in at /ornaments/admin");
+        return;
+      }
+
+      if (code === "MISSING_ENV") {
+        setError(
+          actionError instanceof Error
+            ? actionError.message
+            : "Missing Notion env on host",
+        );
         return;
       }
 
@@ -108,8 +128,13 @@ export function ArchiveSourceButton({
       >
         {isPending ? `${actionLabel}…` : actionLabel}
       </button>
+      {message ? (
+        <p className="max-w-[12rem] bg-paper/95 px-2 py-1 text-right font-serif text-xs leading-snug text-ink/65">
+          {message}
+        </p>
+      ) : null}
       {error ? (
-        <p className="max-w-[10rem] bg-paper/95 px-2 py-1 text-right font-serif text-xs leading-snug text-ink/80">
+        <p className="max-w-[12rem] bg-paper/95 px-2 py-1 text-right font-serif text-xs leading-snug text-ink/80">
           {error}
         </p>
       ) : null}

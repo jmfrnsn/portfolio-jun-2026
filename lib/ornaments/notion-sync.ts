@@ -1,4 +1,5 @@
 import { Client } from "@notionhq/client";
+import { ApiError } from "./errors";
 import { upsertSourceFromNotion } from "./repository";
 import type { Source } from "./schema";
 import { sourceCreateSchema, type SourceCreateInput } from "./validation";
@@ -41,14 +42,17 @@ const propertyNames = {
 };
 
 function getNotionConfig() {
-  const auth = process.env.NOTION_TOKEN;
-  const dataSourceId =
+  const auth = process.env.NOTION_TOKEN?.trim();
+  const dataSourceId = (
     process.env.NOTION_ORNAMENTS_DATA_SOURCE_ID ??
-    process.env.NOTION_ORNAMENTS_DATABASE_ID;
+    process.env.NOTION_ORNAMENTS_DATABASE_ID
+  )?.trim();
 
   if (!auth || !dataSourceId) {
-    throw new Error(
-      "NOTION_TOKEN and NOTION_ORNAMENTS_DATA_SOURCE_ID are required",
+    throw new ApiError(
+      "NOTION_TOKEN and NOTION_ORNAMENTS_DATA_SOURCE_ID are not configured",
+      503,
+      "MISSING_ENV",
     );
   }
 
@@ -223,36 +227,67 @@ export async function ensureNotionStatusProperty() {
   });
 }
 
-export async function archiveNotionSourcePage(notionPageId: string) {
+async function setNotionSourceStatus(
+  notionPageId: string,
+  statusName: "Active" | "Archived",
+) {
   const { auth } = getNotionConfig();
   const notion = new Client({ auth });
 
-  await ensureNotionStatusProperty();
+  try {
+    await ensureNotionStatusProperty();
+  } catch (error) {
+    console.warn(
+      "[ornaments] Could not ensure Notion Status select options",
+      error,
+    );
+  }
 
-  await notion.pages.update({
-    page_id: notionPageId,
-    archived: false,
-    properties: {
-      [propertyNames.status]: {
-        select: { name: "Archived" },
+  try {
+    await notion.pages.update({
+      page_id: notionPageId,
+      archived: false,
+      properties: {
+        [propertyNames.status]: {
+          select: { name: statusName },
+        },
       },
-    },
-  });
+    });
+    return;
+  } catch (selectError) {
+    try {
+      await notion.pages.update({
+        page_id: notionPageId,
+        archived: false,
+        properties: {
+          [propertyNames.status]: {
+            status: { name: statusName },
+          },
+        },
+      });
+      return;
+    } catch (statusError) {
+      const details = {
+        selectError:
+          selectError instanceof Error ? selectError.message : selectError,
+        statusError:
+          statusError instanceof Error ? statusError.message : statusError,
+      };
+      console.error("[ornaments] Failed to update Notion Status", details);
+      throw new ApiError(
+        `Unable to set Notion Status to ${statusName}`,
+        502,
+        "NOTION_UPDATE_FAILED",
+        details,
+      );
+    }
+  }
+}
+
+export async function archiveNotionSourcePage(notionPageId: string) {
+  await setNotionSourceStatus(notionPageId, "Archived");
 }
 
 export async function unarchiveNotionSourcePage(notionPageId: string) {
-  const { auth } = getNotionConfig();
-  const notion = new Client({ auth });
-
-  await ensureNotionStatusProperty();
-
-  await notion.pages.update({
-    page_id: notionPageId,
-    archived: false,
-    properties: {
-      [propertyNames.status]: {
-        select: { name: "Active" },
-      },
-    },
-  });
+  await setNotionSourceStatus(notionPageId, "Active");
 }

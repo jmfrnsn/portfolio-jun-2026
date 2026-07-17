@@ -13,6 +13,7 @@ type SourceListProps = {
 
 export function SourceList({ sources }: SourceListProps) {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [hiddenIds, setHiddenIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     let cancelled = false;
@@ -42,7 +43,9 @@ export function SourceList({ sources }: SourceListProps) {
     };
   }, []);
 
-  if (sources.length === 0) {
+  const visibleSources = sources.filter((source) => !hiddenIds.has(source.id));
+
+  if (visibleSources.length === 0) {
     return (
       <p className="font-serif text-base text-ink/60">
         No sources match these filters.
@@ -52,7 +55,7 @@ export function SourceList({ sources }: SourceListProps) {
 
   return (
     <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-      {sources.map((source) => (
+      {visibleSources.map((source) => (
         <li key={source.id} className="group relative">
           <Link
             href={`/ornaments/sources/${source.id}`}
@@ -94,6 +97,17 @@ export function SourceList({ sources }: SourceListProps) {
                 <ArchiveSourceButton
                   sourceId={source.id}
                   archived={source.notionStatus === "Archived"}
+                  onCompleted={(nextArchived) => {
+                    const viewingArchived =
+                      source.notionStatus === "Archived";
+                    if (nextArchived !== viewingArchived) {
+                      setHiddenIds((current) => {
+                        const next = new Set(current);
+                        next.add(source.id);
+                        return next;
+                      });
+                    }
+                  }}
                 />
               </div>
             </div>

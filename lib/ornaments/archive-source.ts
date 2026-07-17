@@ -4,7 +4,6 @@ import {
   unarchiveNotionSourcePage,
 } from "./notion-sync";
 import { dispatchOrnamentSyncWorkflow } from "./notion-webhook";
-import { archiveSource, getSource, unarchiveSource } from "./repository";
 import { getExportedSource } from "./sources-export";
 
 export type ArchiveSourceResult = {
@@ -14,18 +13,20 @@ export type ArchiveSourceResult = {
 };
 
 async function syncLocalArchiveState(id: string, archived: boolean) {
+  // Local SQLite is optional (unavailable on Vercel). Never fail the request.
   try {
+    const { archiveSource, getSource, unarchiveSource } = await import(
+      "./repository"
+    );
     await getSource(id);
+    if (archived) {
+      await archiveSource(id);
+      return;
+    }
+    await unarchiveSource(id);
   } catch {
-    return;
+    // Ignore missing local DB / source.
   }
-
-  if (archived) {
-    await archiveSource(id);
-    return;
-  }
-
-  await unarchiveSource(id);
 }
 
 async function maybeDispatchSync(clientPayload: Record<string, unknown>) {

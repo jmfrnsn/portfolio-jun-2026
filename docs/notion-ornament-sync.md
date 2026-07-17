@@ -114,7 +114,9 @@ ORNAMENT_ADMIN_SECRET=choose_a_long_random_string
 
 `ORNAMENT_ADMIN_SECRET` powers a private admin session at `/ornaments/admin` (not linked from the public nav, `noindex`). After sign-in, an httpOnly cookie unlocks Archive/Restore on the sources grid; everyone else never sees those controls. API routes: `POST /api/ornaments/admin/login`, `POST /api/ornaments/admin/logout`, `GET /api/ornaments/admin/session`, plus `POST /api/ornaments/sources/:id/archive` and `/unarchive`.
 
-`GITHUB_DISPATCH_TOKEN` needs permission to create a `repository_dispatch` on this repo (classic PAT `repo` scope, or fine-grained PAT with Actions write).
+Archive/Restore on the website also needs `NOTION_TOKEN` and `NOTION_ORNAMENTS_DATA_SOURCE_ID` on the **host** (Vercel), not only in GitHub Actions. Without those, the archive API cannot update Notion.
+
+`GITHUB_DISPATCH_TOKEN` needs permission to create a `repository_dispatch` on this repo (classic PAT `repo` scope, or fine-grained PAT with Actions write). Without it, Notion still updates, but the public `sources.json` catalog waits for the next scheduled/webhook sync.
 
 ### 3. Create the Notion webhook subscription
 
