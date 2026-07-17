@@ -7,7 +7,7 @@
   },
   "sources": [
     {
-      "id": "8c383b2a-1211-49d2-85de-a30cc4ddaba5",
+      "id": "7c007b9d-d0ea-47fa-a2a8-6496439bef57",
       "notionPageId": "3a0157fd-4777-810b-a955-fff3fac81bd3",
       "title": "Ornamental design",
       "creator": "Paul Flindt",
@@ -21,11 +21,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T15:42:36.057Z",
-      "updatedAt": "2026-07-17T15:42:36.057Z"
+      "createdAt": "2026-07-17T17:01:43.322Z",
+      "updatedAt": "2026-07-17T17:01:43.322Z"
     },
     {
-      "id": "c4250d36-47f3-4f3b-85c2-4472e914f6cb",
+      "id": "7e8eff3a-2501-4853-9ce8-71b4ae456cf2",
       "notionPageId": "3a0157fd-4777-811b-8b78-f7e4f5642426",
       "title": "Design for an Alcove with a Coat of Arms Flanked by Putti",
       "creator": "Giovanni Battista Foggini",
@@ -39,11 +39,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T15:42:36.061Z",
-      "updatedAt": "2026-07-17T15:42:36.061Z"
+      "createdAt": "2026-07-17T17:01:43.324Z",
+      "updatedAt": "2026-07-17T17:01:43.324Z"
     },
     {
-      "id": "7b73777c-7acf-4c6e-bd46-7bdb01195f67",
+      "id": "92b95c16-9c1f-466d-812c-19b0bb61e8f4",
       "notionPageId": "3a0157fd-4777-8183-b98b-d926d126b643",
       "title": "Design for a Frieze with Putto and Acanthus Scroll",
       "creator": "Anonymous, French",
@@ -57,11 +57,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T15:42:36.062Z",
-      "updatedAt": "2026-07-17T15:42:36.062Z"
+      "createdAt": "2026-07-17T17:01:43.325Z",
+      "updatedAt": "2026-07-17T17:01:43.325Z"
     },
     {
-      "id": "036333fc-4693-4c5c-96ea-5943b831df5a",
+      "id": "27445a08-36ea-4a19-bb24-32b70d568e48",
       "notionPageId": "3a0157fd-4777-8185-aaed-de6f5cc39ea8",
       "title": "Ornament Design (German, 17th century)",
       "creator": "Anonymous, German",
@@ -73,13 +73,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP804528.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T15:42:36.063Z",
+      "archivedAt": "2026-07-17T17:01:43.326Z",
       "notes": "",
-      "createdAt": "2026-07-17T15:42:36.064Z",
-      "updatedAt": "2026-07-17T15:42:36.064Z"
+      "createdAt": "2026-07-17T17:01:43.327Z",
+      "updatedAt": "2026-07-17T17:01:43.327Z"
     },
     {
-      "id": "5333ab57-b50f-41b4-ae70-18329733b6ea",
+      "id": "24ce13ae-53c0-4d26-8e14-3b11bff8ebb9",
       "notionPageId": "3a0157fd-4777-81b4-ae7c-f1c3ebe41597",
       "title": "Design for a Chandelier with Acanthus, Grape, and Palmette Motifs",
       "creator": "Anonymous, French",
@@ -93,11 +93,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T15:42:36.066Z",
-      "updatedAt": "2026-07-17T15:42:36.066Z"
+      "createdAt": "2026-07-17T17:01:43.328Z",
+      "updatedAt": "2026-07-17T17:01:43.328Z"
     },
     {
-      "id": "5755cf53-a075-43fe-bdd7-1082d85a0714",
+      "id": "1ca79716-f387-4de8-9ad6-142a83995a9a",
       "notionPageId": "3a0157fd-4777-81e8-b377-d77e3f7b33de",
       "title": "Ornament Design with Vases (Designs for Various Ornaments, pl. 38)",
       "creator": "Michelangelo Pergolesi",
@@ -109,10 +109,10 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP104571.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T15:42:36.067Z",
+      "archivedAt": "2026-07-17T17:01:43.328Z",
       "notes": "",
-      "createdAt": "2026-07-17T15:42:36.068Z",
-      "updatedAt": "2026-07-17T15:42:36.068Z"
+      "createdAt": "2026-07-17T17:01:43.329Z",
+      "updatedAt": "2026-07-17T17:01:43.329Z"
     }
   ]
 }
