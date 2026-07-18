@@ -35,8 +35,8 @@ function FilterLink({
   return (
     <Link
       href={href}
-      className={`font-mono text-xs font-extralight uppercase tracking-[0.08em] transition-colors ${
-        active ? "text-ink" : "text-ink/40 hover:text-ink/70"
+      className={`font-serif text-xs tracking-[-0.02em] transition-colors sm:text-sm ${
+        active ? "text-ink" : "text-ink/35 hover:text-ink/70"
       }`}
       aria-current={active ? "page" : undefined}
     >
@@ -59,9 +59,9 @@ export function SourcesFilters({
   ];
 
   return (
-    <div className="mb-10 flex flex-col gap-5">
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-        <span className="font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink/35">
+    <div className="mb-12 flex flex-col gap-4 border-b border-ink/10 pb-8 md:mb-16">
+      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+        <span className="font-serif text-xs tracking-[-0.02em] text-ink/30">
           View
         </span>
         {views.map((entry) => (
@@ -75,8 +75,8 @@ export function SourcesFilters({
       </div>
 
       {eras.length > 0 ? (
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <span className="font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink/35">
+        <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+          <span className="font-serif text-xs tracking-[-0.02em] text-ink/30">
             Era
           </span>
           <FilterLink
@@ -96,8 +96,8 @@ export function SourcesFilters({
       ) : null}
 
       {types.length > 0 ? (
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <span className="font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink/35">
+        <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+          <span className="font-serif text-xs tracking-[-0.02em] text-ink/30">
             Source
           </span>
           <FilterLink

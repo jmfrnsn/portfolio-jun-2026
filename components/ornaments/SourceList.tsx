@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
+import { toOrnamentFigures } from "@/lib/ornaments/figure-catalog";
 import type { ExportedOrnamentSource } from "@/lib/ornaments/sources-export";
 
 type SourceListProps = {
@@ -43,77 +44,99 @@ export function SourceList({ sources }: SourceListProps) {
     };
   }, []);
 
-  const visibleSources = sources.filter((source) => !hiddenIds.has(source.id));
+  const visibleSources = useMemo(
+    () => sources.filter((source) => !hiddenIds.has(source.id)),
+    [hiddenIds, sources],
+  );
+  const figures = useMemo(
+    () => toOrnamentFigures(visibleSources),
+    [visibleSources],
+  );
 
-  if (visibleSources.length === 0) {
+  if (figures.length === 0) {
     return (
-      <p className="font-serif text-base text-ink/60">
+      <p className="text-center font-serif text-base text-ink/60">
         No sources match these filters.
       </p>
     );
   }
 
   return (
-    <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-      {visibleSources.map((source) => (
-        <li key={source.id} className="group relative">
-          <Link
-            href={`/ornaments/sources/${source.id}`}
-            className="flex flex-col gap-4"
-          >
-            <div className="relative aspect-[4/5] w-full overflow-hidden bg-highlight">
-              {source.imageUrl ? (
-                <Image
-                  src={source.imageUrl}
-                  alt={source.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center font-mono text-xs uppercase tracking-[0.08em] text-ink/40">
-                  No image
-                </div>
-              )}
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <h2 className="font-serif text-lg leading-snug tracking-[-0.04375rem] text-ink transition-colors group-hover:text-ink/70">
-                {source.title}
-              </h2>
-              <p className="font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink/55">
-                {[source.creator, source.year].filter(Boolean).join(" · ")}
-              </p>
-              <p className="font-serif text-sm text-ink/60">
-                {[source.era, source.region, source.type]
-                  .filter(Boolean)
-                  .join(" · ")}
-              </p>
-            </div>
-          </Link>
-
-          {isAdmin ? (
-            <div className="pointer-events-none absolute right-3 top-3 z-10 opacity-100 transition-opacity duration-200 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-within:opacity-100">
-              <div className="pointer-events-auto">
-                <ArchiveSourceButton
-                  sourceId={source.id}
-                  archived={source.notionStatus === "Archived"}
-                  onCompleted={(nextArchived) => {
-                    const viewingArchived =
-                      source.notionStatus === "Archived";
-                    if (nextArchived !== viewingArchived) {
-                      setHiddenIds((current) => {
-                        const next = new Set(current);
-                        next.add(source.id);
-                        return next;
-                      });
-                    }
-                  }}
-                />
+    <div className="flex flex-col gap-20 md:gap-28">
+      <ul className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-10 lg:gap-y-14">
+        {figures.map((figure) => (
+          <li key={figure.source.id} className="group relative">
+            <Link
+              href={`/ornaments/sources/${figure.source.id}`}
+              className="flex flex-col gap-3"
+            >
+              <div className="flex items-baseline justify-between gap-2 font-serif text-[0.7rem] tracking-[-0.02em] text-ink/70 sm:text-xs">
+                <span>{figure.figLabel}</span>
+                <span>{figure.catalogCode}</span>
               </div>
-            </div>
-          ) : null}
-        </li>
-      ))}
-    </ul>
+              <div className="relative flex aspect-square items-center justify-center overflow-hidden bg-transparent">
+                {figure.source.imageUrl ? (
+                  <Image
+                    src={figure.source.imageUrl}
+                    alt={figure.source.title}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 18vw"
+                    className="object-contain grayscale transition-[filter,transform] duration-500 ease-out group-hover:scale-[1.015] group-hover:grayscale-0"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center font-serif text-xs text-ink/35">
+                    No image
+                  </div>
+                )}
+              </div>
+            </Link>
+
+            {isAdmin ? (
+              <div className="pointer-events-none absolute right-0 top-7 z-10 opacity-100 transition-opacity duration-200 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-within:opacity-100">
+                <div className="pointer-events-auto">
+                  <ArchiveSourceButton
+                    sourceId={figure.source.id}
+                    archived={figure.source.notionStatus === "Archived"}
+                    onCompleted={(nextArchived) => {
+                      const viewingArchived =
+                        figure.source.notionStatus === "Archived";
+                      if (nextArchived !== viewingArchived) {
+                        setHiddenIds((current) => {
+                          const next = new Set(current);
+                          next.add(figure.source.id);
+                          return next;
+                        });
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
+      <ul className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-10 lg:gap-y-14">
+        {figures.map((figure) => (
+          <li key={`caption-${figure.source.id}`}>
+            <Link
+              href={`/ornaments/sources/${figure.source.id}`}
+              className="flex flex-col items-center gap-1.5 text-center transition-opacity hover:opacity-70"
+            >
+              <p className="flex w-full items-baseline justify-between gap-2 font-serif text-[0.7rem] tracking-[-0.02em] text-ink/65 sm:text-xs">
+                <span>{figure.figLabel}</span>
+                <span>{figure.catalogCode}</span>
+              </p>
+              <h2 className="max-w-[16rem] font-serif text-sm leading-snug tracking-[-0.03em] text-ink sm:text-[0.95rem]">
+                {figure.source.title}
+              </h2>
+              <p className="font-serif text-xs italic tracking-[-0.02em] text-ink/55 sm:text-sm">
+                {figure.dateLabel}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

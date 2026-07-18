@@ -44,6 +44,7 @@ export default async function OrnamentSourcesPage({
       title="Sources"
       description="Museum plates, pattern books, and design drawings collected for ornament research."
       activeHref="/ornaments/sources"
+      wide
     >
       <SourcesFilters
         view={view}
