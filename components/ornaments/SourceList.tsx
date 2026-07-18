@@ -81,7 +81,7 @@ export function SourceList({ sources }: SourceListProps) {
                     alt={figure.source.title}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 18vw"
-                    className="object-contain grayscale transition-[filter,transform] duration-500 ease-out group-hover:scale-[1.015] group-hover:grayscale-0"
+                    className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.015]"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center font-serif text-xs text-ink/35">
