@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "counts": {
     "total": 18,
-    "active": 14,
-    "archived": 4
+    "active": 7,
+    "archived": 11
   },
   "sources": [
     {
@@ -162,11 +162,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/393432",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP237820.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:36:41.995Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.471Z",
-      "updatedAt": "2026-07-18T03:26:14.471Z"
+      "updatedAt": "2026-07-18T03:36:41.995Z"
     },
     {
       "id": "93707bae-2512-476b-8170-b48d7c3539ca",
@@ -180,11 +180,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/711347",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889274.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:35:42.465Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.479Z",
-      "updatedAt": "2026-07-18T03:26:14.479Z"
+      "updatedAt": "2026-07-18T03:35:42.465Z"
     },
     {
       "id": "ad481839-a3a1-4827-9a70-937b88f6395d",
@@ -198,11 +198,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/711322",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889270.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:35:56.078Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.481Z",
-      "updatedAt": "2026-07-18T03:26:14.481Z"
+      "updatedAt": "2026-07-18T03:35:56.078Z"
     },
     {
       "id": "474db4f4-2007-41e1-93b2-45e0780e78b9",
@@ -216,11 +216,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/711224",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889287.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:35:47.809Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.480Z",
-      "updatedAt": "2026-07-18T03:26:14.480Z"
+      "updatedAt": "2026-07-18T03:35:47.809Z"
     },
     {
       "id": "7b6a22ac-8c92-4ef9-9cd9-28d072940faf",
@@ -234,11 +234,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/362815",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/MM60836.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:36:18.187Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.472Z",
-      "updatedAt": "2026-07-18T03:26:14.472Z"
+      "updatedAt": "2026-07-18T03:36:18.187Z"
     },
     {
       "id": "654e6033-340a-414a-8541-7cd1e24dd76f",
@@ -270,11 +270,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/712199",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889282.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:36:29.606Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.480Z",
-      "updatedAt": "2026-07-18T03:26:14.480Z"
+      "updatedAt": "2026-07-18T03:36:29.606Z"
     },
     {
       "id": "07792575-f5af-424f-b1c5-91b407ef6395",
@@ -324,11 +324,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/912183",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-39285-001.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:36:05.627Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.465Z",
-      "updatedAt": "2026-07-18T03:26:14.465Z"
+      "updatedAt": "2026-07-18T03:36:05.627Z"
     }
   ]
 }
