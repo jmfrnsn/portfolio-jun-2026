@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "counts": {
     "total": 63,
-    "active": 21,
-    "archived": 42
+    "active": 19,
+    "archived": 44
   },
   "sources": [
     {
-      "id": "723729bc-b299-44d4-a143-2e047496f1d8",
+      "id": "13741164-6573-49c8-b3f3-aebfb4e47ded",
       "notionPageId": "3a0157fd-4777-810b-a955-fff3fac81bd3",
       "title": "Ornamental design",
       "creator": "Paul Flindt",
@@ -19,13 +19,13 @@
       "imageUrl": "https://www.artic.edu/iiif/2/c979223c-580a-70dc-e8cc-f3168f40c079/full/600,/0/default.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:26:14.482Z",
+      "archivedAt": "2026-07-18T04:16:11.327Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.482Z",
-      "updatedAt": "2026-07-18T03:26:14.482Z"
+      "createdAt": "2026-07-18T04:16:11.327Z",
+      "updatedAt": "2026-07-18T04:16:11.327Z"
     },
     {
-      "id": "34f186c4-0bbb-4311-885a-d606e85a6c23",
+      "id": "16c19aab-d3e6-4386-a7f7-efb87954f8de",
       "notionPageId": "3a0157fd-4777-811b-8b78-f7e4f5642426",
       "title": "Design for an Alcove with a Coat of Arms Flanked by Putti",
       "creator": "Giovanni Battista Foggini",
@@ -37,13 +37,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP809752.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:26:14.482Z",
+      "archivedAt": "2026-07-18T04:16:11.327Z",
       "notes": "",
-      "createdAt": "2026-07-17T06:18:42.457Z",
-      "updatedAt": "2026-07-18T03:26:14.483Z"
+      "createdAt": "2026-07-18T04:16:11.327Z",
+      "updatedAt": "2026-07-18T04:16:11.327Z"
     },
     {
-      "id": "3785a835-0675-4b0c-bf66-1e0b07661a57",
+      "id": "d7a3cba8-5c7e-4910-96f1-43a054bdf369",
       "notionPageId": "3a0157fd-4777-8183-b98b-d926d126b643",
       "title": "Design for a Frieze with Putto and Acanthus Scroll",
       "creator": "Anonymous, French",
@@ -57,11 +57,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T06:18:42.460Z",
-      "updatedAt": "2026-07-17T06:38:01.641Z"
+      "createdAt": "2026-07-18T04:16:11.328Z",
+      "updatedAt": "2026-07-18T04:16:11.328Z"
     },
     {
-      "id": "8c8b0d9a-4dbb-46c5-b7ca-415b16f8b06b",
+      "id": "42a122a5-54af-46a3-ae6c-c7bb38ad7177",
       "notionPageId": "3a0157fd-4777-8185-aaed-de6f5cc39ea8",
       "title": "Ornament Design (German, 17th century)",
       "creator": "Anonymous, German",
@@ -73,13 +73,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP804528.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T06:38:01.641Z",
+      "archivedAt": "2026-07-18T04:16:11.328Z",
       "notes": "",
-      "createdAt": "2026-07-17T06:18:42.461Z",
-      "updatedAt": "2026-07-17T06:38:01.641Z"
+      "createdAt": "2026-07-18T04:16:11.328Z",
+      "updatedAt": "2026-07-18T04:16:11.328Z"
     },
     {
-      "id": "77d36661-a19e-46e8-83cc-e586fc13216a",
+      "id": "60dd5e2b-2b47-4506-a99f-39ded6e3f79f",
       "notionPageId": "3a0157fd-4777-81b4-ae7c-f1c3ebe41597",
       "title": "Design for a Chandelier with Acanthus, Grape, and Palmette Motifs",
       "creator": "Anonymous, French",
@@ -93,11 +93,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T06:18:42.461Z",
-      "updatedAt": "2026-07-17T06:38:01.642Z"
+      "createdAt": "2026-07-18T04:16:11.329Z",
+      "updatedAt": "2026-07-18T04:16:11.329Z"
     },
     {
-      "id": "b29e8f85-9c65-45fc-8e12-c194b21be345",
+      "id": "0d02ee81-aa06-478a-804b-e45ae0bb10e9",
       "notionPageId": "3a0157fd-4777-81e8-b377-d77e3f7b33de",
       "title": "Ornament Design with Vases (Designs for Various Ornaments, pl. 38)",
       "creator": "Michelangelo Pergolesi",
@@ -109,13 +109,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP104571.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T06:38:01.642Z",
+      "archivedAt": "2026-07-18T04:16:11.329Z",
       "notes": "",
-      "createdAt": "2026-07-17T06:18:42.462Z",
-      "updatedAt": "2026-07-17T06:38:01.642Z"
+      "createdAt": "2026-07-18T04:16:11.330Z",
+      "updatedAt": "2026-07-18T04:16:11.330Z"
     },
     {
-      "id": "c88c2899-6a80-4e82-bc2a-c7392e8da382",
+      "id": "571c4345-d26b-44a0-ad49-53bc2a0fe2cf",
       "notionPageId": "3a1157fd-4777-8102-bd23-e24c9a0f7ccf",
       "title": "Floral Designs and Floral Bands",
       "creator": "Giacomo Cavenezia",
@@ -127,13 +127,13 @@
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1952.291/1952.291_web.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:52:15.091Z",
+      "archivedAt": "2026-07-18T04:16:11.286Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.668Z",
-      "updatedAt": "2026-07-18T03:52:15.091Z"
+      "createdAt": "2026-07-18T04:16:11.286Z",
+      "updatedAt": "2026-07-18T04:16:11.286Z"
     },
     {
-      "id": "83cf1458-b5e4-4d4c-94b9-3cca02151ec9",
+      "id": "66c79d2c-8df6-4429-a36b-bee85e20b63d",
       "notionPageId": "3a1157fd-4777-8106-a34d-c14631914e6a",
       "title": "New Suite of Portfolios of Flowers Ideal to Use for Designing and Painting: Floral Fantasies",
       "creator": "Anne Allen",
@@ -145,13 +145,13 @@
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1968.38/1968.38_web.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:52:23.577Z",
+      "archivedAt": "2026-07-18T04:16:11.280Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.666Z",
-      "updatedAt": "2026-07-18T03:52:23.577Z"
+      "createdAt": "2026-07-18T04:16:11.281Z",
+      "updatedAt": "2026-07-18T04:16:11.281Z"
     },
     {
-      "id": "5fe72c65-c489-40b9-8dc1-ba5c7b87fb81",
+      "id": "fe9b185b-69cc-4dff-986d-8c1dd2ef3225",
       "notionPageId": "3a1157fd-4777-810b-9a50-f7b1c47c6a71",
       "title": "Sketches for Grotesque Wall Decorations",
       "creator": "Girolamo da Carpi (Girolamo Sellari)",
@@ -163,13 +163,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP810061.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:12.572Z",
+      "archivedAt": "2026-07-18T04:16:11.310Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.273Z",
-      "updatedAt": "2026-07-18T03:53:12.572Z"
+      "createdAt": "2026-07-18T04:16:11.310Z",
+      "updatedAt": "2026-07-18T04:16:11.310Z"
     },
     {
-      "id": "185c8704-adf6-47c3-b71c-5b86eddf478b",
+      "id": "d669a976-e0e9-4853-a21b-4c1a13a4e6ea",
       "notionPageId": "3a1157fd-4777-810d-b207-f8270a5227aa",
       "title": "Autumn Flower and Sparrow",
       "creator": "Utagawa Hiroshige",
@@ -181,13 +181,13 @@
       "imageUrl": "https://www.artic.edu/iiif/2/e22f4909-4ec3-fd7b-3959-eb8529baccce/full/843,/0/default.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:54:17.961Z",
+      "archivedAt": "2026-07-18T04:16:11.276Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.664Z",
-      "updatedAt": "2026-07-18T03:54:17.961Z"
+      "createdAt": "2026-07-18T04:16:11.277Z",
+      "updatedAt": "2026-07-18T04:16:11.277Z"
     },
     {
-      "id": "68d502f3-9b6f-42a9-9ad0-444ff5cb7346",
+      "id": "3cbff3c9-ed36-4082-ae24-ca2de203f549",
       "notionPageId": "3a1157fd-4777-8111-a8cf-e09295a3d804",
       "title": "Floral Designs with a Blue Bird",
       "creator": "Giacomo Cavenezia",
@@ -199,13 +199,13 @@
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1952.287/1952.287_web.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:14.348Z",
+      "archivedAt": "2026-07-18T04:16:11.287Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.669Z",
-      "updatedAt": "2026-07-18T03:53:14.348Z"
+      "createdAt": "2026-07-18T04:16:11.288Z",
+      "updatedAt": "2026-07-18T04:16:11.288Z"
     },
     {
-      "id": "cc0cc37f-3c30-46ab-abe9-b7f488524307",
+      "id": "83573277-4e46-4eaa-9db0-956cbf59b559",
       "notionPageId": "3a1157fd-4777-8115-8b61-c958c0452d0c",
       "title": "Florentine Woman Wearing a Butterfly Cap and Holding a Hand Warmer",
       "creator": "Jean-Baptiste Greuze",
@@ -217,13 +217,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP806602.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.670Z",
+      "archivedAt": "2026-07-18T04:16:11.290Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.670Z",
-      "updatedAt": "2026-07-18T03:45:44.670Z"
+      "createdAt": "2026-07-18T04:16:11.291Z",
+      "updatedAt": "2026-07-18T04:16:11.291Z"
     },
     {
-      "id": "42a86b47-5b03-4889-bbb5-b698bb1742b4",
+      "id": "bd34970e-7f21-4d6c-aa22-95fad77c4420",
       "notionPageId": "3a1157fd-4777-811a-80ef-e745e23bbe9b",
       "title": "Grotesque with a Victory Figure Under an Overgrown Pergola",
       "creator": "Anonymous, Italian, 16th century",
@@ -237,11 +237,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.268Z",
-      "updatedAt": "2026-07-18T03:39:18.268Z"
+      "createdAt": "2026-07-18T04:16:11.306Z",
+      "updatedAt": "2026-07-18T04:16:11.306Z"
     },
     {
-      "id": "d1e7e666-a356-43fc-a430-c2afcfe2d7f8",
+      "id": "93193125-90d6-4021-b25a-05043a2468f3",
       "notionPageId": "3a1157fd-4777-811d-94d2-e31d9d69768e",
       "title": "Grotesque with an Architectural Structure with a Young Boy on a Bed, Holding a Snake",
       "creator": "Anonymous, Italian, 16th century",
@@ -253,13 +253,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804961.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:54:54.824Z",
+      "archivedAt": "2026-07-18T04:16:11.299Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.263Z",
-      "updatedAt": "2026-07-18T03:54:54.824Z"
+      "createdAt": "2026-07-18T04:16:11.300Z",
+      "updatedAt": "2026-07-18T04:16:11.300Z"
     },
     {
-      "id": "e8a3bb10-a0c5-45f1-9288-05cb4aa0864a",
+      "id": "4fe4dae4-c4d1-4095-8b8c-2f265361e3c2",
       "notionPageId": "3a1157fd-4777-8125-a5ea-ceba2283dfcb",
       "title": "Floral Designs with Two Birds",
       "creator": "Giacomo Cavenezia",
@@ -271,13 +271,13 @@
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1952.289/1952.289_web.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:15.389Z",
+      "archivedAt": "2026-07-18T04:16:11.288Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.670Z",
-      "updatedAt": "2026-07-18T03:53:15.389Z"
+      "createdAt": "2026-07-18T04:16:11.289Z",
+      "updatedAt": "2026-07-18T04:16:11.289Z"
     },
     {
-      "id": "e287d16a-0dc7-4a77-a1c7-0546c9a7f726",
+      "id": "b8ac0ead-442b-4353-bcda-fdea98054ecf",
       "notionPageId": "3a1157fd-4777-8126-896b-cc4dbc52539e",
       "title": "Design for a Hall Lamp",
       "creator": "Lamqua",
@@ -291,11 +291,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.477Z",
-      "updatedAt": "2026-07-18T03:26:14.477Z"
+      "createdAt": "2026-07-18T04:16:11.324Z",
+      "updatedAt": "2026-07-18T04:16:11.324Z"
     },
     {
-      "id": "7b2bf25d-3641-41f0-b16e-c55ac68170b7",
+      "id": "e99d09eb-69ab-4de7-9437-19d622736a37",
       "notionPageId": "3a1157fd-4777-8126-b6cd-c5f15dbe66ea",
       "title": "Candelabra Grotesque with a Large Vase Flanked by Sphinxes",
       "creator": "Anonymous, Italian, 16th century",
@@ -307,13 +307,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804962.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:18.186Z",
+      "archivedAt": "2026-07-18T04:16:11.300Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.264Z",
-      "updatedAt": "2026-07-18T03:53:18.186Z"
+      "createdAt": "2026-07-18T04:16:11.301Z",
+      "updatedAt": "2026-07-18T04:16:11.301Z"
     },
     {
-      "id": "d62282cd-b582-4ae2-8ff4-82aecd08d5e6",
+      "id": "9da3370c-6898-44d1-aac8-1b2ec0c81e5f",
       "notionPageId": "3a1157fd-4777-8127-812b-e188cce46eb6",
       "title": "Candelabra Grotesque Crowned by an Altar in a Small Pavillion",
       "creator": "Anonymous, Italian, 16th century",
@@ -325,13 +325,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804963.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:08.048Z",
+      "archivedAt": "2026-07-18T04:16:11.304Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.265Z",
-      "updatedAt": "2026-07-18T03:45:08.048Z"
+      "createdAt": "2026-07-18T04:16:11.304Z",
+      "updatedAt": "2026-07-18T04:16:11.304Z"
     },
     {
-      "id": "8ed7da2b-b12b-4a8c-b1a1-c075acbe9420",
+      "id": "336b8185-7d84-4f8e-ac5e-3774e3245684",
       "notionPageId": "3a1157fd-4777-8127-9dd0-c9a5d2d5930b",
       "title": "Flower Embroidery Design for Silk Manufactory of Lyon",
       "creator": "Jean Baptiste Pillement",
@@ -343,13 +343,13 @@
       "imageUrl": "https://openaccess-cdn.clevelandart.org/2019.67/2019.67_web.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:21.867Z",
+      "archivedAt": "2026-07-18T04:16:11.283Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.667Z",
-      "updatedAt": "2026-07-18T03:53:21.867Z"
+      "createdAt": "2026-07-18T04:16:11.283Z",
+      "updatedAt": "2026-07-18T04:16:11.283Z"
     },
     {
-      "id": "612e7e37-a068-466c-86b8-2a97000ee94c",
+      "id": "96b9913f-8dc1-4ef8-9518-726cef80cfdb",
       "notionPageId": "3a1157fd-4777-812a-9ded-f8a2e53e4360",
       "title": "Leaf from Aedes Walpolianae mounted with two drawings: (a): Salon Chimney, Houghton Hall, Norfolk, Elevation; (b): Salon Ceiling, Houghton Hall, Norfolk",
       "creator": "Isaac Ware",
@@ -363,11 +363,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.275Z",
-      "updatedAt": "2026-07-18T03:39:18.275Z"
+      "createdAt": "2026-07-18T04:16:11.313Z",
+      "updatedAt": "2026-07-18T04:16:11.313Z"
     },
     {
-      "id": "a543a933-60dc-44c2-8eaf-1a0e7af701a4",
+      "id": "9d725e63-27a4-46da-91be-b0c0b86bc9f2",
       "notionPageId": "3a1157fd-4777-8135-acfe-e8ca97e73f78",
       "title": "Candelabra Grotesque with a Naked Boy in a Strapwork Contraption",
       "creator": "Anonymous, Italian, 16th century",
@@ -379,13 +379,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804953.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:54:44.399Z",
+      "archivedAt": "2026-07-18T04:16:11.307Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.270Z",
-      "updatedAt": "2026-07-18T03:54:44.399Z"
+      "createdAt": "2026-07-18T04:16:11.308Z",
+      "updatedAt": "2026-07-18T04:16:11.308Z"
     },
     {
-      "id": "b6ef5794-dfac-473d-9d51-918a4d3ef087",
+      "id": "39134259-311a-4f89-bf74-b33b5c96261a",
       "notionPageId": "3a1157fd-4777-8139-a11c-e89fc51cc9fb",
       "title": "Candelabra Grotesque with a Female Figure in a Niche and Two Sphinxes",
       "creator": "Anonymous, Italian, 16th century",
@@ -397,13 +397,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804966.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:37.238Z",
+      "archivedAt": "2026-07-18T04:16:11.298Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.259Z",
-      "updatedAt": "2026-07-18T03:53:37.238Z"
+      "createdAt": "2026-07-18T04:16:11.299Z",
+      "updatedAt": "2026-07-18T04:16:11.299Z"
     },
     {
-      "id": "80abc083-0bd7-4b72-9a69-09239dc6abc9",
+      "id": "46743e9d-c24c-4102-93bf-7a484e1b2a29",
       "notionPageId": "3a1157fd-4777-813e-bfa3-d13c1158c4a1",
       "title": "Design for a Chimney Piece",
       "creator": "Anonymous, British, 18th century",
@@ -415,13 +415,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP806988.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:34.692Z",
+      "archivedAt": "2026-07-18T04:16:11.319Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.277Z",
-      "updatedAt": "2026-07-18T03:53:34.692Z"
+      "createdAt": "2026-07-18T04:16:11.319Z",
+      "updatedAt": "2026-07-18T04:16:11.319Z"
     },
     {
-      "id": "11c8e20d-a938-4c3e-8764-9d273c8e140f",
+      "id": "b777ae1f-6240-48ed-9a17-51c3c4fe6459",
       "notionPageId": "3a1157fd-4777-813f-ab45-c7ffdb3402ea",
       "title": "Villa of Agostino Chigi (La Farnesina), Rome, north façade, with ornamental detailing (recto); Villa of Agostino Chigi (La Farnesina), Rome, plan and moulding profiles (verso)",
       "creator": "Anonymous, French, 16th century",
@@ -433,13 +433,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP819311.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:54:46.508Z",
+      "archivedAt": "2026-07-18T04:16:11.320Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.278Z",
-      "updatedAt": "2026-07-18T03:54:46.508Z"
+      "createdAt": "2026-07-18T04:16:11.320Z",
+      "updatedAt": "2026-07-18T04:16:11.320Z"
     },
     {
-      "id": "83b95139-ca00-4a35-b7a9-714101484a77",
+      "id": "4e7fa842-73e9-4cf0-b24e-353f8c524c4a",
       "notionPageId": "3a1157fd-4777-8149-95a9-cdb5fa712b99",
       "title": "Candelabra Grotesque with a Winged Female Term on a Pedestal",
       "creator": "Anonymous, Italian, 16th century",
@@ -453,11 +453,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.265Z",
-      "updatedAt": "2026-07-18T03:39:18.265Z"
+      "createdAt": "2026-07-18T04:16:11.303Z",
+      "updatedAt": "2026-07-18T04:16:11.303Z"
     },
     {
-      "id": "b26a3f3b-f0b9-484e-aa3d-e27804753f0d",
+      "id": "57ddc16f-1be2-414d-8e20-0161bf9b343b",
       "notionPageId": "3a1157fd-4777-814a-a82b-da1f0d918bdd",
       "title": "Flower Study",
       "creator": "Harry Fenn",
@@ -469,13 +469,13 @@
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1928.120/1928.120_web.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:38.103Z",
+      "archivedAt": "2026-07-18T04:16:11.285Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.667Z",
-      "updatedAt": "2026-07-18T03:53:38.103Z"
+      "createdAt": "2026-07-18T04:16:11.286Z",
+      "updatedAt": "2026-07-18T04:16:11.286Z"
     },
     {
-      "id": "6fef9ce4-e836-404f-9341-ce24afbfbc1d",
+      "id": "628714e5-4398-4260-8b49-ffc688de14a8",
       "notionPageId": "3a1157fd-4777-8150-90ed-d8592621814b",
       "title": "Design for an Overdoor or Chimney Piece with an Armorial Trophy and the personification of Victory",
       "creator": "Anonymous, French, 18th century",
@@ -487,13 +487,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP808748.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:42.119Z",
+      "archivedAt": "2026-07-18T04:16:11.312Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.274Z",
-      "updatedAt": "2026-07-18T03:53:42.119Z"
+      "createdAt": "2026-07-18T04:16:11.312Z",
+      "updatedAt": "2026-07-18T04:16:11.312Z"
     },
     {
-      "id": "04ea42a7-c07b-4e76-bb6d-2d4a10296fa6",
+      "id": "16766cf7-98d1-4b66-a103-0129181fb91e",
       "notionPageId": "3a1157fd-4777-8160-979c-f73dfbca80c4",
       "title": "Design for a Chimney Piece",
       "creator": "Anonymous, British, 18th century",
@@ -507,11 +507,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.277Z",
-      "updatedAt": "2026-07-18T03:39:18.277Z"
+      "createdAt": "2026-07-18T04:16:11.318Z",
+      "updatedAt": "2026-07-18T04:16:11.318Z"
     },
     {
-      "id": "16a0bcac-54e8-4e41-b94b-3a148cc7367d",
+      "id": "5de66a28-9355-452f-8273-4960e280c852",
       "notionPageId": "3a1157fd-4777-8164-8935-e6873da61f65",
       "title": "Design for a Wall Monument",
       "creator": "Francesco di Giorgio Martini",
@@ -523,13 +523,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/rl/original/DP324211.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:44.535Z",
+      "archivedAt": "2026-07-18T04:16:11.322Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.474Z",
-      "updatedAt": "2026-07-18T03:53:44.535Z"
+      "createdAt": "2026-07-18T04:16:11.323Z",
+      "updatedAt": "2026-07-18T04:16:11.323Z"
     },
     {
-      "id": "d830fe4e-61e0-458d-8904-04672c882e11",
+      "id": "95a5b772-66b5-4e3c-8495-ecbf6a199e58",
       "notionPageId": "3a1157fd-4777-8166-97c2-d9638d523728",
       "title": "Design for a Chimney Piece in the Gallery, now Dining Room, Harewood House, Yorkshire (Elevation)",
       "creator": "Robert Adam",
@@ -543,11 +543,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.276Z",
-      "updatedAt": "2026-07-18T03:39:18.276Z"
+      "createdAt": "2026-07-18T04:16:11.316Z",
+      "updatedAt": "2026-07-18T04:16:11.316Z"
     },
     {
-      "id": "92efd06f-5152-4c12-bf6a-389a0073bc20",
+      "id": "25913f6e-fb7b-4ec4-b66d-b5cc07ed5fe7",
       "notionPageId": "3a1157fd-4777-8168-9757-eaaf575b5c50",
       "title": "Design for a Chimney piece decorated with figures of Venus and Cupid",
       "creator": "Emil Wolff",
@@ -559,13 +559,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP860287.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:51.294Z",
+      "archivedAt": "2026-07-18T04:16:11.316Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.276Z",
-      "updatedAt": "2026-07-18T03:53:51.294Z"
+      "createdAt": "2026-07-18T04:16:11.317Z",
+      "updatedAt": "2026-07-18T04:16:11.317Z"
     },
     {
-      "id": "2aa9530d-0f14-4a45-abb0-e5c6b8172bb4",
+      "id": "667e9f9f-3e9e-498d-b729-a7137a36a0db",
       "notionPageId": "3a1157fd-4777-8174-8dda-c687aeea5714",
       "title": "Ornament",
       "creator": "Alphonse Mucha",
@@ -579,11 +579,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.670Z",
-      "updatedAt": "2026-07-18T03:45:44.670Z"
+      "createdAt": "2026-07-18T04:16:11.290Z",
+      "updatedAt": "2026-07-18T04:16:11.290Z"
     },
     {
-      "id": "db08befc-7cda-49fb-98f0-dcd6b09cd6db",
+      "id": "e509c304-e8cf-4529-b044-04438297a751",
       "notionPageId": "3a1157fd-4777-8176-9c2a-cee7652234ea",
       "title": "Design for a Wall Panel or Ceiling with The Virgin and Saints Interceding before Christ for the Souls of the Lost",
       "creator": "Johann Baptist Enderle",
@@ -595,13 +595,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP237820.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:36:41.995Z",
+      "archivedAt": "2026-07-18T04:16:11.321Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.471Z",
-      "updatedAt": "2026-07-18T03:36:41.995Z"
+      "createdAt": "2026-07-18T04:16:11.321Z",
+      "updatedAt": "2026-07-18T04:16:11.321Z"
     },
     {
-      "id": "47872558-61e6-42b2-ae6f-b31e3a9517e9",
+      "id": "d7279a30-f7b0-4df7-aaf7-69dcbf38e5e8",
       "notionPageId": "3a1157fd-4777-8184-aabd-e1655c3fec5f",
       "title": "Study of Justice Dispensing Rewards to the Arts (recto); Study of a Lunette and Spandrel (verso)",
       "creator": "Lorenzo de' Ferrari",
@@ -613,13 +613,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP809467.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.671Z",
+      "archivedAt": "2026-07-18T04:16:11.293Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.671Z",
-      "updatedAt": "2026-07-18T03:45:44.671Z"
+      "createdAt": "2026-07-18T04:16:11.293Z",
+      "updatedAt": "2026-07-18T04:16:11.293Z"
     },
     {
-      "id": "c66470d7-d699-4a00-b91f-2ab14a74ba96",
+      "id": "ccdf053a-f5ea-4c97-b982-0a879953b4b5",
       "notionPageId": "3a1157fd-4777-818a-8c42-d0ccd1dc4f2c",
       "title": "Ornament with a Palmette",
       "creator": "Sebald Beham",
@@ -633,11 +633,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.662Z",
-      "updatedAt": "2026-07-18T03:45:44.662Z"
+      "createdAt": "2026-07-18T04:16:11.274Z",
+      "updatedAt": "2026-07-18T04:16:11.274Z"
     },
     {
-      "id": "da771a3d-b364-4034-a991-a0a9ec88508e",
+      "id": "3a0c42bb-8db3-4adf-8ff0-354427b3303f",
       "notionPageId": "3a1157fd-4777-8193-b16d-ca9823e8e7ab",
       "title": "Design for a Chimney Place and Study of a Nude Female Figure",
       "creator": "Anonymous, Flemish, 17th century",
@@ -649,13 +649,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP802347.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:55.045Z",
+      "archivedAt": "2026-07-18T04:16:11.317Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.276Z",
-      "updatedAt": "2026-07-18T03:53:55.045Z"
+      "createdAt": "2026-07-18T04:16:11.317Z",
+      "updatedAt": "2026-07-18T04:16:11.317Z"
     },
     {
-      "id": "94eed43f-d546-4644-aa1b-01767e041233",
+      "id": "2c823068-da50-4dad-b135-59c3d621edab",
       "notionPageId": "3a1157fd-4777-8199-9bcc-ec5d46d78dd3",
       "title": "Study of a Seated Woman Seen from Behind (Marie-Gabrielle Capet)",
       "creator": "Adélaïde Labille-Guiard",
@@ -667,13 +667,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP167476.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.672Z",
+      "archivedAt": "2026-07-18T04:16:11.296Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.672Z",
-      "updatedAt": "2026-07-18T03:45:44.672Z"
+      "createdAt": "2026-07-18T04:16:11.296Z",
+      "updatedAt": "2026-07-18T04:16:11.296Z"
     },
     {
-      "id": "93707bae-2512-476b-8170-b48d7c3539ca",
+      "id": "ec38e7a2-8210-4f97-b57b-38e3bc072743",
       "notionPageId": "3a1157fd-4777-819b-88a5-e97f0c326d6a",
       "title": "Design for a Sofa Seat Cover (?) with an Ornamental Frame Containing a Vase with a Large Bundle of Flowers and Leaves and Decorated with Acanthus Leaves and Two Fleurs de Lys",
       "creator": "Anonymous, French, 19th century",
@@ -685,13 +685,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889274.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:35:42.465Z",
+      "archivedAt": "2026-07-18T04:16:11.324Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.479Z",
-      "updatedAt": "2026-07-18T03:35:42.465Z"
+      "createdAt": "2026-07-18T04:16:11.324Z",
+      "updatedAt": "2026-07-18T04:16:11.324Z"
     },
     {
-      "id": "041b32cd-7858-47c3-92b5-2c4c88875156",
+      "id": "0a13aa7b-3146-445e-9569-e4b172ced545",
       "notionPageId": "3a1157fd-4777-81a6-a939-c3a80862e877",
       "title": "Study of a Kneeling Figure (recto); Design for a Festival Chariot (verso)",
       "creator": "Anonymous, Italian, Florentine, 16th century",
@@ -703,13 +703,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP115159.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.671Z",
+      "archivedAt": "2026-07-18T04:16:11.294Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.671Z",
-      "updatedAt": "2026-07-18T03:45:44.671Z"
+      "createdAt": "2026-07-18T04:16:11.294Z",
+      "updatedAt": "2026-07-18T04:16:11.294Z"
     },
     {
-      "id": "0b3f95e1-4de9-44d6-bddc-9a67e14c4432",
+      "id": "52a86454-1143-4d82-b0d5-9a3b325ee11e",
       "notionPageId": "3a1157fd-4777-81ae-8b0a-c800caa7d552",
       "title": "Salon Chimney, Houghton Hall, Norfolk, Elevation",
       "creator": "Isaac Ware",
@@ -721,13 +721,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP829114.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:53:53.661Z",
+      "archivedAt": "2026-07-18T04:16:11.318Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.276Z",
-      "updatedAt": "2026-07-18T03:53:53.661Z"
+      "createdAt": "2026-07-18T04:16:11.318Z",
+      "updatedAt": "2026-07-18T04:16:11.318Z"
     },
     {
-      "id": "666ee187-eead-4b8d-9ac5-2c7f12954611",
+      "id": "5662a0c6-391c-44da-a657-ead8dbfc77a4",
       "notionPageId": "3a1157fd-4777-81af-a4e8-e4a96b26aaf9",
       "title": "Grotesque with a Bacchus Fountain Placed in an Architectural Structure",
       "creator": "Anonymous, Italian, 16th century",
@@ -741,11 +741,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.269Z",
-      "updatedAt": "2026-07-18T03:39:18.269Z"
+      "createdAt": "2026-07-18T04:16:11.307Z",
+      "updatedAt": "2026-07-18T04:16:11.307Z"
     },
     {
-      "id": "ad481839-a3a1-4827-9a70-937b88f6395d",
+      "id": "08fa3086-e9b7-47d7-a976-e073199f4b7c",
       "notionPageId": "3a1157fd-4777-81b0-9820-c854e6c0ad12",
       "title": "Design for a Valance with Bundles and Garlands of Flowers and a Monogram Presenting Two Design Variants",
       "creator": "Anonymous, French, 19th century",
@@ -757,13 +757,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889270.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:35:56.078Z",
+      "archivedAt": "2026-07-18T04:16:11.326Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.481Z",
-      "updatedAt": "2026-07-18T03:35:56.078Z"
+      "createdAt": "2026-07-18T04:16:11.326Z",
+      "updatedAt": "2026-07-18T04:16:11.326Z"
     },
     {
-      "id": "a8ad3ffb-b830-4498-9ef5-128383cddba1",
+      "id": "bfe1f544-792b-4666-a65f-732bc06ae79e",
       "notionPageId": "3a1157fd-4777-81b2-b776-f11ed0612b29",
       "title": "Design for a Chimney Piece",
       "creator": "Anonymous, Italian, 19th century",
@@ -777,11 +777,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.278Z",
-      "updatedAt": "2026-07-18T03:39:18.278Z"
+      "createdAt": "2026-07-18T04:16:11.319Z",
+      "updatedAt": "2026-07-18T04:16:11.319Z"
     },
     {
-      "id": "474db4f4-2007-41e1-93b2-45e0780e78b9",
+      "id": "840b77c2-63bb-46e0-a165-21bc937134ef",
       "notionPageId": "3a1157fd-4777-81b3-9b26-e954b1a48bab",
       "title": "Design for a Valance with Floral Motifs",
       "creator": "Anonymous, French, 19th century",
@@ -793,13 +793,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889287.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:35:47.809Z",
+      "archivedAt": "2026-07-18T04:16:11.324Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.480Z",
-      "updatedAt": "2026-07-18T03:35:47.809Z"
+      "createdAt": "2026-07-18T04:16:11.325Z",
+      "updatedAt": "2026-07-18T04:16:11.325Z"
     },
     {
-      "id": "4ef7b624-1280-4d85-948d-033c794e8eb3",
+      "id": "5f8fb902-3742-48f4-9c13-8e1a65ae7428",
       "notionPageId": "3a1157fd-4777-81b3-a815-f80b23d0e56f",
       "title": "Design for Art Nouveau Loveseat with Caning",
       "creator": "Anonymous, French, 19th century",
@@ -811,13 +811,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP812916.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.671Z",
+      "archivedAt": "2026-07-18T04:16:11.292Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.671Z",
-      "updatedAt": "2026-07-18T03:45:44.671Z"
+      "createdAt": "2026-07-18T04:16:11.293Z",
+      "updatedAt": "2026-07-18T04:16:11.293Z"
     },
     {
-      "id": "90cbf0ef-54b9-4b81-aea9-1ad90c14c6f2",
+      "id": "fd0b7790-0b46-46f9-a966-7a05a388f374",
       "notionPageId": "3a1157fd-4777-81bf-bebd-f191315a9671",
       "title": "Study of Eleven Heads",
       "creator": "Jacques de Gheyn II",
@@ -829,13 +829,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP801085.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.672Z",
+      "archivedAt": "2026-07-18T04:16:11.297Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.672Z",
-      "updatedAt": "2026-07-18T03:45:44.672Z"
+      "createdAt": "2026-07-18T04:16:11.297Z",
+      "updatedAt": "2026-07-18T04:16:11.297Z"
     },
     {
-      "id": "7b6a22ac-8c92-4ef9-9cd9-28d072940faf",
+      "id": "6d0abb01-3332-4885-81a3-064528bda5e2",
       "notionPageId": "3a1157fd-4777-81c0-8651-e2e907094817",
       "title": "Design for a tea-pot, verso: design for a covered dish and bowl",
       "creator": "Thomas Fletcher",
@@ -847,13 +847,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/MM60836.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:36:18.187Z",
+      "archivedAt": "2026-07-18T04:16:11.321Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.472Z",
-      "updatedAt": "2026-07-18T03:36:18.187Z"
+      "createdAt": "2026-07-18T04:16:11.321Z",
+      "updatedAt": "2026-07-18T04:16:11.321Z"
     },
     {
-      "id": "a0261dbd-68ab-4df4-a9bc-dbc8baff8fec",
+      "id": "4d678ecf-4e97-4908-a681-de00bf79b22d",
       "notionPageId": "3a1157fd-4777-81c0-90f2-ebfe49210626",
       "title": "Designs for Ornamental Motifs and for a Herm Supporting a Chimney Piece",
       "creator": "Moncalvo (Guglielmo Caccia)",
@@ -867,11 +867,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.274Z",
-      "updatedAt": "2026-07-18T03:39:18.274Z"
+      "createdAt": "2026-07-18T04:16:11.311Z",
+      "updatedAt": "2026-07-18T04:16:11.311Z"
     },
     {
-      "id": "654e6033-340a-414a-8541-7cd1e24dd76f",
+      "id": "a45d6f4b-8380-470a-bb21-8186ec45bf09",
       "notionPageId": "3a1157fd-4777-81c0-bb5c-c31b18cfdd61",
       "title": "Design for a Monumental Sacrament House",
       "creator": "Lorenz Lechler",
@@ -885,11 +885,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.473Z",
-      "updatedAt": "2026-07-18T03:26:14.473Z"
+      "createdAt": "2026-07-18T04:16:11.322Z",
+      "updatedAt": "2026-07-18T04:16:11.322Z"
     },
     {
-      "id": "831accfe-88f0-492b-ad30-698f57a6c413",
+      "id": "d5bf6b77-5393-4fb0-bc21-9bfbbd9c205f",
       "notionPageId": "3a1157fd-4777-81c7-a8ce-ec30f3b4b8e9",
       "title": "Design for a Panel with a Large Bundle of Flowers and Leaves and a Hanging Thin Bundle Containing Gardening Tools Inside an Ornamental Frame Decorated with Thin Garlands of Flowers and Leaves",
       "creator": "Anonymous, French, 19th century",
@@ -901,13 +901,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889282.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:36:29.606Z",
+      "archivedAt": "2026-07-18T04:16:11.325Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.480Z",
-      "updatedAt": "2026-07-18T03:36:29.606Z"
+      "createdAt": "2026-07-18T04:16:11.325Z",
+      "updatedAt": "2026-07-18T04:16:11.325Z"
     },
     {
-      "id": "07792575-f5af-424f-b1c5-91b407ef6395",
+      "id": "a9aaabe0-7b44-486e-b753-29d41f01f645",
       "notionPageId": "3a1157fd-4777-81c8-9437-e0acb31ee4d8",
       "title": "Design for the Salon of the Pleasure Pavilion, Favorita, at Ludwigsburg, 1718",
       "creator": "Donato Giuseppe Frisoni",
@@ -921,11 +921,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.474Z",
-      "updatedAt": "2026-07-18T03:26:14.474Z"
+      "createdAt": "2026-07-18T04:16:11.323Z",
+      "updatedAt": "2026-07-18T04:16:11.323Z"
     },
     {
-      "id": "524f1641-5dba-4835-9277-eb0720b4d623",
+      "id": "e0eb18ee-947c-48e5-a58b-2ccfa684fa43",
       "notionPageId": "3a1157fd-4777-81c8-aa93-f0de17c46437",
       "title": "Design for a Title Page with a Coat of Arms (blank) and Two Putti Holding a Crown",
       "creator": "Giovanni Andrea Maglioli",
@@ -939,11 +939,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.482Z",
-      "updatedAt": "2026-07-18T03:26:14.482Z"
+      "createdAt": "2026-07-18T04:16:11.326Z",
+      "updatedAt": "2026-07-18T04:16:11.326Z"
     },
     {
-      "id": "1cef80b7-4e36-4574-934c-0f4ea9be5f9b",
+      "id": "753760fc-c2ce-4efd-b0ca-7c81a39e8a34",
       "notionPageId": "3a1157fd-4777-81c9-99f8-f5a3e6f6babf",
       "title": "Spray of Flowers",
       "creator": "L. F. Duruisseau",
@@ -955,13 +955,13 @@
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1955.475/1955.475_web.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:54:00.046Z",
+      "archivedAt": "2026-07-18T04:16:11.282Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.667Z",
-      "updatedAt": "2026-07-18T03:54:00.046Z"
+      "createdAt": "2026-07-18T04:16:11.282Z",
+      "updatedAt": "2026-07-18T04:16:11.282Z"
     },
     {
-      "id": "fac94992-40ee-4bf0-a5c9-2be7b8f3e550",
+      "id": "560b3eda-5a27-4cc4-95da-2eb497fbe0ab",
       "notionPageId": "3a1157fd-4777-81d3-8af7-fec7e7e60d2a",
       "title": "Designs for an Art Nouveau Table and Chair",
       "creator": "Anonymous, French, 19th century",
@@ -973,13 +973,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP812917.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.670Z",
+      "archivedAt": "2026-07-18T04:16:11.291Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.671Z",
-      "updatedAt": "2026-07-18T03:45:44.671Z"
+      "createdAt": "2026-07-18T04:16:11.292Z",
+      "updatedAt": "2026-07-18T04:16:11.292Z"
     },
     {
-      "id": "fb053184-c73e-4af8-ac1c-6825069539a5",
+      "id": "951ef207-0215-4f17-a830-5683ddafc495",
       "notionPageId": "3a1157fd-4777-81d5-85ca-de3f6615a8e6",
       "title": "Design for a Grotesque Decoration",
       "creator": "Luzio Luzzi (also known as Luzio Romano, Luzio da Todi)",
@@ -993,11 +993,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.272Z",
-      "updatedAt": "2026-07-18T03:39:18.272Z"
+      "createdAt": "2026-07-18T04:16:11.309Z",
+      "updatedAt": "2026-07-18T04:16:11.309Z"
     },
     {
-      "id": "dedfefe8-8e78-414a-9f6d-076361b10072",
+      "id": "f09361ea-3605-4371-8ccc-e22df4f7cf43",
       "notionPageId": "3a1157fd-4777-81e2-939b-d5da086aacb5",
       "title": "Design for a Grotesque Wall Decoration",
       "creator": "Perino del Vaga (Pietro Buonaccorsi)",
@@ -1009,13 +1009,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP811055.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:54:03.609Z",
+      "archivedAt": "2026-07-18T04:16:11.301Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.264Z",
-      "updatedAt": "2026-07-18T03:54:03.609Z"
+      "createdAt": "2026-07-18T04:16:11.302Z",
+      "updatedAt": "2026-07-18T04:16:11.302Z"
     },
     {
-      "id": "16a2fa94-a416-46de-93c4-7442555a3bcf",
+      "id": "7cfb80a9-1370-4a74-86ea-49dc57d98bb4",
       "notionPageId": "3a1157fd-4777-81e6-a6ec-ea16eea9b2d5",
       "title": "Design for an Overdoor or Chimney Piece with an Armorial Trophy and the Figure of Minerva",
       "creator": "Anonymous, French, 18th century",
@@ -1026,14 +1026,14 @@
       "url": "https://www.metmuseum.org/art/collection/search/356113",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP808750.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T04:16:11.310Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.273Z",
-      "updatedAt": "2026-07-18T03:39:18.273Z"
+      "createdAt": "2026-07-18T04:16:11.311Z",
+      "updatedAt": "2026-07-18T04:16:11.311Z"
     },
     {
-      "id": "40e17b16-0e17-4288-b8f7-60cbecf89bc0",
+      "id": "1a7783d6-c409-42d6-a327-e5facb90cac2",
       "notionPageId": "3a1157fd-4777-81e9-9d65-cfb9ce861e73",
       "title": "Sketches of Snails, Flowering Plant",
       "creator": "Édouard Manet",
@@ -1047,11 +1047,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.666Z",
-      "updatedAt": "2026-07-18T03:45:44.666Z"
+      "createdAt": "2026-07-18T04:16:11.280Z",
+      "updatedAt": "2026-07-18T04:16:11.280Z"
     },
     {
-      "id": "5416197f-de9d-4172-9dd9-3607dcbb34dd",
+      "id": "1e77a5e6-8252-4fb9-93e6-1a425270457a",
       "notionPageId": "3a1157fd-4777-81f4-b3e4-c18fd504a84b",
       "title": "Design for a Wall Decorated with Grotesque",
       "creator": "Giuseppe Bernardino Bison",
@@ -1065,11 +1065,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-18T03:39:18.271Z",
-      "updatedAt": "2026-07-18T03:39:18.271Z"
+      "createdAt": "2026-07-18T04:16:11.308Z",
+      "updatedAt": "2026-07-18T04:16:11.308Z"
     },
     {
-      "id": "f263cdf4-e2df-4fde-86b9-b67840824136",
+      "id": "28d0ac8c-62dc-452c-ae8d-dc21ca6ce742",
       "notionPageId": "3a1157fd-4777-81f6-81c4-c94cbd4e80df",
       "title": "Cover design for \"Le Jour et la Nuit\"",
       "creator": "Félix Bracquemond",
@@ -1081,13 +1081,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-39285-001.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:36:05.627Z",
+      "archivedAt": "2026-07-18T04:16:11.320Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:26:14.465Z",
-      "updatedAt": "2026-07-18T03:36:05.627Z"
+      "createdAt": "2026-07-18T04:16:11.320Z",
+      "updatedAt": "2026-07-18T04:16:11.320Z"
     },
     {
-      "id": "641f51aa-04f2-49f5-95bf-f97abb466044",
+      "id": "5ed55108-687f-4d44-af71-cddaf2c210e2",
       "notionPageId": "3a1157fd-4777-81fa-82bf-e45d91c28b91",
       "title": "Bell-Flower and Dragonfly, from an untitled series of large flowers",
       "creator": "Katsushika Hokusai",
@@ -1098,14 +1098,14 @@
       "url": "https://www.artic.edu/artworks/25129",
       "imageUrl": "https://www.artic.edu/iiif/2/960360f3-def7-27e5-6102-6fea8815ff61/full/843,/0/default.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T04:16:11.277Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.665Z",
-      "updatedAt": "2026-07-18T03:45:44.665Z"
+      "createdAt": "2026-07-18T04:16:11.278Z",
+      "updatedAt": "2026-07-18T04:16:11.278Z"
     },
     {
-      "id": "9f935faa-ce9b-4b89-b4af-4403b6f8142d",
+      "id": "b6289e4b-b4fa-4e7e-989b-2e7577665aed",
       "notionPageId": "3a1157fd-4777-81fd-a7fd-cff6e9e324cc",
       "title": "Design for a Chair Seat Cover with Floral Motifs",
       "creator": "Anonymous, French, 19th century",
@@ -1117,13 +1117,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP889275.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.672Z",
+      "archivedAt": "2026-07-18T04:16:11.298Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.673Z",
-      "updatedAt": "2026-07-18T03:45:44.673Z"
+      "createdAt": "2026-07-18T04:16:11.298Z",
+      "updatedAt": "2026-07-18T04:16:11.298Z"
     },
     {
-      "id": "d6d53f9e-156c-41e8-a2ec-7112f9444707",
+      "id": "db92c177-d4d3-45dc-971a-b40caa2bb5d5",
       "notionPageId": "3a1157fd-4777-81ff-b1f5-edcf1ca31a42",
       "title": "Study of a Jaguar",
       "creator": "John Macallan Swan",
@@ -1135,10 +1135,10 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DT4924.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-18T03:45:44.672Z",
+      "archivedAt": "2026-07-18T04:16:11.295Z",
       "notes": "",
-      "createdAt": "2026-07-18T03:45:44.672Z",
-      "updatedAt": "2026-07-18T03:45:44.672Z"
+      "createdAt": "2026-07-18T04:16:11.295Z",
+      "updatedAt": "2026-07-18T04:16:11.295Z"
     }
   ]
 }
