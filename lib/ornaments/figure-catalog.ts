@@ -5,6 +5,7 @@ export type OrnamentFigure = {
   index: number;
   figLabel: string;
   catalogCode: string;
+  titleLabel: string;
   dateLabel: string;
 };
 
@@ -23,6 +24,39 @@ function formatDateLabel(year: string) {
   }
 
   return trimmed;
+}
+
+/** Short plate captions, closer to catalog index labels than full museum titles. */
+export function simplifyCaptionTitle(title: string) {
+  let simplified = title.trim().replace(/\s+/g, " ");
+
+  // Drop trailing parentheticals: "(German, 17th century)", "(… pl. 38)"
+  simplified = simplified.replace(/(?:\s*\([^)]*\))+\s*$/g, "").trim();
+
+  // "Design for an Alcove…" → "Alcove…"
+  simplified = simplified
+    .replace(/^Designs?\s+for\s+(?:an?\s+|the\s+)?/i, "")
+    .trim();
+
+  // Keep the object noun, drop long descriptive tails.
+  // "Alcove with a Coat of Arms…" → "Alcove"
+  // "Ornament Design with Vases" → "Ornament Design"
+  const withMatch = simplified.match(
+    /^(.+?)\s+with\s+(?:a|an|the)\s+/i,
+  );
+  if (withMatch?.[1]) {
+    simplified = withMatch[1].trim();
+  } else {
+    const genericWith = simplified.match(/^(.+?)\s+with\s+/i);
+    if (genericWith?.[1] && simplified.length > 28) {
+      simplified = genericWith[1].trim();
+    }
+  }
+
+  // "Chandelier … Motifs" leftovers
+  simplified = simplified.replace(/\s+Motifs?$/i, "").trim();
+
+  return simplified || title.trim();
 }
 
 /** Assign stable A.1 / B.2 style codes by era grouping. */
@@ -50,6 +84,7 @@ export function toOrnamentFigures(
       index,
       figLabel: formatFigLabel(index),
       catalogCode: `${letter}.${next}`,
+      titleLabel: simplifyCaptionTitle(source.title),
       dateLabel: formatDateLabel(source.year),
     };
   });

@@ -128,7 +128,7 @@ export function SourceList({ sources }: SourceListProps) {
                 <span>{figure.catalogCode}</span>
               </p>
               <h2 className="max-w-[16rem] font-serif text-sm leading-snug tracking-[-0.03em] text-ink sm:text-[0.95rem]">
-                {figure.source.title}
+                {figure.titleLabel}
               </h2>
               <p className="font-serif text-xs italic tracking-[-0.02em] text-ink/55 sm:text-sm">
                 {figure.dateLabel}
