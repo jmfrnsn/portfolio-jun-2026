@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
+import { OrnamentImage } from "@/components/ornaments/OrnamentImage";
 import { toOrnamentFigures } from "@/lib/ornaments/figure-catalog";
 import type { ExportedOrnamentSource } from "@/lib/ornaments/sources-export";
 
@@ -110,7 +110,7 @@ export function SourceList({ sources }: SourceListProps) {
             </p>
             <div className="relative flex aspect-square items-center justify-center overflow-hidden bg-transparent">
               {figure.source.imageUrl ? (
-                <Image
+                <OrnamentImage
                   src={figure.source.imageUrl}
                   alt={figure.source.title}
                   fill

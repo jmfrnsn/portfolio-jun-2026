@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { OrnamentImage } from "@/components/ornaments/OrnamentImage";
 import { OrnamentLayout } from "@/components/ornaments/OrnamentLayout";
 import {
   getExportedSource,
@@ -67,7 +67,7 @@ export default async function OrnamentSourceDetailPage({
       <article className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14">
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-highlight">
           {source.imageUrl ? (
-            <Image
+            <OrnamentImage
               src={source.imageUrl}
               alt={source.title}
               fill
