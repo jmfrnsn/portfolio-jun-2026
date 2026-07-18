@@ -4,7 +4,9 @@ import Image from "next/image";
 import { motion, useMotionValue } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { useEditorSurface } from "@/components/editor/EditorContext";
 import { getBookCoverUrl } from "@/lib/book-cover";
+import { readEditorStorage, writeEditorStorage } from "@/lib/editor-storage";
 import {
   DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS,
   type LibraryHeroCardPlacement,
@@ -23,6 +25,7 @@ import {
 
 const LIBRARY_RED = "#d7361f";
 const HERO_CARD_WIDTH = "12.5rem";
+const LIBRARY_EDITOR_STORAGE_KEY = "portfolio-editor:v1:library";
 
 function cloneDefaultLibraryHeroCardPlacements(): LibraryHeroCardPlacement[] {
   return DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS.map((placement) => ({ ...placement }));
@@ -249,7 +252,7 @@ function PlacementEditorControl({
   );
 }
 
-function LibraryHeroPlacementEditor({
+function LibraryHeroPlacementPanel({
   entries,
   placements,
   selectedIndex,
@@ -264,7 +267,6 @@ function LibraryHeroPlacementEditor({
   onPlacementChange: (index: number, placement: LibraryHeroCardPlacement) => void;
   onReset: () => void;
 }) {
-  const [open, setOpen] = useState(false);
   const [bakeStatus, setBakeStatus] = useState<
     "idle" | "saving" | "saved" | "error"
   >("idle");
@@ -295,103 +297,79 @@ function LibraryHeroPlacementEditor({
   };
 
   return (
-    <div className="pointer-events-none fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
-      <div className="pointer-events-auto flex flex-col items-end gap-1.5">
-        {open ? (
-          <div className="w-[min(calc(100vw-2rem),22rem)] rounded-md border border-ink/10 bg-paper/95 p-3 shadow-sm backdrop-blur-sm">
-            <div className="mb-3 flex items-start justify-between gap-3">
-              <div>
-                <p className="font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/60">
-                  Card Layout
-                </p>
-                <p className="mt-1 truncate font-serif text-sm tracking-[-0.04375rem] text-ink">
-                  {entry.name}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="cursor-pointer font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/40 transition-colors hover:text-ink"
-              >
-                Close
-              </button>
-            </div>
+    <div className="grid gap-3">
+      <div>
+        <p className="font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/60">
+          Card Layout
+        </p>
+        <p className="mt-1 truncate font-serif text-sm tracking-[-0.04375rem] text-ink">
+          {entry.name}
+        </p>
+      </div>
 
-            <select
-              value={selectedIndex}
-              onChange={(event) => onSelect(Number(event.target.value))}
-              className="mb-3 w-full rounded-sm border border-ink/10 bg-paper px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink"
-            >
-              {entries.map((item, index) => (
-                <option key={item.name} value={index}>
-                  {String(index + 1).padStart(2, "0")} {item.name}
-                </option>
-              ))}
-            </select>
+      <select
+        value={selectedIndex}
+        onChange={(event) => onSelect(Number(event.target.value))}
+        className="w-full rounded-sm border border-ink/10 bg-paper px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink"
+      >
+        {entries.map((item, index) => (
+          <option key={item.name} value={index}>
+            {String(index + 1).padStart(2, "0")} {item.name}
+          </option>
+        ))}
+      </select>
 
-            <p className="mb-3 rounded-sm border border-ink/10 bg-highlight/40 p-2 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink/45">
-              Drag cards on the page, or tune the selected card below.
-            </p>
+      <p className="rounded-sm border border-ink/10 bg-highlight/40 p-2 font-mono text-[10px] font-extralight uppercase tracking-[0.08em] text-ink/45">
+        Drag cards on the page, or tune the selected card below.
+      </p>
 
-            <div className="grid gap-2 border-t border-ink/10 pt-3">
-              <PlacementEditorControl
-                label="Left %"
-                value={placement.left}
-                min={-30}
-                max={110}
-                step={0.25}
-                onChange={(value) => update("left", value)}
-              />
-              <PlacementEditorControl
-                label="Top %"
-                value={placement.top}
-                min={-30}
-                max={90}
-                step={0.25}
-                onChange={(value) => update("top", value)}
-              />
-              <PlacementEditorControl
-                label="Rotate"
-                value={placement.rotate}
-                min={-45}
-                max={45}
-                onChange={(value) => update("rotate", value)}
-              />
-            </div>
+      <div className="grid gap-2 border-t border-ink/10 pt-3">
+        <PlacementEditorControl
+          label="Left %"
+          value={placement.left}
+          min={-30}
+          max={110}
+          step={0.25}
+          onChange={(value) => update("left", value)}
+        />
+        <PlacementEditorControl
+          label="Top %"
+          value={placement.top}
+          min={-30}
+          max={90}
+          step={0.25}
+          onChange={(value) => update("top", value)}
+        />
+        <PlacementEditorControl
+          label="Rotate"
+          value={placement.rotate}
+          min={-45}
+          max={45}
+          onChange={(value) => update("rotate", value)}
+        />
+      </div>
 
-            <div className="mt-4 flex justify-between gap-2">
-              <button
-                type="button"
-                onClick={onReset}
-                className="cursor-pointer font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/40 transition-colors hover:text-ink"
-              >
-                Reset
-              </button>
-              <button
-                type="button"
-                onClick={bakePlacements}
-                disabled={bakeStatus === "saving"}
-                className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {bakeStatus === "saving"
-                  ? "Baking"
-                  : bakeStatus === "saved"
-                    ? "Baked"
-                    : bakeStatus === "error"
-                      ? "Error"
-                      : "Bake Layout"}
-              </button>
-            </div>
-          </div>
-        ) : null}
-
+      <div className="flex justify-between gap-2 border-t border-ink/10 pt-3">
         <button
           type="button"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          className="cursor-pointer rounded-md border border-ink/10 bg-paper/80 px-2.5 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/45 backdrop-blur-sm transition-colors hover:border-ink/20 hover:bg-paper hover:text-ink/70"
+          onClick={onReset}
+          className="cursor-pointer font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/40 transition-colors hover:text-ink"
         >
-          Card Layout
+          Reset
+        </button>
+        <button
+          type="button"
+          onClick={bakePlacements}
+          disabled={bakeStatus === "saving"}
+          className="cursor-pointer rounded-sm border border-ink/10 px-2 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/55 transition-colors hover:bg-highlight hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {bakeStatus === "saving"
+            ? "Baking"
+            : bakeStatus === "saved"
+              ? "Baked"
+              : bakeStatus === "error"
+                ? "Error"
+                : "Bake Layout"}
         </button>
       </div>
     </div>
@@ -402,7 +380,10 @@ function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
   const heroRef = useRef<HTMLElement>(null);
   const heroEntries = entries.slice(0, DEFAULT_LIBRARY_HERO_CARD_PLACEMENTS.length);
   const [placements, setPlacements] = useState<LibraryHeroCardPlacement[]>(() =>
-    cloneDefaultLibraryHeroCardPlacements(),
+    readEditorStorage(
+      LIBRARY_EDITOR_STORAGE_KEY,
+      cloneDefaultLibraryHeroCardPlacements(),
+    ),
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -437,6 +418,31 @@ function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
     setSelectedIndex(0);
   };
 
+  useEffect(() => {
+    writeEditorStorage(LIBRARY_EDITOR_STORAGE_KEY, placements);
+  }, [placements]);
+
+  const editorSurface = useMemo(
+    () => ({
+      id: "library-card-layout",
+      title: "Library Cards",
+      group: "Page",
+      renderPanel: () => (
+        <LibraryHeroPlacementPanel
+          entries={heroEntries}
+          placements={placements}
+          selectedIndex={selectedIndex}
+          onSelect={setSelectedIndex}
+          onPlacementChange={updatePlacement}
+          onReset={resetPlacements}
+        />
+      ),
+    }),
+    [heroEntries, placements, selectedIndex],
+  );
+
+  useEditorSurface(editorSurface);
+
   return (
     <section
       ref={heroRef}
@@ -460,14 +466,6 @@ function LibraryHero({ entries }: { entries: LibraryEntry[] }) {
           />
         ))}
       </div>
-      <LibraryHeroPlacementEditor
-        entries={heroEntries}
-        placements={placements}
-        selectedIndex={selectedIndex}
-        onSelect={setSelectedIndex}
-        onPlacementChange={updatePlacement}
-        onReset={resetPlacements}
-      />
     </section>
   );
 }
