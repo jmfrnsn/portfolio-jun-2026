@@ -28,25 +28,49 @@ function stubSource(
   };
 }
 
-test("toOrnamentFigures assigns fig labels and era codes", () => {
+test("toOrnamentFigures sorts by period then assigns fig labels", () => {
   const figures = toOrnamentFigures([
-    stubSource({ id: "1", era: "Baroque (17th c.)", year: "1652–1725" }),
-    stubSource({ id: "2", era: "Baroque (17th c.)", year: "17th century" }),
     stubSource({
       id: "3",
       era: "19th-Century Revival & Historicism",
       year: "19th century",
+      title: "Later plate",
+    }),
+    stubSource({
+      id: "1",
+      era: "Baroque (17th c.)",
+      year: "1652–1725",
+      title: "Earlier baroque",
+    }),
+    stubSource({
+      id: "2",
+      era: "Baroque (17th c.)",
+      year: "17th century",
+      title: "Later baroque",
+    }),
+    stubSource({
+      id: "0",
+      era: "Renaissance & Earlier (pre-1600)",
+      year: "1540 after",
+      title: "Renaissance plate",
     }),
   ]);
 
+  // Century-only years sort to mid-century (1650), before a 1652 start date.
+  assert.deepEqual(
+    figures.map((figure) => figure.source.id),
+    ["0", "2", "1", "3"],
+  );
   assert.equal(figures[0]?.figLabel, "(Fig.01)");
   assert.equal(figures[1]?.figLabel, "(Fig.02)");
   assert.equal(figures[2]?.figLabel, "(Fig.03)");
-  assert.equal(figures[0]?.catalogCode, "B.1");
-  assert.equal(figures[1]?.catalogCode, "B.2");
-  assert.equal(figures[2]?.catalogCode, "A.1");
-  assert.equal(figures[0]?.dateLabel, "*(1652–1725)");
+  assert.equal(figures[3]?.figLabel, "(Fig.04)");
+  assert.equal(figures[0]?.catalogCode, "A.1");
+  assert.equal(figures[1]?.catalogCode, "B.1");
+  assert.equal(figures[2]?.catalogCode, "B.2");
+  assert.equal(figures[3]?.catalogCode, "C.1");
   assert.equal(figures[1]?.dateLabel, "*(17th century)");
+  assert.equal(figures[2]?.dateLabel, "*(1652–1725)");
 });
 
 test("simplifyCaptionTitle shortens museum titles for the index", () => {

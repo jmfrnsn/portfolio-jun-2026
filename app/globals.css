@@ -6,6 +6,8 @@
   --ink: #27301c;
   --highlight: #f2f2e9;
   --highlight-cursor: #e6e6dc;
+  /* Vermillion accent for catalog fig labels (Flint-card reference). */
+  --fig: #e24a3c;
 }
 
 @theme inline {
@@ -14,6 +16,7 @@
   --color-ink: var(--ink);
   --color-highlight: var(--highlight);
   --color-highlight-cursor: var(--highlight-cursor);
+  --color-fig: var(--fig);
   --font-display: var(--font-display);
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
@@ -71,6 +74,41 @@ body {
   .sliding-row-highlight {
     transition: none;
   }
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fiber paper + fine grain for ornament catalog pages */
+.ornament-paper {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--paper);
+}
+
+.ornament-paper-noise {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.15 0 0 0 0 0.14 0 0 0 0 0.1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.ornament-paper > *:not(.ornament-paper-noise) {
+  position: relative;
+  z-index: 2;
+}
+
+.ornament-plate-image {
+  mix-blend-mode: multiply;
 }
 
 /* Newspaper-style grainy ink bleed on about body lines */

@@ -65,7 +65,7 @@ export default async function OrnamentSourceDetailPage({
       </div>
 
       <article className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14">
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-highlight">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-transparent">
           {source.imageUrl ? (
             <OrnamentImage
               src={source.imageUrl}
@@ -73,7 +73,7 @@ export default async function OrnamentSourceDetailPage({
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
+              className="object-contain"
             />
           ) : (
             <div className="flex h-full items-center justify-center font-serif text-sm text-ink/40">

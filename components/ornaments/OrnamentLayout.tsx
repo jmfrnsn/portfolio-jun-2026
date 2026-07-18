@@ -8,8 +8,9 @@ type OrnamentLayoutProps = {
 
 export function OrnamentLayout({ children, title }: OrnamentLayoutProps) {
   return (
-    <div className="bg-paper text-ink">
-      <div className="mx-auto w-full max-w-[72rem] px-5 pb-24 pt-28 sm:px-8 md:px-10 md:pb-32 md:pt-36">
+    <div className="ornament-paper text-ink">
+      <div className="ornament-paper-noise" aria-hidden />
+      <div className="mx-auto w-full max-w-[78rem] px-5 pb-24 pt-28 sm:px-8 md:px-10 md:pb-32 md:pt-36">
         {title ? (
           <header className="mb-10 md:mb-14">
             <h1 className="font-serif text-2xl tracking-[-0.05em] text-ink md:text-3xl">
