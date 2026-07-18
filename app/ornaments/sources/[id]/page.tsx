@@ -51,26 +51,16 @@ export default async function OrnamentSourceDetailPage({
     { label: "Era", value: source.era },
     { label: "Region", value: source.region },
     { label: "Collection", value: source.type },
-    {
-      label: "Status",
-      value: source.notionStatus === "Archived" ? "Archived" : source.status,
-    },
   ].filter((entry) => Boolean(entry.value));
 
   return (
-    <OrnamentLayout
-      title={source.title}
-      description={[source.creator, source.year, source.era]
-        .filter(Boolean)
-        .join(" · ")}
-      activeHref="/ornaments/sources"
-    >
+    <OrnamentLayout title={source.title}>
       <div className="mb-8">
         <Link
-          href="/ornaments/sources"
-          className="font-mono text-sm font-extralight uppercase tracking-[0.08em] text-ink/60 transition-colors hover:text-ink"
+          href="/ornaments"
+          className="font-serif text-sm tracking-[-0.03em] text-ink/50 transition-colors hover:text-ink"
         >
-          ← Sources
+          ← Catalog
         </Link>
       </div>
 
@@ -86,7 +76,7 @@ export default async function OrnamentSourceDetailPage({
               className="object-cover"
             />
           ) : (
-            <div className="flex h-full items-center justify-center font-mono text-xs uppercase tracking-[0.08em] text-ink/40">
+            <div className="flex h-full items-center justify-center font-serif text-sm text-ink/40">
               No image
             </div>
           )}
@@ -96,7 +86,7 @@ export default async function OrnamentSourceDetailPage({
           <dl className="flex flex-col gap-4">
             {meta.map((entry) => (
               <div key={entry.label} className="flex flex-col gap-1">
-                <dt className="font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink/40">
+                <dt className="font-serif text-xs tracking-[-0.02em] text-ink/40">
                   {entry.label}
                 </dt>
                 <dd className="font-serif text-base text-ink">{entry.value}</dd>
@@ -104,31 +94,16 @@ export default async function OrnamentSourceDetailPage({
             ))}
           </dl>
 
-          {source.notes ? (
-            <div className="flex flex-col gap-2 border-t border-ink/10 pt-6">
-              <h2 className="font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink/40">
-                Notes
-              </h2>
-              <p className="font-serif text-base leading-relaxed text-ink/80">
-                {source.notes}
-              </p>
-            </div>
-          ) : null}
-
           {source.url ? (
             <a
               href={source.url}
               target="_blank"
               rel="noreferrer"
-              className="font-mono text-sm font-extralight uppercase tracking-[0.08em] text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink"
+              className="font-serif text-sm tracking-[-0.03em] text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink"
             >
               View object →
             </a>
           ) : null}
-
-          <p className="border-t border-ink/10 pt-6 font-serif text-base leading-relaxed text-ink/60">
-            Linked motifs will appear here after this source is digested.
-          </p>
         </div>
       </article>
     </OrnamentLayout>

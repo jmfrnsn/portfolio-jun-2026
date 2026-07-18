@@ -22,11 +22,7 @@ export default async function OrnamentAdminPage() {
   const authenticated = verifyAdminSessionToken(token);
 
   return (
-    <OrnamentLayout
-      title="Access"
-      description="Private catalog controls. This page is not linked from the public site."
-      activeHref="/ornaments"
-    >
+    <OrnamentLayout title="Access">
       <OrnamentAdminLoginForm initiallyAuthenticated={authenticated} />
     </OrnamentLayout>
   );

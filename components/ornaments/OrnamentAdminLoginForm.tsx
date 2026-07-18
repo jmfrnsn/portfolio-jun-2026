@@ -37,7 +37,7 @@ export function OrnamentAdminLoginForm({
 
       setAuthenticated(true);
       setSecret("");
-      router.push("/ornaments/sources");
+      router.push("/ornaments");
       router.refresh();
     } catch (loginError) {
       setError(
@@ -67,14 +67,14 @@ export function OrnamentAdminLoginForm({
     return (
       <div className="flex max-w-sm flex-col gap-4">
         <p className="font-serif text-base leading-relaxed text-ink/70">
-          Signed in. Archive controls are available on the sources grid.
+          Signed in. Archive buttons are visible on each figure in the catalog.
         </p>
         <div className="flex flex-wrap gap-x-6 gap-y-2">
           <a
-            href="/ornaments/sources"
+            href="/ornaments"
             className="font-mono text-sm font-extralight uppercase tracking-[0.08em] text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink"
           >
-            Sources →
+            Catalog →
           </a>
           <button
             type="button"

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "counts": {
     "total": 63,
-    "active": 42,
-    "archived": 21
+    "active": 21,
+    "archived": 42
   },
   "sources": [
     {
@@ -126,11 +126,11 @@
       "url": "https://www.clevelandart.org/art/1952.291",
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1952.291/1952.291_web.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:52:15.091Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.668Z",
-      "updatedAt": "2026-07-18T03:45:44.668Z"
+      "updatedAt": "2026-07-18T03:52:15.091Z"
     },
     {
       "id": "83cf1458-b5e4-4d4c-94b9-3cca02151ec9",
@@ -144,11 +144,11 @@
       "url": "https://www.clevelandart.org/art/1968.38",
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1968.38/1968.38_web.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:52:23.577Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.666Z",
-      "updatedAt": "2026-07-18T03:45:44.666Z"
+      "updatedAt": "2026-07-18T03:52:23.577Z"
     },
     {
       "id": "5fe72c65-c489-40b9-8dc1-ba5c7b87fb81",
@@ -162,11 +162,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/344680",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP810061.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:12.572Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.273Z",
-      "updatedAt": "2026-07-18T03:39:18.273Z"
+      "updatedAt": "2026-07-18T03:53:12.572Z"
     },
     {
       "id": "185c8704-adf6-47c3-b71c-5b86eddf478b",
@@ -180,11 +180,11 @@
       "url": "https://www.artic.edu/artworks/56236",
       "imageUrl": "https://www.artic.edu/iiif/2/e22f4909-4ec3-fd7b-3959-eb8529baccce/full/843,/0/default.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:54:17.961Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.664Z",
-      "updatedAt": "2026-07-18T03:45:44.664Z"
+      "updatedAt": "2026-07-18T03:54:17.961Z"
     },
     {
       "id": "68d502f3-9b6f-42a9-9ad0-444ff5cb7346",
@@ -198,11 +198,11 @@
       "url": "https://www.clevelandart.org/art/1952.287",
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1952.287/1952.287_web.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:14.348Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.669Z",
-      "updatedAt": "2026-07-18T03:45:44.669Z"
+      "updatedAt": "2026-07-18T03:53:14.348Z"
     },
     {
       "id": "cc0cc37f-3c30-46ab-abe9-b7f488524307",
@@ -252,11 +252,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/407173",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804961.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:54:54.824Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.263Z",
-      "updatedAt": "2026-07-18T03:39:18.263Z"
+      "updatedAt": "2026-07-18T03:54:54.824Z"
     },
     {
       "id": "e8a3bb10-a0c5-45f1-9288-05cb4aa0864a",
@@ -270,11 +270,11 @@
       "url": "https://www.clevelandart.org/art/1952.289",
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1952.289/1952.289_web.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:15.389Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.670Z",
-      "updatedAt": "2026-07-18T03:45:44.670Z"
+      "updatedAt": "2026-07-18T03:53:15.389Z"
     },
     {
       "id": "e287d16a-0dc7-4a77-a1c7-0546c9a7f726",
@@ -306,11 +306,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/407174",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804962.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:18.186Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.264Z",
-      "updatedAt": "2026-07-18T03:39:18.264Z"
+      "updatedAt": "2026-07-18T03:53:18.186Z"
     },
     {
       "id": "d62282cd-b582-4ae2-8ff4-82aecd08d5e6",
@@ -342,11 +342,11 @@
       "url": "https://www.clevelandart.org/art/2019.67",
       "imageUrl": "https://openaccess-cdn.clevelandart.org/2019.67/2019.67_web.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:21.867Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.667Z",
-      "updatedAt": "2026-07-18T03:45:44.667Z"
+      "updatedAt": "2026-07-18T03:53:21.867Z"
     },
     {
       "id": "612e7e37-a068-466c-86b8-2a97000ee94c",
@@ -378,11 +378,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/407168",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804953.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:54:44.399Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.270Z",
-      "updatedAt": "2026-07-18T03:39:18.270Z"
+      "updatedAt": "2026-07-18T03:54:44.399Z"
     },
     {
       "id": "b6ef5794-dfac-473d-9d51-918a4d3ef087",
@@ -396,11 +396,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/407177",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP804966.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:37.238Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.259Z",
-      "updatedAt": "2026-07-18T03:39:18.259Z"
+      "updatedAt": "2026-07-18T03:53:37.238Z"
     },
     {
       "id": "80abc083-0bd7-4b72-9a69-09239dc6abc9",
@@ -414,11 +414,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/386753",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP806988.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:34.692Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.277Z",
-      "updatedAt": "2026-07-18T03:39:18.277Z"
+      "updatedAt": "2026-07-18T03:53:34.692Z"
     },
     {
       "id": "11c8e20d-a938-4c3e-8764-9d273c8e140f",
@@ -432,11 +432,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/360503",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP819311.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:54:46.508Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.278Z",
-      "updatedAt": "2026-07-18T03:39:18.278Z"
+      "updatedAt": "2026-07-18T03:54:46.508Z"
     },
     {
       "id": "83b95139-ca00-4a35-b7a9-714101484a77",
@@ -468,11 +468,11 @@
       "url": "https://www.clevelandart.org/art/1928.120",
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1928.120/1928.120_web.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:38.103Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.667Z",
-      "updatedAt": "2026-07-18T03:45:44.667Z"
+      "updatedAt": "2026-07-18T03:53:38.103Z"
     },
     {
       "id": "6fef9ce4-e836-404f-9341-ce24afbfbc1d",
@@ -486,11 +486,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/346327",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP808748.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:42.119Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.274Z",
-      "updatedAt": "2026-07-18T03:39:18.274Z"
+      "updatedAt": "2026-07-18T03:53:42.119Z"
     },
     {
       "id": "04ea42a7-c07b-4e76-bb6d-2d4a10296fa6",
@@ -522,11 +522,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/459185",
       "imageUrl": "https://images.metmuseum.org/CRDImages/rl/original/DP324211.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:44.535Z",
       "notes": "",
       "createdAt": "2026-07-18T03:26:14.474Z",
-      "updatedAt": "2026-07-18T03:26:14.474Z"
+      "updatedAt": "2026-07-18T03:53:44.535Z"
     },
     {
       "id": "d830fe4e-61e0-458d-8904-04672c882e11",
@@ -558,11 +558,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/676829",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP860287.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:51.294Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.276Z",
-      "updatedAt": "2026-07-18T03:39:18.276Z"
+      "updatedAt": "2026-07-18T03:53:51.294Z"
     },
     {
       "id": "2aa9530d-0f14-4a45-abb0-e5c6b8172bb4",
@@ -648,11 +648,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/348032",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP802347.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:55.045Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.276Z",
-      "updatedAt": "2026-07-18T03:39:18.276Z"
+      "updatedAt": "2026-07-18T03:53:55.045Z"
     },
     {
       "id": "94eed43f-d546-4644-aa1b-01767e041233",
@@ -720,11 +720,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/369071",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP829114.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:53:53.661Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.276Z",
-      "updatedAt": "2026-07-18T03:39:18.276Z"
+      "updatedAt": "2026-07-18T03:53:53.661Z"
     },
     {
       "id": "666ee187-eead-4b8d-9ac5-2c7f12954611",
@@ -954,11 +954,11 @@
       "url": "https://www.clevelandart.org/art/1955.475",
       "imageUrl": "https://openaccess-cdn.clevelandart.org/1955.475/1955.475_web.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:54:00.046Z",
       "notes": "",
       "createdAt": "2026-07-18T03:45:44.667Z",
-      "updatedAt": "2026-07-18T03:45:44.667Z"
+      "updatedAt": "2026-07-18T03:54:00.046Z"
     },
     {
       "id": "fac94992-40ee-4bf0-a5c9-2be7b8f3e550",
@@ -1008,11 +1008,11 @@
       "url": "https://www.metmuseum.org/art/collection/search/346297",
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP811055.jpg",
       "status": "to_read",
-      "notionStatus": "Active",
-      "archivedAt": null,
+      "notionStatus": "Archived",
+      "archivedAt": "2026-07-18T03:54:03.609Z",
       "notes": "",
       "createdAt": "2026-07-18T03:39:18.264Z",
-      "updatedAt": "2026-07-18T03:39:18.264Z"
+      "updatedAt": "2026-07-18T03:54:03.609Z"
     },
     {
       "id": "16a2fa94-a416-46de-93c4-7442555a3bcf",

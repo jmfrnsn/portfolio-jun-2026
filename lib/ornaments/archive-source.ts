@@ -4,12 +4,16 @@ import {
   unarchiveNotionSourcePage,
 } from "./notion-sync";
 import { dispatchOrnamentSyncWorkflow } from "./notion-webhook";
-import { getExportedSource } from "./sources-export";
+import {
+  getExportedSource,
+  patchExportedSourceArchiveState,
+} from "./sources-export";
 
 export type ArchiveSourceResult = {
   id: string;
   archived: boolean;
   dispatched: boolean;
+  exportPatched: boolean;
 };
 
 async function syncLocalArchiveState(id: string, archived: boolean) {
@@ -79,6 +83,7 @@ export async function archiveCatalogSource(
 
   await archiveNotionSourcePage(source.notionPageId!);
   await syncLocalArchiveState(id, true);
+  const exportPatched = patchExportedSourceArchiveState(id, true);
 
   const dispatched = await maybeDispatchSync({
     source: "website-archive",
@@ -86,7 +91,7 @@ export async function archiveCatalogSource(
     notionPageId: source.notionPageId,
   });
 
-  return { id, archived: true, dispatched };
+  return { id, archived: true, dispatched, exportPatched };
 }
 
 export async function unarchiveCatalogSource(
@@ -100,6 +105,7 @@ export async function unarchiveCatalogSource(
 
   await unarchiveNotionSourcePage(source.notionPageId!);
   await syncLocalArchiveState(id, false);
+  const exportPatched = patchExportedSourceArchiveState(id, false);
 
   const dispatched = await maybeDispatchSync({
     source: "website-unarchive",
@@ -107,5 +113,5 @@ export async function unarchiveCatalogSource(
     notionPageId: source.notionPageId,
   });
 
-  return { id, archived: false, dispatched };
+  return { id, archived: false, dispatched, exportPatched };
 }

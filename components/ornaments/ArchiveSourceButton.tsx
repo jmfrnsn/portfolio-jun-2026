@@ -29,6 +29,7 @@ async function postArchiveAction(sourceId: string, archived: boolean) {
   const body = (await response.json().catch(() => ({}))) as ApiErrorBody & {
     ok?: boolean;
     dispatched?: boolean;
+    exportPatched?: boolean;
   };
 
   if (!response.ok) {
@@ -54,37 +55,30 @@ export function ArchiveSourceButton({
   const [status, setStatus] = useState<"active" | "archived">(
     archived ? "archived" : "active",
   );
-  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const isArchived = status === "archived";
   const actionLabel = isArchived ? "Restore" : "Archive";
 
   async function runAction() {
-    const confirmMessage = isArchived
-      ? "Restore this source to the active catalog?"
-      : "Archive this source in Notion and move it out of the active list?";
+    if (isPending) return;
 
-    if (!window.confirm(confirmMessage)) {
-      return;
-    }
+    const previousArchived = isArchived;
+    const nextArchived = !isArchived;
 
     setError(null);
-    setMessage(null);
     setIsPending(true);
+    setStatus(nextArchived ? "archived" : "active");
+    // Leave the grid immediately; roll back only if the request fails.
+    onCompleted?.(nextArchived);
 
     try {
-      const result = await postArchiveAction(sourceId, isArchived);
-      const nextArchived = !isArchived;
-      setStatus(nextArchived ? "archived" : "active");
-      setMessage(
-        result.dispatched
-          ? `${actionLabel}d. Sync queued — catalog refreshes shortly.`
-          : `${actionLabel}d in Notion. Catalog refreshes on the next sync.`,
-      );
-      onCompleted?.(nextArchived);
+      await postArchiveAction(sourceId, previousArchived);
       router.refresh();
     } catch (actionError) {
+      setStatus(previousArchived ? "archived" : "active");
+      onCompleted?.(previousArchived);
+
       const code =
         actionError && typeof actionError === "object" && "code" in actionError
           ? String((actionError as { code?: string }).code)
@@ -124,15 +118,10 @@ export function ArchiveSourceButton({
           void runAction();
         }}
         disabled={isPending}
-        className="bg-paper/95 px-2.5 py-1.5 font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink transition-opacity disabled:cursor-wait disabled:opacity-50"
+        className="border border-ink/20 bg-paper px-2.5 py-1.5 font-mono text-xs font-extralight uppercase tracking-[0.08em] text-ink shadow-sm transition-opacity hover:border-ink disabled:cursor-wait disabled:opacity-50"
       >
         {isPending ? `${actionLabel}…` : actionLabel}
       </button>
-      {message ? (
-        <p className="max-w-[12rem] bg-paper/95 px-2 py-1 text-right font-serif text-xs leading-snug text-ink/65">
-          {message}
-        </p>
-      ) : null}
       {error ? (
         <p className="max-w-[12rem] bg-paper/95 px-2 py-1 text-right font-serif text-xs leading-snug text-ink/80">
           {error}
