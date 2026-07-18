@@ -7,7 +7,7 @@
   },
   "sources": [
     {
-      "id": "01d463ef-ec25-424b-aaf3-24dcea5dd51e",
+      "id": "c740dcfb-68b8-44fe-8ff6-71aa2ae7d3db",
       "notionPageId": "3a0157fd-4777-810b-a955-fff3fac81bd3",
       "title": "Ornamental design",
       "creator": "Paul Flindt",
@@ -19,13 +19,13 @@
       "imageUrl": "https://www.artic.edu/iiif/2/c979223c-580a-70dc-e8cc-f3168f40c079/full/600,/0/default.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T23:30:26.869Z",
+      "archivedAt": "2026-07-18T01:02:42.984Z",
       "notes": "",
-      "createdAt": "2026-07-17T23:30:26.898Z",
-      "updatedAt": "2026-07-17T23:30:26.898Z"
+      "createdAt": "2026-07-18T01:02:43.017Z",
+      "updatedAt": "2026-07-18T01:02:43.017Z"
     },
     {
-      "id": "7bbb6c03-834e-4870-b7c3-875984ede53e",
+      "id": "b64c9ed3-74be-4556-a952-9b6af1ee7932",
       "notionPageId": "3a0157fd-4777-811b-8b78-f7e4f5642426",
       "title": "Design for an Alcove with a Coat of Arms Flanked by Putti",
       "creator": "Giovanni Battista Foggini",
@@ -39,11 +39,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T23:30:26.901Z",
-      "updatedAt": "2026-07-17T23:30:26.901Z"
+      "createdAt": "2026-07-18T01:02:43.021Z",
+      "updatedAt": "2026-07-18T01:02:43.021Z"
     },
     {
-      "id": "c0c6dfba-1dc3-4593-837e-67f91d496ded",
+      "id": "69cc5ad7-354a-4e9b-90f0-1b85b11e2c1a",
       "notionPageId": "3a0157fd-4777-8183-b98b-d926d126b643",
       "title": "Design for a Frieze with Putto and Acanthus Scroll",
       "creator": "Anonymous, French",
@@ -57,11 +57,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T23:30:26.902Z",
-      "updatedAt": "2026-07-17T23:30:26.902Z"
+      "createdAt": "2026-07-18T01:02:43.023Z",
+      "updatedAt": "2026-07-18T01:02:43.023Z"
     },
     {
-      "id": "b54eb43a-6e17-4e68-819f-065067aef131",
+      "id": "9e741402-3286-4105-964f-956bb231859c",
       "notionPageId": "3a0157fd-4777-8185-aaed-de6f5cc39ea8",
       "title": "Ornament Design (German, 17th century)",
       "creator": "Anonymous, German",
@@ -73,13 +73,13 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP804528.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T23:30:26.903Z",
+      "archivedAt": "2026-07-18T01:02:43.024Z",
       "notes": "",
-      "createdAt": "2026-07-17T23:30:26.904Z",
-      "updatedAt": "2026-07-17T23:30:26.904Z"
+      "createdAt": "2026-07-18T01:02:43.025Z",
+      "updatedAt": "2026-07-18T01:02:43.025Z"
     },
     {
-      "id": "11bf71f2-3433-48a0-b335-267c450a2e2a",
+      "id": "6cc5c740-00c1-4186-94c2-7f39790bae46",
       "notionPageId": "3a0157fd-4777-81b4-ae7c-f1c3ebe41597",
       "title": "Design for a Chandelier with Acanthus, Grape, and Palmette Motifs",
       "creator": "Anonymous, French",
@@ -93,11 +93,11 @@
       "notionStatus": "Active",
       "archivedAt": null,
       "notes": "",
-      "createdAt": "2026-07-17T23:30:26.905Z",
-      "updatedAt": "2026-07-17T23:30:26.905Z"
+      "createdAt": "2026-07-18T01:02:43.027Z",
+      "updatedAt": "2026-07-18T01:02:43.027Z"
     },
     {
-      "id": "440f5a93-5ddc-4d8c-bc5a-69a32c29bbfe",
+      "id": "02807913-cce0-40d7-bb13-9d3591d1be3e",
       "notionPageId": "3a0157fd-4777-81e8-b377-d77e3f7b33de",
       "title": "Ornament Design with Vases (Designs for Various Ornaments, pl. 38)",
       "creator": "Michelangelo Pergolesi",
@@ -109,10 +109,10 @@
       "imageUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP104571.jpg",
       "status": "to_read",
       "notionStatus": "Archived",
-      "archivedAt": "2026-07-17T23:30:26.906Z",
+      "archivedAt": "2026-07-18T01:02:43.028Z",
       "notes": "",
-      "createdAt": "2026-07-17T23:30:26.906Z",
-      "updatedAt": "2026-07-17T23:30:26.906Z"
+      "createdAt": "2026-07-18T01:02:43.028Z",
+      "updatedAt": "2026-07-18T01:02:43.028Z"
     }
   ]
 }
