@@ -88,6 +88,55 @@ body {
   mix-blend-mode: multiply;
 }
 
+/* Field-journal index: ruled specimen columns */
+.ornament-index-grid {
+  --index-rule: color-mix(in srgb, var(--ink) 15%, transparent);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.ornament-index-cell + .ornament-index-cell {
+  border-top: 1px solid var(--index-rule);
+}
+
+@media (min-width: 640px) {
+  .ornament-index-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ornament-index-cell {
+    border-top: none;
+    border-left: none;
+  }
+
+  .ornament-index-cell:nth-child(n + 3) {
+    border-top: 1px solid var(--index-rule);
+  }
+
+  .ornament-index-cell:nth-child(2n) {
+    border-left: 1px solid var(--index-rule);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ornament-index-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .ornament-index-cell {
+    border-top: none;
+    border-left: none;
+  }
+
+  .ornament-index-cell:nth-child(n + 5) {
+    border-top: 1px solid var(--index-rule);
+  }
+
+  .ornament-index-cell:not(:nth-child(4n + 1)) {
+    border-left: 1px solid var(--index-rule);
+  }
+}
+
 /*
   Drafting sheet: fine unit grid + major + crosses every 5 units
   (engineering-paper reference). Plates snap to the major module.

@@ -8,6 +8,7 @@ export const CATALOG_LAYOUT_IDS = [
   "editorial",
   "draft",
   "dot",
+  "index",
 ] as const;
 
 export type CatalogLayoutId = (typeof CATALOG_LAYOUT_IDS)[number];
@@ -16,7 +17,15 @@ export type CatalogLayoutOption = {
   id: CatalogLayoutId;
   label: string;
   blurb: string;
-  family: "grid" | "page" | "folio" | "gallery" | "editorial" | "draft" | "dot";
+  family:
+    | "grid"
+    | "page"
+    | "folio"
+    | "gallery"
+    | "editorial"
+    | "draft"
+    | "dot"
+    | "index";
 };
 
 export const CATALOG_LAYOUTS: CatalogLayoutOption[] = [
@@ -73,6 +82,12 @@ export const CATALOG_LAYOUTS: CatalogLayoutOption[] = [
     label: "Dot",
     family: "dot",
     blurb: "Sparse + field — lookbook placement with open ground between plates.",
+  },
+  {
+    id: "index",
+    label: "Index",
+    family: "index",
+    blurb: "Field-journal index — roman entries, specimen meta, ruled four-up grid.",
   },
 ];
 
