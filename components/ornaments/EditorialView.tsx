@@ -330,10 +330,8 @@ export function EditorialView({
   const leadEra = shortEra(figures[0]?.source.era || "Ornament");
 
   return (
-    // Stay in normal flow (no full-bleed pull-up) so content clears the fixed
-    // centered "ORNAMENTS" nav mark — that collision was the overlapping text.
     <div className="relative mx-auto w-full max-w-[92rem]">
-      <header className="mb-10 max-w-2xl pt-2">
+      <header className="mb-10 max-w-2xl">
         <p className="font-mono text-[10px] font-extralight uppercase tracking-[0.14em] text-ink/40">
           Catalog · Ornament Research
         </p>
