@@ -206,7 +206,7 @@ export function IndexView({
   const count = figures.length;
 
   return (
-    <div className="ornament-index relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 -mt-10 mb-[-6rem] bg-[#f8f3e7] text-ink sm:-mt-14">
+    <div className="ornament-index relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 -mt-10 mb-[-6rem] bg-paper text-ink sm:-mt-14">
       <div className="mx-auto min-h-svh w-full max-w-[90rem] px-4 pb-36 pt-6 sm:px-6 md:px-8 md:pt-8">
         <header className="grid grid-cols-1 items-start gap-4 border-b border-ink/15 pb-4 sm:grid-cols-[1fr_auto_1fr] sm:gap-6 sm:pb-5">
           <Link
