@@ -52,10 +52,6 @@ function shortEra(era: string) {
   );
 }
 
-function figCode(index: number) {
-  return `FIG_${String(index + 1).padStart(3, "0")}`;
-}
-
 function figureRef(figure: OrnamentFigure) {
   return formatTextbookFigLabel(figure.index).replace(/\.$/, "");
 }
@@ -267,60 +263,49 @@ function PlateBlockView({
 
   return (
     <figure className="group relative min-w-0">
-      <div className="flex gap-2.5">
-        <span
-          aria-hidden
-          className="shrink-0 pt-1 font-mono text-[9px] font-extralight uppercase tracking-[0.14em] text-fig"
-          style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-        >
-          {figCode(block.figure.index)}
-        </span>
-        <div className="min-w-0 flex-1">
-          <Link
-            href={`/ornaments/sources/${block.figure.source.id}`}
-            className="block"
-          >
-            <div className={`relative w-full overflow-hidden ${maxH}`}>
-              {block.figure.source.imageUrl ? (
-                <OrnamentImage
-                  src={block.figure.source.imageUrl}
-                  alt={block.figure.source.title}
-                  width={1200}
-                  height={1500}
-                  sizes={
-                    block.size === "lg"
-                      ? "36vw"
-                      : block.size === "sm"
-                        ? "18vw"
-                        : "28vw"
-                  }
-                  className="mx-auto h-full w-auto max-w-full object-contain object-top"
-                />
-              ) : (
-                <div className="flex h-28 items-center justify-center font-serif text-xs text-ink/35">
-                  No image
-                </div>
-              )}
+      <Link
+        href={`/ornaments/sources/${block.figure.source.id}`}
+        className="block"
+      >
+        <div className={`relative w-full overflow-hidden ${maxH}`}>
+          {block.figure.source.imageUrl ? (
+            <OrnamentImage
+              src={block.figure.source.imageUrl}
+              alt={block.figure.source.title}
+              width={1200}
+              height={1500}
+              sizes={
+                block.size === "lg"
+                  ? "36vw"
+                  : block.size === "sm"
+                    ? "18vw"
+                    : "28vw"
+              }
+              className="mx-auto h-full w-auto max-w-full object-contain object-top"
+            />
+          ) : (
+            <div className="flex h-28 items-center justify-center font-serif text-xs text-ink/35">
+              No image
             </div>
-            <figcaption className="mt-2 font-serif text-[0.82rem] leading-snug tracking-[-0.03em] text-ink">
-              <span className="font-mono text-[0.68rem] uppercase tracking-[0.08em] text-fig">
-                {formatTextbookFigLabel(block.figure.index)}
-              </span>{" "}
-              <span className="italic">{block.figure.titleLabel}</span>
-              {block.figure.source.creator ? (
-                <span className="text-ink/60">
-                  {" "}
-                  ({block.figure.source.creator}
-                  {block.figure.source.year
-                    ? `, ${block.figure.source.year}`
-                    : ""}
-                  )
-                </span>
-              ) : null}
-            </figcaption>
-          </Link>
+          )}
         </div>
-      </div>
+        <figcaption className="mt-2 font-serif text-[0.82rem] leading-snug tracking-[-0.03em] text-ink">
+          <span className="font-mono text-[0.68rem] uppercase tracking-[0.08em] text-fig">
+            {formatTextbookFigLabel(block.figure.index)}
+          </span>{" "}
+          <span className="italic">{block.figure.titleLabel}</span>
+          {block.figure.source.creator ? (
+            <span className="text-ink/60">
+              {" "}
+              ({block.figure.source.creator}
+              {block.figure.source.year
+                ? `, ${block.figure.source.year}`
+                : ""}
+              )
+            </span>
+          ) : null}
+        </figcaption>
+      </Link>
       <ArchiveCorner
         figure={block.figure}
         isAdmin={isAdmin}

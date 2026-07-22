@@ -84,31 +84,140 @@ body {
   display: none;
 }
 
-/* Fiber paper + fine grain for ornament catalog pages */
-.ornament-paper {
-  position: relative;
-  isolation: isolate;
-  background-color: var(--paper);
-}
-
-.ornament-paper-noise {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  opacity: 0.42;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.15 0 0 0 0 0.14 0 0 0 0 0.1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-}
-
-.ornament-paper > *:not(.ornament-paper-noise) {
-  position: relative;
-  z-index: 2;
-}
-
 .ornament-plate-image {
   mix-blend-mode: multiply;
+}
+
+/*
+  Drafting sheet: fine unit grid + major + crosses every 5 units
+  (engineering-paper reference). Plates snap to the major module.
+*/
+.ornament-draft-sheet {
+  --draft-unit: 0.5rem;
+  --draft-major: calc(var(--draft-unit) * 5);
+  --draft-line: color-mix(in srgb, var(--ink) 14%, transparent);
+  --draft-cross: color-mix(in srgb, var(--ink) 42%, #6f9a58);
+  position: relative;
+  isolation: isolate;
+  background-color: transparent;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg stroke='%235f8a4e' stroke-width='1.1' stroke-linecap='square' fill='none' opacity='0.85'%3E%3Cpath d='M20 16.2v7.6M16.2 20h7.6'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(
+      to right,
+      var(--draft-line) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--draft-line) 1px,
+      transparent 1px
+    );
+  background-size:
+    var(--draft-major) var(--draft-major),
+    var(--draft-unit) var(--draft-unit),
+    var(--draft-unit) var(--draft-unit);
+  background-position: 0 0, 0 0, 0 0;
+}
+
+.ornament-draft-modules {
+  display: grid;
+  grid-template-columns: repeat(4, var(--draft-major));
+  grid-auto-rows: var(--draft-major);
+  grid-auto-flow: dense;
+  gap: 0;
+  justify-content: start;
+}
+
+@media (min-width: 640px) {
+  .ornament-draft-sheet {
+    --draft-unit: 0.55rem;
+  }
+
+  .ornament-draft-modules {
+    grid-template-columns: repeat(8, var(--draft-major));
+  }
+}
+
+@media (min-width: 1024px) {
+  .ornament-draft-sheet {
+    --draft-unit: 0.6rem;
+  }
+
+  .ornament-draft-modules {
+    grid-template-columns: repeat(12, var(--draft-major));
+  }
+}
+
+@media (min-width: 1280px) {
+  .ornament-draft-modules {
+    grid-template-columns: repeat(14, var(--draft-major));
+  }
+}
+
+/* Sparse lookbook field: real dots, plates parked on the lattice */
+.ornament-dot-sheet {
+  /* Slightly tighter than before so ~one more column of dots fits across */
+  --dot-cell: 3.4rem;
+  position: relative;
+}
+
+/* Full-viewport width dots; plates centered via flex cloud */
+.ornament-dot-bleed {
+  isolation: isolate;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3E%3Ccircle cx='26' cy='26' r='0.95' fill='%238a927c' fill-opacity='0.75'/%3E%3C/svg%3E");
+  background-size: var(--dot-cell) var(--dot-cell);
+  background-position: center top;
+  padding-bottom: 4rem;
+  min-height: calc(var(--dot-cell) * 18);
+}
+
+.ornament-dot-scatter {
+  min-height: calc(var(--dot-cell) * 16);
+}
+
+.ornament-dot-plate {
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .ornament-dot-scatter {
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .ornament-dot-scatter > article {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: min(72vw, 14rem) !important;
+  }
+
+  .ornament-dot-scatter > article:nth-child(odd) {
+    align-self: flex-start;
+    margin-left: 4%;
+  }
+
+  .ornament-dot-scatter > article:nth-child(even) {
+    align-self: flex-end;
+    margin-right: 8%;
+  }
+}
+
+@media (min-width: 768px) {
+  .ornament-dot-sheet {
+    --dot-cell: 4.1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ornament-dot-sheet {
+    --dot-cell: 4.55rem;
+  }
 }
 
 /* Newspaper-style grainy ink bleed on about body lines */

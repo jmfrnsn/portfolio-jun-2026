@@ -6,6 +6,8 @@ export const CATALOG_LAYOUT_IDS = [
   "platebook",
   "gallery",
   "editorial",
+  "draft",
+  "dot",
 ] as const;
 
 export type CatalogLayoutId = (typeof CATALOG_LAYOUT_IDS)[number];
@@ -14,7 +16,7 @@ export type CatalogLayoutOption = {
   id: CatalogLayoutId;
   label: string;
   blurb: string;
-  family: "grid" | "page" | "folio" | "gallery" | "editorial";
+  family: "grid" | "page" | "folio" | "gallery" | "editorial" | "draft" | "dot";
 };
 
 export const CATALOG_LAYOUTS: CatalogLayoutOption[] = [
@@ -59,6 +61,18 @@ export const CATALOG_LAYOUTS: CatalogLayoutOption[] = [
     label: "Editorial",
     family: "editorial",
     blurb: "Shortest-column pack — notes with their plates, lanes kept level.",
+  },
+  {
+    id: "draft",
+    label: "Draft",
+    family: "draft",
+    blurb: "Engineering sheet — fine units, major crosses, plates on the module.",
+  },
+  {
+    id: "dot",
+    label: "Dot",
+    family: "dot",
+    blurb: "Sparse + field — lookbook placement with open ground between plates.",
   },
 ];
 

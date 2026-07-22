@@ -7,7 +7,7 @@ import { listExportedSources } from "@/lib/ornaments/sources-export";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Ornaments — Jade Franson",
+  title: "Ornaments",
   description: "A catalog of historical ornament sources.",
 };
 

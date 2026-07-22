@@ -45,6 +45,11 @@ export function MonogramMark({ className = "" }: MonogramMarkProps) {
   const [scrambleActive, setScrambleActive] = useState(false);
   const isHome = pathname === "/";
 
+  // Catalog pages use their own header; keep the fixed mark off this section.
+  if (pathname === "/ornaments" || pathname.startsWith("/ornaments/")) {
+    return null;
+  }
+
   return (
     <Link
       href="/"

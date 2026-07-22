@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 
 import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
 import { CatalogVersionDial } from "@/components/ornaments/CatalogVersionDial";
+import { DotGridView } from "@/components/ornaments/DotGridView";
+import { DraftGridView } from "@/components/ornaments/DraftGridView";
 import { EditorialView } from "@/components/ornaments/EditorialView";
 import { GalleryView } from "@/components/ornaments/GalleryView";
 import { OrnamentImage } from "@/components/ornaments/OrnamentImage";
@@ -524,6 +526,20 @@ export function SourceList({ sources }: SourceListProps) {
         ) : null}
         {layout === "editorial" ? (
           <EditorialView
+            figures={figures}
+            isAdmin={isAdmin}
+            onArchiveChange={handleArchiveChange}
+          />
+        ) : null}
+        {layout === "draft" ? (
+          <DraftGridView
+            figures={figures}
+            isAdmin={isAdmin}
+            onArchiveChange={handleArchiveChange}
+          />
+        ) : null}
+        {layout === "dot" ? (
+          <DotGridView
             figures={figures}
             isAdmin={isAdmin}
             onArchiveChange={handleArchiveChange}
