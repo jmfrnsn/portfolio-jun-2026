@@ -108,7 +108,7 @@ export function IndexView({
   onArchiveChange,
 }: IndexViewProps) {
   const reduceMotion = useReducedMotion() ?? false;
-  const [display, setDisplay] = useState<IndexDisplayMode>("grid");
+  const [display, setDisplay] = useState<IndexDisplayMode>("list");
   const [eraFilter, setEraFilter] = useState<string | null>(null);
 
   const paneTransition = {
@@ -219,8 +219,8 @@ export function IndexView({
         >
           {(
             [
-              { id: "grid", label: "Grid" },
               { id: "list", label: "List" },
+              { id: "grid", label: "Grid" },
             ] as const
           ).map((option, index) => {
             const selected = display === option.id;
