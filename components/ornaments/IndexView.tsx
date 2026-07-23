@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
+import { IndexListView } from "@/components/ornaments/IndexListView";
 import { OrnamentImage } from "@/components/ornaments/OrnamentImage";
 import type { OrnamentFigure } from "@/lib/ornaments/figure-catalog";
 
@@ -12,6 +14,14 @@ type IndexViewProps = {
   isAdmin: boolean;
   onArchiveChange: (sourceId: string, nextArchived: boolean) => void;
 };
+
+type IndexDisplayMode = "grid" | "list";
+
+const INDEX_DISPLAY_STORAGE_KEY = "ornament-index-display";
+
+function isIndexDisplayMode(value: unknown): value is IndexDisplayMode {
+  return value === "grid" || value === "list";
+}
 
 const ROMAN = [
   "I",
@@ -59,38 +69,16 @@ function shortEra(era: string) {
   );
 }
 
-function specimenBlurb(figure: OrnamentFigure) {
-  const fromNotes = figure.source.notes?.trim();
-  if (fromNotes) return fromNotes;
-
-  const creator = figure.source.creator || "an anonymous draughtsman";
-  const region = figure.source.region || "an unstated region";
-  const era = shortEra(figure.source.era);
-  return `A ${era.toLowerCase()} plate attributed to ${creator}, from ${region}. Read the contour, the unit of repeat, and the ground reserved around the motif.`;
-}
-
-function SpecimenMeta({ figure }: { figure: OrnamentFigure }) {
-  const rows = [
-    { label: "Collection", value: figure.source.type },
-    { label: "Era", value: shortEra(figure.source.era) },
-    { label: "Region", value: figure.source.region },
-    { label: "Maker", value: figure.source.creator },
-    { label: "Date", value: figure.source.year },
-  ].filter((row) => Boolean(row.value?.trim()));
-
-  if (rows.length === 0) return null;
-
+function MetaRow({ label, value }: { label: string; value: string }) {
   return (
-    <dl className="mb-3 space-y-1 font-sans text-[0.62rem] uppercase tracking-[0.12em] text-ink/45">
-      {rows.map((row) => (
-        <div key={row.label} className="grid grid-cols-[4.5rem_1fr] gap-2">
-          <dt className="text-ink/35">{row.label}</dt>
-          <dd className="normal-case tracking-[0.02em] text-ink/65">
-            {row.value}
-          </dd>
-        </div>
-      ))}
-    </dl>
+    <div className="grid grid-cols-[3.25rem_minmax(0,1fr)] items-baseline gap-x-2">
+      <dt className="font-mono text-[9px] font-extralight uppercase tracking-[0.12em] text-ink/35">
+        {label}
+      </dt>
+      <dd className="truncate font-serif text-[0.8rem] leading-snug tracking-[-0.02em] text-ink/80">
+        {value}
+      </dd>
+    </div>
   );
 }
 
@@ -107,53 +95,67 @@ function SpecimenCell({
   delay: number;
   reduceMotion: boolean;
 }) {
-  const showMeta = figure.index % 2 === 1;
+  const era = shortEra(figure.source.era);
+  const region = figure.source.region?.trim() || "";
+  const year = figure.source.year?.trim() || "";
+  const creator = figure.source.creator?.trim() || "";
+  const notes = figure.source.notes?.trim() || "";
 
   return (
     <motion.article
-      initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.55,
+        duration: 0.5,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="ornament-index-cell group relative flex min-h-0 flex-col px-4 py-5 sm:px-5 sm:py-6"
+      className="ornament-index-cell group relative flex h-full min-h-0 flex-col"
     >
       <Link
         href={`/ornaments/sources/${figure.source.id}`}
-        className="flex min-h-0 flex-1 flex-col"
+        className="grid h-full min-h-0 grid-rows-[auto_minmax(0,1fr)_auto] gap-0"
       >
-        <header className="mb-4 flex items-baseline justify-between gap-3">
-          <span className="font-serif text-sm tracking-[-0.02em] text-ink/55">
+        <header className="flex items-baseline justify-between gap-3 border-b border-ink/10 px-3.5 py-3 sm:px-4">
+          <span className="shrink-0 font-serif text-sm tracking-[-0.02em] text-ink/50">
             {toRoman(figure.index)}.
           </span>
-          <h2 className="text-right font-sans text-[0.65rem] font-medium uppercase tracking-[0.16em] text-ink">
-            {figure.titleLabel}
+          <h2 className="min-w-0 text-right font-sans text-[0.62rem] font-medium uppercase leading-snug tracking-[0.14em] text-ink">
+            <span className="line-clamp-2">{figure.titleLabel}</span>
           </h2>
         </header>
 
-        <div className="relative mx-auto mb-4 aspect-[4/5] w-full max-w-[11rem] overflow-hidden sm:max-w-[12.5rem]">
-          {figure.source.imageUrl ? (
-            <OrnamentImage
-              src={figure.source.imageUrl}
-              alt={figure.source.title}
-              fill
-              sizes="(max-width: 640px) 45vw, (max-width: 1024px) 22vw, 14vw"
-              className="object-contain grayscale transition-[filter,transform] duration-700 ease-out group-hover:scale-[1.02] group-hover:grayscale-0"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center font-serif text-xs text-ink/30">
-              No image
-            </div>
-          )}
+        <div className="relative flex min-h-[11rem] items-center justify-center px-3 py-4 sm:min-h-[13rem] sm:px-4">
+          <div className="relative aspect-[4/5] h-full max-h-[16rem] w-full max-w-[11rem]">
+            {figure.source.imageUrl ? (
+              <OrnamentImage
+                src={figure.source.imageUrl}
+                alt={figure.source.title}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
+                className="object-contain grayscale transition-[filter,transform] duration-700 ease-out group-hover:scale-[1.02] group-hover:grayscale-0"
+              />
+            ) : (
+              <div className="flex h-full items-center justify-center font-serif text-xs text-ink/30">
+                No image
+              </div>
+            )}
+          </div>
         </div>
 
-        {showMeta ? <SpecimenMeta figure={figure} /> : null}
-
-        <p className="font-serif text-[0.82rem] leading-[1.55] tracking-[-0.02em] text-ink/70">
-          {specimenBlurb(figure)}
-        </p>
+        <footer className="mt-auto border-t border-ink/10 px-3.5 py-3 sm:px-4">
+          <dl className="flex flex-col gap-1.5">
+            {era ? <MetaRow label="Era" value={era} /> : null}
+            {region ? <MetaRow label="Place" value={region} /> : null}
+            {year ? <MetaRow label="Date" value={year} /> : null}
+            {creator ? <MetaRow label="By" value={creator} /> : null}
+          </dl>
+          {notes ? (
+            <p className="mt-3 line-clamp-2 border-t border-ink/8 pt-2.5 font-serif text-[0.72rem] leading-[1.4] tracking-[-0.02em] text-ink/45">
+              {notes}
+            </p>
+          ) : null}
+        </footer>
       </Link>
 
       {isAdmin ? (
@@ -178,39 +180,121 @@ export function IndexView({
 }: IndexViewProps) {
   const reduceMotion = useReducedMotion() ?? false;
   const count = figures.length;
+  const [display, setDisplay] = useState<IndexDisplayMode>("grid");
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(INDEX_DISPLAY_STORAGE_KEY);
+      if (isIndexDisplayMode(stored)) setDisplay(stored);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(INDEX_DISPLAY_STORAGE_KEY, display);
+    } catch {
+      // ignore
+    }
+  }, [display]);
+
+  const eraList = useMemo(() => {
+    const seen = new Set<string>();
+    const eras: string[] = [];
+    for (const figure of figures) {
+      const era = shortEra(figure.source.era).toUpperCase();
+      if (!era || seen.has(era)) continue;
+      seen.add(era);
+      eras.push(era);
+    }
+    return eras;
+  }, [figures]);
 
   return (
-    <div className="ornament-index relative mx-auto w-full max-w-[90rem]">
+    <div className="ornament-index relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 pb-10">
       <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="mb-10 md:mb-12"
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 w-full border-b border-ink/10 px-5 pb-6 sm:px-8 md:px-12 lg:px-16"
       >
-        <h1 className="text-center font-serif text-[2.35rem] tracking-[-0.04em] text-ink md:text-[2.85rem]">
-          IV. Index
-        </h1>
-        <p className="mx-auto mt-6 max-w-xl font-serif text-[0.95rem] leading-[1.65] tracking-[-0.02em] text-ink/65 md:ml-[28%] md:mr-0 md:max-w-none">
-          An index of {count} public-domain ornament{" "}
-          {count === 1 ? "specimen" : "specimens"}—friezes, grotesques, putti,
-          and botanical scrolls collected for study. Each entry is a plate for
-          looking: compare contour, repeat, and reserved ground across the
-          field.
-        </p>
+        <div
+          className="absolute right-5 top-0 flex border border-ink/15 sm:right-8 md:right-12 lg:right-16"
+          role="group"
+          aria-label="Index display"
+        >
+          {(
+            [
+              { id: "grid", label: "Grid" },
+              { id: "list", label: "List" },
+            ] as const
+          ).map((option) => {
+            const selected = display === option.id;
+            return (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => setDisplay(option.id)}
+                className={`cursor-pointer px-3 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.12em] transition-colors ${
+                  selected
+                    ? "bg-ink text-paper"
+                    : "bg-paper text-ink/55 hover:bg-highlight/70 hover:text-ink"
+                }`}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="grid w-full grid-cols-1 gap-4 pt-10 font-mono text-[10px] font-extralight uppercase leading-[1.45] tracking-[0.08em] text-ink/55 sm:grid-cols-12 sm:gap-x-6 sm:pt-0">
+          <div className="sm:col-span-3">
+            <p>Historical ornament</p>
+            <p>Research catalog</p>
+            <p className="mt-2 text-ink/35">Public domain plates</p>
+          </div>
+          <div className="sm:col-span-2 sm:col-start-5">
+            <p>Index</p>
+            <p className="mt-2 text-ink/35">
+              {count} {count === 1 ? "specimen" : "specimens"}
+            </p>
+          </div>
+          <div className="sm:col-span-5 sm:col-start-8 sm:pr-28">
+            <p className="text-pretty">
+              {eraList.length > 0
+                ? eraList.join(" / ")
+                : "Renaissance / Baroque / Rococo / Modern"}
+            </p>
+            <p className="mt-2 max-w-md text-pretty text-ink/35">
+              Plates for looking — compare contour, repeat, and reserved ground
+              across the field.
+            </p>
+          </div>
+        </div>
       </motion.div>
 
-      <div className="ornament-index-grid border-y border-ink/15">
-        {figures.map((figure, index) => (
-          <SpecimenCell
-            key={figure.source.id}
-            figure={figure}
-            isAdmin={isAdmin}
-            onArchiveChange={onArchiveChange}
-            delay={reduceMotion ? 0 : 0.08 + index * 0.04}
-            reduceMotion={reduceMotion}
-          />
-        ))}
-      </div>
+      {display === "list" ? (
+        <IndexListView
+          figures={figures}
+          isAdmin={isAdmin}
+          onArchiveChange={onArchiveChange}
+        />
+      ) : (
+        <div className="ornament-index-grid">
+          {figures.map((figure, index) => (
+            <SpecimenCell
+              key={figure.source.id}
+              figure={figure}
+              isAdmin={isAdmin}
+              onArchiveChange={onArchiveChange}
+              delay={reduceMotion ? 0 : Math.min(0.08 + index * 0.03, 0.9)}
+              reduceMotion={reduceMotion}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
