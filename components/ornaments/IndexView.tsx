@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
 import { IndexListView } from "@/components/ornaments/IndexListView";
@@ -111,6 +111,15 @@ export function IndexView({
   const [display, setDisplay] = useState<IndexDisplayMode>("grid");
   const [eraFilter, setEraFilter] = useState<string | null>(null);
 
+  const paneTransition = {
+    duration: reduceMotion ? 0.01 : 0.28,
+    ease: [0.22, 1, 0.36, 1] as const,
+  };
+  const paneExitTransition = {
+    duration: reduceMotion ? 0.01 : 0.16,
+    ease: [0.4, 0, 1, 1] as const,
+  };
+
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(INDEX_DISPLAY_STORAGE_KEY);
@@ -160,14 +169,14 @@ export function IndexView({
         className="ornament-index-head w-full font-mono text-[11px] font-light uppercase leading-[1.55] tracking-[0.06em]"
       >
         <div className="ornament-index-head-cell">
-          <p className="text-ink">Historical ornament</p>
+          <p className="text-ink">Ornament Research Catalog</p>
           <p className="text-ink/65">
             {count} {count === 1 ? "specimen" : "specimens"}
           </p>
         </div>
 
         <div
-          className="ornament-index-head-cell is-flush-left tracking-[0.08em] lg:col-span-2"
+          className="ornament-index-head-cell is-flush-left tracking-[0.08em]"
           role="group"
           aria-label="Filter by era"
         >
@@ -201,59 +210,100 @@ export function IndexView({
           })}
         </div>
 
-        <div className="ornament-index-head-cell flex justify-start max-lg:col-start-2 lg:justify-end">
-          <div
-            className="flex shrink-0 border border-ink/30"
-            role="group"
-            aria-label="Index display"
-          >
-            {(
-              [
-                { id: "grid", label: "Grid" },
-                { id: "list", label: "List" },
-              ] as const
-            ).map((option) => {
-              const selected = display === option.id;
-              return (
+        <div className="ornament-index-head-cell hidden lg:block" aria-hidden />
+
+        <div
+          className="ornament-index-head-cell flex justify-start gap-x-0 max-lg:col-start-2 lg:justify-end"
+          role="group"
+          aria-label="Index display"
+        >
+          {(
+            [
+              { id: "grid", label: "Grid" },
+              { id: "list", label: "List" },
+            ] as const
+          ).map((option, index) => {
+            const selected = display === option.id;
+            return (
+              <span key={option.id}>
+                {index > 0 ? <span aria-hidden>,{" "}</span> : null}
                 <button
-                  key={option.id}
                   type="button"
                   aria-pressed={selected}
                   onClick={() => setDisplay(option.id)}
-                  className={`cursor-pointer px-3.5 py-2 tracking-[0.1em] transition-colors ${
-                    selected
-                      ? "bg-ink text-paper"
-                      : "bg-paper text-ink/75 hover:bg-highlight/70 hover:text-ink"
+                  className={`cursor-pointer uppercase transition-colors ${
+                    selected ? "text-ink" : "text-ink/55 hover:text-ink"
                   }`}
                 >
                   {option.label}
                 </button>
-              );
-            })}
-          </div>
+              </span>
+            );
+          })}
         </div>
       </motion.header>
 
-      {display === "list" ? (
-        <IndexListView
-          figures={visibleFigures}
-          isAdmin={isAdmin}
-          onArchiveChange={onArchiveChange}
-        />
-      ) : (
-        <div className="ornament-index-grid">
-          {visibleFigures.map((figure, index) => (
-            <SpecimenCell
-              key={figure.source.id}
-              figure={figure}
-              isAdmin={isAdmin}
-              onArchiveChange={onArchiveChange}
-              delay={reduceMotion ? 0 : Math.min(0.08 + index * 0.03, 0.9)}
-              reduceMotion={reduceMotion}
-            />
-          ))}
-        </div>
-      )}
+      <div className="relative grid [&>*]:col-start-1 [&>*]:row-start-1">
+        <AnimatePresence initial={false}>
+          {display === "list" ? (
+            <motion.div
+              key="list"
+              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={
+                reduceMotion
+                  ? undefined
+                  : {
+                      opacity: 0,
+                      y: -4,
+                      pointerEvents: "none",
+                      transition: paneExitTransition,
+                    }
+              }
+              transition={paneTransition}
+            >
+              <IndexListView
+                figures={visibleFigures}
+                isAdmin={isAdmin}
+                onArchiveChange={onArchiveChange}
+                reduceMotion={reduceMotion}
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="grid"
+              initial={reduceMotion ? false : { y: 6 }}
+              animate={{ y: 0 }}
+              exit={
+                reduceMotion
+                  ? undefined
+                  : {
+                      opacity: 0,
+                      y: -4,
+                      pointerEvents: "none",
+                      transition: paneExitTransition,
+                    }
+              }
+              transition={paneTransition}
+            >
+              <div className="ornament-index-grid">
+                {visibleFigures.map((figure, index) => (
+                  <SpecimenCell
+                    key={figure.source.id}
+                    figure={figure}
+                    isAdmin={isAdmin}
+                    onArchiveChange={onArchiveChange}
+                    delay={
+                      reduceMotion ? 0 : Math.min(index * 0.022, 0.55)
+                    }
+                    reduceMotion={reduceMotion}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

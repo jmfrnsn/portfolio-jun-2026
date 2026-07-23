@@ -1,16 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 
 import { ArchiveSourceButton } from "@/components/ornaments/ArchiveSourceButton";
 import { OrnamentImage } from "@/components/ornaments/OrnamentImage";
+import {
+  SlidingHighlightList,
+  useSlidingHighlight,
+} from "@/components/shared/SlidingHighlightRows";
 import type { OrnamentFigure } from "@/lib/ornaments/figure-catalog";
 
 type IndexListViewProps = {
   figures: OrnamentFigure[];
   isAdmin: boolean;
   onArchiveChange: (sourceId: string, nextArchived: boolean) => void;
+  reduceMotion?: boolean;
 };
 
 function shortEra(era: string) {
@@ -27,10 +33,151 @@ function cellText(value: string | null | undefined) {
   return trimmed ? trimmed : "—";
 }
 
+const ROMAN = [
+  "I",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VIII",
+  "IX",
+  "X",
+  "XI",
+  "XII",
+  "XIII",
+  "XIV",
+  "XV",
+  "XVI",
+  "XVII",
+  "XVIII",
+  "XIX",
+  "XX",
+  "XXI",
+  "XXII",
+  "XXIII",
+  "XXIV",
+  "XXV",
+  "XXVI",
+  "XXVII",
+  "XXVIII",
+  "XXIX",
+  "XXX",
+  "XXXI",
+  "XXXII",
+  "XXXIII",
+  "XXXIV",
+  "XXXV",
+  "XXXVI",
+  "XXXVII",
+  "XXXVIII",
+  "XXXIX",
+  "XL",
+] as const;
+
+function toRoman(index: number) {
+  return ROMAN[index] ?? String(index + 1);
+}
+
+function IndexListRow({
+  figure,
+  index,
+  selected,
+  isAdmin,
+  reduceMotion,
+  onActivate,
+  onArchiveChange,
+}: {
+  figure: OrnamentFigure;
+  index: number;
+  selected: boolean;
+  isAdmin: boolean;
+  reduceMotion: boolean;
+  onActivate: () => void;
+  onArchiveChange: (sourceId: string, nextArchived: boolean) => void;
+}) {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const { setActiveRow } = useSlidingHighlight();
+  const creator = figure.source.creator
+    ?.trim()
+    .replace(/^Anonymous,\s*/i, "");
+
+  const activate = () => {
+    setActiveRow(linkRef.current);
+    onActivate();
+  };
+
+  return (
+    <motion.li
+      initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.35,
+        delay: reduceMotion ? 0 : Math.min(index * 0.018, 0.4),
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={`ornament-index-list-row group relative ${
+        selected ? "is-active" : ""
+      }`}
+    >
+      <Link
+        ref={linkRef}
+        href={`/ornaments/sources/${figure.source.id}`}
+        className="ornament-index-list-link relative z-[1] origin-center transition-transform duration-150 ease-out active:scale-[0.99] motion-reduce:transition-none motion-reduce:active:scale-100"
+        aria-current={selected ? "true" : undefined}
+        aria-label={figure.source.title}
+        onMouseEnter={activate}
+        onFocus={activate}
+      >
+        <span className="ornament-index-list-lead">
+          <span className="ornament-index-list-num">{toRoman(index)}</span>
+          <span className="ornament-index-list-thumb">
+            {figure.source.imageUrl ? (
+              <OrnamentImage
+                src={figure.source.imageUrl}
+                alt=""
+                fill
+                sizes="40px"
+                className="object-contain"
+              />
+            ) : (
+              <span className="block h-full w-full bg-ink/5" />
+            )}
+          </span>
+        </span>
+
+        <span className="ornament-index-list-meta">
+          {shortEra(figure.source.era)}
+        </span>
+        <span className="ornament-index-list-meta">
+          {cellText(figure.source.year)}
+        </span>
+        <span className="ornament-index-list-meta max-lg:hidden truncate">
+          {cellText(creator)}
+        </span>
+      </Link>
+
+      {isAdmin ? (
+        <div className="absolute right-2 top-1/2 z-10 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+          <ArchiveSourceButton
+            sourceId={figure.source.id}
+            archived={figure.source.notionStatus === "Archived"}
+            onCompleted={(nextArchived) =>
+              onArchiveChange(figure.source.id, nextArchived)
+            }
+          />
+        </div>
+      ) : null}
+    </motion.li>
+  );
+}
+
 export function IndexListView({
   figures,
   isAdmin,
   onArchiveChange,
+  reduceMotion = false,
 }: IndexListViewProps) {
   const [activeId, setActiveId] = useState<string | null>(
     figures[0]?.source.id ?? null,
@@ -55,101 +202,28 @@ export function IndexListView({
         <div className="ornament-index-list-main">
           <div className="ornament-index-list-cols" aria-hidden="true">
             <span />
-            <span />
-            <span>Title</span>
             <span>Era</span>
-            <span className="max-lg:hidden">Place</span>
-            <span className="max-md:hidden">Type</span>
             <span>Year</span>
-            <span className="max-xl:hidden">By</span>
-            <span />
+            <span className="max-lg:hidden">By</span>
           </div>
 
-          <ul className="ornament-index-list-rows" role="list">
-            {figures.map((figure) => {
-              const selected = figure.source.id === active?.source.id;
-
-              return (
-                <li
-                  key={figure.source.id}
-                  className={`ornament-index-list-row group relative ${
-                    selected ? "is-active" : ""
-                  }`}
-                  onMouseEnter={() => setActiveId(figure.source.id)}
-                  onFocusCapture={() => setActiveId(figure.source.id)}
-                >
-                  <Link
-                    href={`/ornaments/sources/${figure.source.id}`}
-                    className="ornament-index-list-link"
-                    aria-current={selected ? "true" : undefined}
-                  >
-                    <span className="ornament-index-list-mark" aria-hidden>
-                      <span
-                        className={`ornament-index-list-dot ${
-                          selected ? "is-filled" : ""
-                        }`}
-                      />
-                    </span>
-
-                    <span className="ornament-index-list-thumb">
-                      {figure.source.imageUrl ? (
-                        <OrnamentImage
-                          src={figure.source.imageUrl}
-                          alt=""
-                          fill
-                          sizes="40px"
-                          className="object-cover"
-                        />
-                      ) : (
-                        <span className="block h-full w-full bg-ink/5" />
-                      )}
-                    </span>
-
-                    <span className="ornament-index-list-title">
-                      {figure.titleLabel}
-                    </span>
-                    <span className="ornament-index-list-meta">
-                      {shortEra(figure.source.era)}
-                    </span>
-                    <span className="ornament-index-list-meta max-lg:hidden">
-                      {cellText(figure.source.region)}
-                    </span>
-                    <span className="ornament-index-list-meta max-md:hidden">
-                      {cellText(figure.source.type)}
-                    </span>
-                    <span className="ornament-index-list-meta">
-                      {cellText(figure.source.year)}
-                    </span>
-                    <span className="ornament-index-list-meta max-xl:hidden truncate">
-                      {cellText(figure.source.creator)}
-                    </span>
-                    <span
-                      className="ornament-index-list-arrow"
-                      aria-hidden
-                    >
-                      {selected ? "→" : ""}
-                    </span>
-                  </Link>
-
-                  {isAdmin ? (
-                    <div className="absolute right-2 top-1/2 z-10 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
-                      <ArchiveSourceButton
-                        sourceId={figure.source.id}
-                        archived={figure.source.notionStatus === "Archived"}
-                        onCompleted={(nextArchived) =>
-                          onArchiveChange(figure.source.id, nextArchived)
-                        }
-                      />
-                    </div>
-                  ) : null}
-                </li>
-              );
-            })}
-          </ul>
+          <SlidingHighlightList className="ornament-index-list-rows">
+            {figures.map((figure, index) => (
+              <IndexListRow
+                key={figure.source.id}
+                figure={figure}
+                index={index}
+                selected={figure.source.id === active?.source.id}
+                isAdmin={isAdmin}
+                reduceMotion={reduceMotion}
+                onActivate={() => setActiveId(figure.source.id)}
+                onArchiveChange={onArchiveChange}
+              />
+            ))}
+          </SlidingHighlightList>
         </div>
 
         <aside className="ornament-index-list-preview" aria-live="polite">
-          <p className="ornament-index-list-preview-label">Preview</p>
           {active ? (
             <Link
               href={`/ornaments/sources/${active.source.id}`}
@@ -165,14 +239,13 @@ export function IndexListView({
                     className="object-contain"
                   />
                 ) : (
-                  <div className="flex h-full items-center justify-center font-serif text-xs text-ink/35">
-                    No image
+                  <div className="flex h-full items-center justify-center font-mono text-[11px] text-ink/35">
+                    —
                   </div>
                 )}
               </div>
-              <p className="mt-3 shrink-0 font-mono text-[9px] font-extralight uppercase tracking-[0.12em] text-ink/45">
-                {active.titleLabel}
-                {active.source.year ? ` · ${active.source.year}` : ""}
+              <p className="mt-4 shrink-0 font-mono text-[11px] font-light uppercase tracking-[0.08em] text-ink/55">
+                {active.source.year?.trim() || "—"}
               </p>
             </Link>
           ) : null}

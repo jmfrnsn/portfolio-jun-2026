@@ -55,6 +55,11 @@ function useSlidingHighlightContext(): SlidingHighlightContextValue {
   return context;
 }
 
+/** Activate the sliding highlight from a custom row (link, button, etc.). */
+export function useSlidingHighlight(): SlidingHighlightContextValue {
+  return useSlidingHighlightContext();
+}
+
 function getRowOffset(list: HTMLElement, row: HTMLElement): Indicator {
   const listRect = list.getBoundingClientRect();
   const rowRect = row.getBoundingClientRect();
@@ -131,7 +136,7 @@ export function SlidingHighlightList({
       >
         <div
           aria-hidden="true"
-          className="sliding-row-highlight pointer-events-none absolute inset-x-0 bg-highlight"
+          className="sliding-row-highlight pointer-events-none absolute inset-x-0 z-0 bg-highlight"
           style={{
             transform: `translate3d(0, ${indicator.y}px, 0)`,
             height: indicator.height,
