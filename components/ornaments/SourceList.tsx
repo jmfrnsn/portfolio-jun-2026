@@ -9,6 +9,7 @@ import { DotGridView } from "@/components/ornaments/DotGridView";
 import { DraftGridView } from "@/components/ornaments/DraftGridView";
 import { EditorialView } from "@/components/ornaments/EditorialView";
 import { GalleryView } from "@/components/ornaments/GalleryView";
+import { IndexView } from "@/components/ornaments/IndexView";
 import { OrnamentImage } from "@/components/ornaments/OrnamentImage";
 import {
   CATALOG_LAYOUT_STORAGE_KEY,
@@ -540,6 +541,13 @@ export function SourceList({ sources }: SourceListProps) {
         ) : null}
         {layout === "dot" ? (
           <DotGridView
+            figures={figures}
+            isAdmin={isAdmin}
+            onArchiveChange={handleArchiveChange}
+          />
+        ) : null}
+        {layout === "index" ? (
+          <IndexView
             figures={figures}
             isAdmin={isAdmin}
             onArchiveChange={handleArchiveChange}

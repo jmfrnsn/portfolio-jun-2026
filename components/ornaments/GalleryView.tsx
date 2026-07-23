@@ -85,8 +85,8 @@ export function GalleryView({
   }
 
   return (
-    <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 -mt-28 mb-[-8rem] bg-[#0a0a0a] text-white">
-      <div className="mx-auto flex min-h-svh max-w-[78rem] flex-col px-5 pb-36 pt-28 sm:px-8 md:px-10 md:pt-32">
+    <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 -mt-36 mb-[-8rem] bg-[#0a0a0a] text-white md:-mt-44">
+      <div className="mx-auto flex min-h-svh max-w-[78rem] flex-col px-5 pb-36 pt-36 sm:px-8 md:px-10 md:pt-44">
         <header className="grid gap-8 border-b border-white/10 pb-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-end md:gap-12">
           <div>
             <div className="flex flex-wrap items-start gap-x-3 gap-y-1">

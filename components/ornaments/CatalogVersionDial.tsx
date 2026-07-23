@@ -170,7 +170,7 @@ export function CatalogVersionDial({
         </span>
       </button>
 
-      <div className="grid grid-cols-3 gap-1.5 p-2.5">
+      <div className="grid grid-cols-4 gap-1.5 p-2.5">
         {CATALOG_LAYOUTS.map((layout) => {
           const selected = layout.id === value;
           return (
