@@ -45,6 +45,10 @@ export function MonogramMark({ className = "" }: MonogramMarkProps) {
   const [scrambleActive, setScrambleActive] = useState(false);
   const isHome = pathname === "/";
 
+  if (pathname === "/ornaments" || pathname.startsWith("/ornaments/")) {
+    return null;
+  }
+
   return (
     <Link
       href="/"
