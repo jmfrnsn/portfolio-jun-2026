@@ -1,13 +1,12 @@
 "use client";
 
-import { contents } from "@/components/home/contents-data";
 import { ContentsTableRow } from "@/components/shared/ContentsTableRow";
 import {
   SlidingHighlightList,
   SlidingHighlightRow,
 } from "@/components/shared/SlidingHighlightRows";
 import { HOME_LAYOUT } from "@/lib/home-layout";
-import { sectionHref } from "@/lib/site-sections";
+import { formatPageYear, getSitePages } from "@/lib/site-pages";
 import { useMinWidthMd } from "@/lib/use-min-width-md";
 
 type ContentsListProps = {
@@ -20,6 +19,7 @@ export function ContentsList({ className = "" }: ContentsListProps) {
   const rowPaddingX = isMd
     ? contentsLayout.rowPaddingXDesktop
     : contentsLayout.rowPaddingX;
+  const pages = getSitePages();
 
   return (
     <SlidingHighlightList
@@ -29,10 +29,10 @@ export function ContentsList({ className = "" }: ContentsListProps) {
         fontSize: typography.contentsFontSize,
       }}
     >
-      {contents.map((entry) => (
+      {pages.map((page) => (
         <SlidingHighlightRow
-          key={entry.number}
-          href={sectionHref(entry.slug)}
+          key={page.id}
+          href={page.href}
           style={{
             paddingLeft: rowPaddingX,
             paddingRight: rowPaddingX,
@@ -41,10 +41,9 @@ export function ContentsList({ className = "" }: ContentsListProps) {
           }}
         >
           <ContentsTableRow
-            number={entry.number}
-            title={entry.title}
-            suffix={entry.pages}
-            slug={entry.slug}
+            title={page.title}
+            suffix={formatPageYear(page.publishedAt)}
+            titleVariant={page.titleVariant}
           />
         </SlidingHighlightRow>
       ))}

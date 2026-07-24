@@ -1,8 +1,6 @@
 "use client";
 
 import { VariantScrambleText } from "@/components/shared/VariantScrambleText";
-import type { ContentEntry } from "@/components/home/contents-data";
-import { CONTENTS_TITLE_VARIANTS } from "@/lib/contents-title-variants";
 import { HOME_LAYOUT } from "@/lib/home-layout";
 
 type ContentsTableRowProps = {
@@ -10,7 +8,8 @@ type ContentsTableRowProps = {
   title: string;
   suffix: string;
   suffixClassName?: string;
-  slug?: ContentEntry["slug"];
+  /** Hover scramble line; when set, title swaps on row hover. */
+  titleVariant?: string;
 };
 
 export function ContentsTableRow({
@@ -18,11 +17,10 @@ export function ContentsTableRow({
   title,
   suffix,
   suffixClassName = "font-mono font-extralight tracking-[-0.04375rem] text-ink",
-  slug,
+  titleVariant,
 }: ContentsTableRowProps) {
   const { leaderDotSize, leaderDotSpacing } = HOME_LAYOUT.contents;
   const dotRadius = leaderDotSize / 2;
-  const titleVariant = slug ? CONTENTS_TITLE_VARIANTS[slug] : undefined;
 
   return (
     <>

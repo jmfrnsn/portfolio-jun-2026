@@ -6,6 +6,7 @@ import { AboutLayoutColumns } from "./layouts/AboutLayoutColumns";
 import { AboutLayoutContents } from "./layouts/AboutLayoutContents";
 import { AboutLayoutEditorial } from "./layouts/AboutLayoutEditorial";
 import { AboutLayoutIndex } from "./layouts/AboutLayoutIndex";
+import { AboutLayoutTerminal } from "./layouts/AboutLayoutTerminal";
 
 export function AboutSection() {
   const { layout } = useHomeAboutLayout();
@@ -21,6 +22,8 @@ export function AboutSection() {
       return <AboutLayoutIndex />;
     case "contents":
       return <AboutLayoutContents />;
+    case "terminal":
+      return <AboutLayoutTerminal />;
     default:
       return <AboutLayoutEditorial />;
   }

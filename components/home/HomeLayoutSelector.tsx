@@ -6,84 +6,185 @@ import { HOME_ABOUT_LAYOUTS } from "@/lib/home-about-layout";
 
 import { useHomeAboutLayout } from "./HomeAboutLayoutContext";
 
+const POSITION_KEY = "portfolio-home-layout-dial-position";
+
+type DialPosition = { x: number; y: number };
+
+function clampPosition(x: number, y: number, width: number, height: number) {
+  const pad = 8;
+  const maxX = Math.max(pad, window.innerWidth - width - pad);
+  const maxY = Math.max(pad, window.innerHeight - height - pad);
+  return {
+    x: Math.min(maxX, Math.max(pad, x)),
+    y: Math.min(maxY, Math.max(pad, y)),
+  };
+}
+
+function readStoredPosition(): DialPosition | null {
+  try {
+    const raw = window.localStorage.getItem(POSITION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<DialPosition>;
+    if (typeof parsed.x !== "number" || typeof parsed.y !== "number") {
+      return null;
+    }
+    return { x: parsed.x, y: parsed.y };
+  } catch {
+    return null;
+  }
+}
+
 export function HomeLayoutSelector() {
   const { layout, setLayout } = useHomeAboutLayout();
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const dragOffset = useRef({ x: 0, y: 0 });
+  const [position, setPosition] = useState<DialPosition | null>(null);
+  const [dragging, setDragging] = useState(false);
 
-  const activeLabel =
-    HOME_ABOUT_LAYOUTS.find((option) => option.id === layout)?.label ?? layout;
+  const active =
+    HOME_ABOUT_LAYOUTS.find((option) => option.id === layout) ??
+    HOME_ABOUT_LAYOUTS[0];
 
   useEffect(() => {
-    if (!open) return;
+    const panel = panelRef.current;
+    if (!panel) return;
 
-    function handlePointerDown(event: MouseEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        setOpen(false);
-      }
+    const stored = readStoredPosition();
+    const width = panel.offsetWidth;
+    const height = panel.offsetHeight;
+
+    if (stored) {
+      setPosition(clampPosition(stored.x, stored.y, width, height));
+      return;
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+    setPosition(
+      clampPosition(
+        16,
+        window.innerHeight - height - 24,
+        width,
+        height,
+      ),
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!position) return;
+    try {
+      window.localStorage.setItem(POSITION_KEY, JSON.stringify(position));
+    } catch {
+      // ignore
+    }
+  }, [position]);
+
+  useEffect(() => {
+    function onResize() {
+      const panel = panelRef.current;
+      if (!panel || !position) return;
+      setPosition(
+        clampPosition(
+          position.x,
+          position.y,
+          panel.offsetWidth,
+          panel.offsetHeight,
+        ),
+      );
     }
 
-    document.addEventListener("mousedown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [position]);
 
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
+  function startDrag(clientX: number, clientY: number) {
+    const panel = panelRef.current;
+    if (!panel || !position) return;
+    dragOffset.current = {
+      x: clientX - position.x,
+      y: clientY - position.y,
     };
-  }, [open]);
+    setDragging(true);
+  }
+
+  useEffect(() => {
+    if (!dragging) return;
+
+    function onPointerMove(event: PointerEvent) {
+      const panel = panelRef.current;
+      if (!panel) return;
+      setPosition(
+        clampPosition(
+          event.clientX - dragOffset.current.x,
+          event.clientY - dragOffset.current.y,
+          panel.offsetWidth,
+          panel.offsetHeight,
+        ),
+      );
+    }
+
+    function onPointerUp() {
+      setDragging(false);
+    }
+
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+  }, [dragging]);
 
   return (
     <div
-      ref={rootRef}
-      className="pointer-events-none fixed bottom-4 left-4 z-50 sm:bottom-6 sm:left-6"
+      ref={panelRef}
+      className="fixed z-50 w-[min(20rem,calc(100vw-1rem))] rounded-md border border-ink/15 bg-paper/95 shadow-sm backdrop-blur-sm"
+      style={
+        position
+          ? { left: position.x, top: position.y }
+          : { left: 16, bottom: 24 }
+      }
     >
-      <div className="pointer-events-auto flex flex-col items-start gap-1.5">
-        {open ? (
-          <div
-            role="tablist"
-            aria-label="Home layout comparison"
-            className="flex flex-col overflow-hidden rounded-md border border-ink/10 bg-paper/95 shadow-sm backdrop-blur-sm"
-          >
-            {HOME_ABOUT_LAYOUTS.map((option) => {
-              const isActive = layout === option.id;
+      <button
+        type="button"
+        aria-label="Drag layout dial"
+        onPointerDown={(event) => {
+          event.preventDefault();
+          startDrag(event.clientX, event.clientY);
+        }}
+        className={`flex w-full cursor-grab items-center justify-between gap-3 border-b border-ink/10 px-3 py-2.5 text-left active:cursor-grabbing ${
+          dragging ? "cursor-grabbing bg-highlight/60" : "hover:bg-highlight/40"
+        }`}
+      >
+        <span className="font-mono text-[10px] font-extralight uppercase tracking-[0.12em] text-ink/45">
+          Layout dial · drag
+        </span>
+        <span className="font-serif text-sm tracking-[-0.03em] text-ink">
+          {active.label}
+        </span>
+      </button>
 
-              return (
-                <button
-                  key={option.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => {
-                    setLayout(option.id);
-                    setOpen(false);
-                  }}
-                  className={`cursor-pointer px-3 py-1.5 text-left font-mono text-[10px] uppercase tracking-[0.08em] transition-colors ${
-                    isActive
-                      ? "bg-ink text-paper"
-                      : "text-ink/60 hover:bg-highlight hover:text-ink"
-                  }`}
-                >
-                  {option.label}
-                </button>
-              );
-            })}
-          </div>
-        ) : null}
-
-        <button
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-haspopup="listbox"
-          className="cursor-pointer rounded-md border border-ink/10 bg-paper/80 px-2.5 py-1.5 font-mono text-[10px] font-extralight uppercase tracking-[0.1em] text-ink/45 backdrop-blur-sm transition-colors hover:border-ink/20 hover:bg-paper hover:text-ink/70"
-        >
-          {activeLabel}
-        </button>
+      <div className="grid grid-cols-3 gap-1.5 p-2.5">
+        {HOME_ABOUT_LAYOUTS.map((option) => {
+          const selected = option.id === layout;
+          return (
+            <button
+              key={option.id}
+              type="button"
+              onClick={() => setLayout(option.id)}
+              className={`min-h-10 cursor-pointer rounded-sm px-2 py-2 text-center font-mono text-[10px] font-extralight uppercase tracking-[0.08em] transition-colors ${
+                selected
+                  ? "bg-ink text-paper"
+                  : "bg-highlight/70 text-ink/70 hover:bg-highlight hover:text-ink"
+              }`}
+            >
+              {option.label}
+            </button>
+          );
+        })}
       </div>
+
+      <p className="border-t border-ink/10 px-3 py-2 font-serif text-[0.7rem] leading-snug tracking-[-0.02em] text-ink/50">
+        {active.blurb}
+      </p>
     </div>
   );
 }

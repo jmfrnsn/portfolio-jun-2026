@@ -169,10 +169,26 @@ export function IndexView({
         className="ornament-index-head w-full font-mono text-[11px] font-light uppercase leading-[1.55] tracking-[0.06em]"
       >
         <div className="ornament-index-head-cell">
-          <p className="text-ink">Ornament Research Catalog</p>
-          <p className="text-ink/65">
-            {count} {count === 1 ? "specimen" : "specimens"}
-          </p>
+          <Link
+            href="/"
+            aria-label="Back home"
+            className="group/home inline-flex max-w-full flex-col text-ink"
+          >
+            <span className="relative inline-grid">
+              <span className="col-start-1 row-start-1 transition-opacity duration-200 ease-out group-hover/home:opacity-0 group-focus-visible/home:opacity-0">
+                Ornament Research Catalog
+              </span>
+              <span
+                aria-hidden
+                className="col-start-1 row-start-1 opacity-0 transition-opacity duration-200 ease-out group-hover/home:opacity-100 group-focus-visible/home:opacity-100"
+              >
+                ← Home
+              </span>
+            </span>
+            <span className="text-ink/65 transition-opacity duration-200 ease-out group-hover/home:opacity-0 group-focus-visible/home:opacity-0">
+              {count} {count === 1 ? "specimen" : "specimens"}
+            </span>
+          </Link>
         </div>
 
         <div
